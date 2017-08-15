@@ -1,4 +1,4 @@
-/.settings
+/**/.settings/
 /bin/
 /src/db.properties
 /.classpath
