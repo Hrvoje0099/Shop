@@ -257,6 +257,7 @@ public class CashRegisterGUI extends JFrame {
 				
 				try {
 					String entry = JOptionPane.showInputDialog(null, "Unesite iznos gotovine: ", "UNOS", JOptionPane.QUESTION_MESSAGE);
+					if (entry == null) return;
 
 					if (Double.valueOf(txtAmountTotal.getText().toString().replaceAll(",", ".")) <= 0) {
 						JOptionPane.showMessageDialog(null, "NISTE UNIJELI NITI JEDAN ARTIKL!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
@@ -443,13 +444,6 @@ public class CashRegisterGUI extends JFrame {
 		menuBar.add(menuTime);
 
 		return menuBar;
-	}
-	
-	//kad stisnemo ENTER da reagira na button UNOS
-	@Override
-    public void addNotify() {
-        super.addNotify();
-        SwingUtilities.getRootPane(btnEntry).setDefaultButton(btnEntry);
 	}
 	
 	private void saveCart() {
@@ -957,6 +951,13 @@ public class CashRegisterGUI extends JFrame {
 		btnReviewSales = new JButton("PREGLED PRODAJE");
 		btnReviewSales.setBounds(667, 647, 145, 55);
 		contentPane.add(btnReviewSales);
+	}
+	
+	//kad stisnemo ENTER da reagira na button UNOS
+	@Override
+    public void addNotify() {
+        super.addNotify();
+        SwingUtilities.getRootPane(btnEntry).setDefaultButton(btnEntry);
 	}
 
 }

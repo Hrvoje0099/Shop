@@ -17,9 +17,7 @@ import org.apache.commons.dbcp2.BasicDataSourceFactory;
 public abstract class BaseController {
 	
 	protected Connection con;
-	
 	private final StringWriter errors;
-	
 	private DataSource dataSource;
 	
 	public BaseController() {

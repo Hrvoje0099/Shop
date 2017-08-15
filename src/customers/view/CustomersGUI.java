@@ -146,7 +146,7 @@ public class CustomersGUI extends JFrame {
 				
 				password = Utility.checkPasswordFile();
 				
-				if (password == null)
+				if (password == null || passwordField.getText().isEmpty() )
 					return;
 
 				if (passwordField.getText().equals(password.myPassword)) {

@@ -21,6 +21,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -124,15 +125,23 @@ public class ChangePasswordGUI extends JFrame {
 		oldPasswordItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				JLabel label = new JLabel("Upišite glavnu lozinku:");
-				JPasswordField passField = new JPasswordField();
-				JOptionPane.showConfirmDialog(null, new Object[] { label, passField }, "UNOS LOZINKE ", JOptionPane.OK_CANCEL_OPTION);
-
+				
+			    JPanel panel = new JPanel();
+			    JPasswordField passField = new JPasswordField(10);
+			    panel.add(new JLabel("Upišite glavnu lozinku:"));
+			    panel.add(passField);
+			    JOptionPane pane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION) {
+			        @Override
+			        public void selectInitialValue() {
+			        	passField.requestFocusInWindow();
+			        }
+			    };
+			    pane.createDialog(null, "UNOS LOZINKE").setVisible(true);
+				
 				if (passField.getText().equals("hrvoje"))
 					JOptionPane.showMessageDialog(null, "STARA LOZINKA JE: " + password.myPassword, "INFO", JOptionPane.INFORMATION_MESSAGE);
 				else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GRE�KA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 

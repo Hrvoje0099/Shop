@@ -172,7 +172,7 @@ public class ReviewSalesGUI extends JFrame {
 					
 					if (chckbxReviewByWorker.isSelected()) {
 						
-						// load ra�una određenog datuma i određenog radnika
+						// load računa određenog datuma i određenog radnika
 						try {
 							String worker = (String) comboBoxWorkers.getSelectedItem();
 							controller.loadBillsByDateAndWorker(date, worker);

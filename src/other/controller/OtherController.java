@@ -1,20 +1,25 @@
 package other.controller;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Properties;
 
+import javax.sql.DataSource;
 import javax.swing.JOptionPane;
+
+import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 public class OtherController {
 	
 	private Connection con;
-	
 	private StringWriter errors;
+	private DataSource dataSource;
 	
 	public OtherController() {
 		
@@ -23,14 +28,17 @@ public class OtherController {
 	
 	public void connect() throws Exception {
 		
-		if(con != null) return;
+		Properties props = new Properties();
 		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
+		try (InputStream istream = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
+			if (istream == null) 
+				throw new FileNotFoundException("Could not find JDBC properties");
+			props.load(istream);
+			dataSource = BasicDataSourceFactory.createDataSource(props);
+		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
 			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-			
+
 			try {
 				saveException(e1.getMessage(), errors.toString());
 			} catch (SQLException e2) {
@@ -38,9 +46,7 @@ public class OtherController {
 			}
 		}
 		
-		String url = "jdbc:mysql://localhost:3306/zavrsni?autoReconnect=true&useSSL=false";
-		
-		con = DriverManager.getConnection(url, "root", "88rabil");
+		con = dataSource.getConnection();		
 	}
 	
 	public void disconnect() {
