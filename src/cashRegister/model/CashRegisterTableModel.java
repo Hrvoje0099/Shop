@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 public class CashRegisterTableModel extends AbstractTableModel {
 	
 	private List<CartModel> dbCartModel;
-	private String[] colNames = {"äifra", "Naziv", "Mj.jed.", "PDV(%)", "KoliËina", "MPC", "Popust", "Iznos" };
+	private String[] colNames = {"≈†ifra", "Naziv", "Mj.jed.", "PDV(%)", "Koliƒçina", "MPC", "Popust", "Iznos" };
 
 	
 	@Override

@@ -23,7 +23,7 @@ public final class Utility {
 		
 	    JPanel panel = new JPanel();
 	    JPasswordField passwordField = new JPasswordField(10);
-	    panel.add(new JLabel("Upišite lozinku za pristup:"));
+	    panel.add(new JLabel("UpiÅ¡ite lozinku za pristup:"));
 	    panel.add(passwordField);
 	    JOptionPane pane = new JOptionPane(panel, JOptionPane.QUESTION_MESSAGE, JOptionPane.OK_CANCEL_OPTION) {
 	        @Override
@@ -46,13 +46,13 @@ public final class Utility {
 			ois.close();
 		} catch (ClassNotFoundException | IOException e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			
 			try {
 				controller.connect();
 				controller.saveException(e1.getMessage(), errors.toString());
 			} catch (Exception e2) {
-//				JOptionPane.showMessageDialog(null, e2, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+//				JOptionPane.showMessageDialog(null, e2, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			}
 			return null;
 		}
@@ -68,7 +68,7 @@ public final class Utility {
 			controller.connect();
 			controller.saveException(message, stackTrace);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

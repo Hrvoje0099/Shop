@@ -52,13 +52,13 @@ public class BillsGUI extends JFrame {
 		errors = new StringWriter();
 		
 		billsTable = new BillsTable();
-		billsTable.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Popis ra\u010Duna", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
+		billsTable.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Popis računa", TitledBorder.LEADING, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
-		setTitle("RA\u010CUNI");
+		setTitle("RAČUNI");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1148, 649);
 		setSize(1400, 731);
@@ -69,7 +69,7 @@ public class BillsGUI extends JFrame {
 		loadBills();
 		setJMenuBar(createMenuBar());
 		
-		// ActionListener za button TRA�I - ozna�i ra�un ako ga na�e
+		// ActionListener za button TRAŽI - označi račun ako ga nađe
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +98,7 @@ public class BillsGUI extends JFrame {
 		
 	}
 	
-	//kad stisnemo ENTER da reagira na button TRA�I
+	//kad stisnemo ENTER da reagira na button TRAŽI
 	@Override
     public void addNotify() {
         super.addNotify();
@@ -112,7 +112,7 @@ public class BillsGUI extends JFrame {
 			
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GRE�KA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -136,7 +136,7 @@ public class BillsGUI extends JFrame {
 		menuTime.setText(hour + ":" + minute + "h");
 		
 		horizontalGlue = Box.createHorizontalGlue();
-		menuBar.add(horizontalGlue);  //postavlja menu bar u desni �o�ak
+		menuBar.add(horizontalGlue);  //postavlja menu bar u desni čošak
 		menuBar.add(menuDate);
 		menuBar.add(menuTime);
 
@@ -145,7 +145,7 @@ public class BillsGUI extends JFrame {
 	
 	private void loadComponents() {
 		
-		lblSearchByBill = new JLabel("TRA\u017DI RA\u010CUN PO BROJ:");
+		lblSearchByBill = new JLabel("TRAŽI RAČUN PO BROJ:");
 		lblSearchByBill.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblSearchByBill.setBounds(10, 13, 140, 15);
 		contentPane.add(lblSearchByBill);
@@ -160,12 +160,12 @@ public class BillsGUI extends JFrame {
 		billsTable.setData(controller.getBillsList());
 		contentPane.add(billsTable);
 		
-		lblRightClick = new JLabel("DESNI KLIK NA RA\u010CUN - OTVARAJU SE DETALJI RA\u010CUNA(pregled, brisanje, \u0161tampanje)");
+		lblRightClick = new JLabel("DESNI KLIK NA RAČUN - OTVARAJU SE DETALJI RAČUNA(pregled, brisanje, štampanje)");
 		lblRightClick.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRightClick.setBounds(10, 657, 485, 14);
 		contentPane.add(lblRightClick);
 		
-		btnSearch = new JButton("TRA\u017DI");
+		btnSearch = new JButton("TRAŽI");
 		btnSearch.setBounds(270, 8, 62, 25);
 		contentPane.add(btnSearch);
 	}

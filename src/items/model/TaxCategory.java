@@ -5,8 +5,8 @@ public class TaxCategory {
 	private double vat;	// VAT - value added tax
 	private String text;
 	
-	// ArtikliFormaDodaj
-	// ArtikliDetalji
+	// ItemDetails
+	// ItemsFormAdd
 	public TaxCategory(int id, double vat, String text) {
 		this.id = id;
 		this.vat = vat;

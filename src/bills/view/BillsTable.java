@@ -32,10 +32,10 @@ public class BillsTable extends JPanel {
 		setLayout(new BorderLayout());
 		add(new JScrollPane(tableBills), BorderLayout.CENTER);
 		
-		menuItemReviewBill = new JMenuItem("Pregled raèuna");
+		menuItemReviewBill = new JMenuItem("Pregled raÄuna");
 		popupMenu.add(menuItemReviewBill);
 		
-		// mouseListener az desnik klik nad raèunom za otvaranje popup menu
+		// mouseListener az desnik klik nad raÄunom za otvaranje popup menu
 		tableBills.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -48,7 +48,7 @@ public class BillsTable extends JPanel {
 			}
 		});
 		
-		// ActionListener za otvaranje pregleda raèuna
+		// ActionListener za otvaranje pregleda raÄuna
 		menuItemReviewBill.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

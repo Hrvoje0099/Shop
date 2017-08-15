@@ -111,14 +111,14 @@ public class ItemsGUI extends JFrame {
 					itemsTableAdd.refresh();
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
 			}
 		});
 		
-		// TRAŽI button - traži artikl
+		// TRAÅ½I button - traÅ¾i artikl
 		itemsFormSearch.setItemsFormSearchListener(new ItemsFormSearchListener() {
 			@Override
 			public void searchItem(ItemsTemp item) {
@@ -127,7 +127,7 @@ public class ItemsGUI extends JFrame {
 					controller.searchItems(item);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -161,7 +161,7 @@ public class ItemsGUI extends JFrame {
 						controller.deleteItem(row_index, itemCode);
 					} catch (SQLException e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -169,7 +169,7 @@ public class ItemsGUI extends JFrame {
 					itemsTableAdd.refresh();
 
 				} else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
@@ -182,7 +182,7 @@ public class ItemsGUI extends JFrame {
 			}
 		});
 		
-		// izbriši tablicu ulaza robe kad stinemo button SPREMI
+		// izbriÅ¡i tablicu ulaza robe kad stinemo button SPREMI
 		itemsTableEntryOfGoods.setItemsTableEntryOfGoodsListener(new ItemsTableEntryOfGoodsListener() {
 			@Override
 			public void cleanEntryOfGoodsTableAfterSave() {
@@ -214,7 +214,7 @@ public class ItemsGUI extends JFrame {
 		//tabPaneLeft
 		tabPaneLeft = new JTabbedPane();
 		tabPaneLeft.addTab("Dodaj artikl", itemsFormAdd);
-		tabPaneLeft.addTab("Traži artikl", itemsFormSearch);
+		tabPaneLeft.addTab("TraÅ¾i artikl", itemsFormSearch);
 		tabPaneLeft.addTab("Ulaz robe", itemsFormEntryOfGoods);
 		tabPaneLeft.setFocusable(false);
 		getContentPane().add(tabPaneLeft, BorderLayout.WEST);
@@ -222,7 +222,7 @@ public class ItemsGUI extends JFrame {
 		//tabPaneRight
 		tabPaneRight = new JTabbedPane();
 		tabPaneRight.addTab("Popis artikla", itemsTableAdd);
-		tabPaneRight.addTab("Pretraživanje artikla", itemsTableSearch);
+		tabPaneRight.addTab("PretraÅ¾ivanje artikla", itemsTableSearch);
 		tabPaneRight.addTab("Popis ulaza robe", itemsTableEntryOfGoods);
 		getContentPane().add(tabPaneRight, BorderLayout.CENTER);
 		
@@ -258,7 +258,7 @@ public class ItemsGUI extends JFrame {
 			controller.loadItems();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -316,17 +316,17 @@ public class ItemsGUI extends JFrame {
 			        table1.setLockedWidth(true);
 			        table1.setWidths(new float[]{3, 5, 6, 6, 6, (float) 3.5, 3, 3, 4, 4, 4, 5});
 			        for(int i = 0; i < 1; i++) {
-			        	table1.addCell(new PdfPCell(new Phrase("Šifra", f2)));
+			        	table1.addCell(new PdfPCell(new Phrase("Å ifra", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Naziv", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Barkod 1", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Barkod 2", f2)));
-			        	table1.addCell(new PdfPCell(new Phrase("Dobavljaè", f2)));
+			        	table1.addCell(new PdfPCell(new Phrase("DobavljaÄ", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Rabat", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("PDV (%)", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Mj.jd.", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("VPC", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("MPC", f2)));
-			        	table1.addCell(new PdfPCell(new Phrase("Marža", f2)));
+			        	table1.addCell(new PdfPCell(new Phrase("MarÅ¾a", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Stanje", f2)));
 			        }
 			        document.add(table1);
@@ -365,7 +365,7 @@ public class ItemsGUI extends JFrame {
 					
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}

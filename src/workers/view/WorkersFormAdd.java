@@ -63,17 +63,17 @@ public class WorkersFormAdd extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				if (txtName.getText().equals("") || txtPrezime.getText().equals("") || txtOib.getText().equals("") || txtId.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtId.getText()))) {
-					JOptionPane.showMessageDialog(null, "ID MOŽE SADRŽAVATI SAMO BROJEVE", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ID MOÅ½E SADRÅ½AVATI SAMO BROJEVE", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtOib.getText()))) {
-					JOptionPane.showMessageDialog(null, "OIB MOŽE SADRŽAVATI SAMO BROJEVE", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "OIB MOÅ½E SADRÅ½AVATI SAMO BROJEVE", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if ((txtOib.getDocument().getLength() < 11) || (txtOib.getDocument().getLength() > 11)) {
-					JOptionPane.showMessageDialog(null, "OIB MORA IMATE 11 BROJEVA!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "OIB MORA IMATE 11 BROJEVA!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[a-zA-Z]+$", txtName.getText())) && (!(Pattern.matches("\\p{IsLatin}+", txtName.getText())))) {
-					JOptionPane.showMessageDialog(null, "IME MOŽE SADRŽAVATI SAMO SLOVA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "IME MOÅ½E SADRÅ½AVATI SAMO SLOVA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[a-zA-Z]+$", txtPrezime.getText())) && (!(Pattern.matches("\\p{IsLatin}+", txtPrezime.getText())))) {
-					JOptionPane.showMessageDialog(null, "PREZIME MOŽE SADRŽAVATI SAMO SLOVA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "PREZIME MOÅ½E SADRÅ½AVATI SAMO SLOVA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 
 					WorkersTemp worker = new WorkersTemp(Integer.parseInt(txtId.getText()), txtName.getText(), txtPrezime.getText(), txtOib.getText(), Integer.parseInt(comboBoxBirthYear.getSelectedItem().toString()), groupSex.getSelection().getActionCommand(), txtPassword.getText());
@@ -105,10 +105,10 @@ public class WorkersFormAdd extends JPanel {
 		lblNecessarily = new JLabel("(*) obavezna polja");
 		btnSave = new JButton("SPREMI");
 
-		radioMale = new JRadioButton("muško");
-		radioFemale = new JRadioButton("žensko");
-		radioMale.setActionCommand("muško");
-		radioFemale.setActionCommand("žensko");
+		radioMale = new JRadioButton("muÅ¡ko");
+		radioFemale = new JRadioButton("Å¾ensko");
+		radioMale.setActionCommand("muÅ¡ko");
+		radioFemale.setActionCommand("Å¾ensko");
 		groupSex = new ButtonGroup();
 		groupSex.add(radioMale);
 		groupSex.add(radioFemale);
@@ -200,7 +200,7 @@ public class WorkersFormAdd extends JPanel {
 		gc.gridx = 0;
 		gc.anchor = GridBagConstraints.LINE_END;
 		gc.insets = new Insets(0, 0, 0, 5);
-		add(new JLabel("*Godina roðenja: "), gc);
+		add(new JLabel("*Godina roÄ‘enja: "), gc);
 
 		gc.gridx = 1;
 		gc.insets = new Insets(0, 0, 0, 0);

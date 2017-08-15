@@ -16,12 +16,12 @@ public class App {
 	public static void main(String[] args) {
 		
 		// Swing data structures aren't thread-safe!
-		// Definicija: Thread predstavlja jedan sekvencijalni tok izvršavanja unutar programa!
-		// Ažuriranja GUI-a, preko Swing-a, mora uslijediti na Event Dispatch Thread (EDT), a kod koji radi bilo što drugo
-		//		(npr pristupa nekim resursima na bazi podataka) treba koristiti jedan ili više drugih niti (thread) i
-		//  	invokeLater() omoguæuje ove druge niti da ažuriraju GUI s njihovim rezultatima.
+		// Definicija: Thread predstavlja jedan sekvencijalni tok izvrï¿½avanja unutar programa!
+		// AÅ¾uriranja GUI-a, preko Swing-a, mora uslijediti na Event Dispatch Thread (EDT), a kod koji radi bilo Å¡to drugo
+		//		(npr pristupa nekim resursima na bazi podataka) treba koristiti jedan ili viÅ¡e drugih niti (thread) i
+		//  	invokeLater() omoguÄ‡uje ove druge niti da aÅ¾uriraju GUI s njihovim rezultatima.
 		
-		errors = new StringWriter();	// za spremanje Exception
+		errors = new StringWriter();
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -29,7 +29,7 @@ public class App {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 
 					Utility.saveException(e1.getMessage(), errors.toString());

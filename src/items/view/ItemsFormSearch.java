@@ -56,7 +56,7 @@ public class ItemsFormSearch extends JPanel {
 		loadComponents();
 		layoutComponents();
 		
-		// ActionListener za 'TRAéI' button
+		// ActionListener za 'TRA≈ΩI' button
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -65,7 +65,7 @@ public class ItemsFormSearch extends JPanel {
 				if (txtItemCode.getText().equals("")) {
 					itemCode = 0;
 				} else if (!(Pattern.matches("^[0-9]+$", txtItemCode.getText()))) {
-					JOptionPane.showMessageDialog(null, "äIFRA MOéE SADRéAVATI SAMO BROJEVE", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "≈†IFRA MO≈ΩE SADR≈ΩAVATI SAMO BROJEVE", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 					itemCode = Integer.parseInt(txtItemCode.getText());
 				}
@@ -86,7 +86,7 @@ public class ItemsFormSearch extends JPanel {
 	
 	private void loadComponents() {
 		
-		lblItemCode = new JLabel("äifra: ");
+		lblItemCode = new JLabel("≈†ifra: ");
 		txtItemCode = new JTextField(20);
 		lblName = new JLabel("Naziv: ");
 		txtAreaName = new JTextArea(3, 20);
@@ -94,7 +94,7 @@ public class ItemsFormSearch extends JPanel {
 		lblBarcode = new JLabel("Barkod: ");
 		txtBarcode = new JTextField(20);
 		
-		lblSupplier = new JLabel("DobavljaË: ");
+		lblSupplier = new JLabel("Dobavljaƒç: ");
 		comboBoxSupplier = new JComboBox<String>();
 		comboBoxSupplier.setPrototypeDisplayValue("qwqwqwqwqwqwqwqwqwqwqwqwq");
 		try {
@@ -111,13 +111,13 @@ public class ItemsFormSearch extends JPanel {
 			
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
 		comboBoxSupplier.setSelectedItem("");
 		
-		btnSearch = new JButton("TRAéI");
+		btnSearch = new JButton("TRA≈ΩI");
 	}
 	
 	private void layoutComponents() {
@@ -202,7 +202,7 @@ public class ItemsFormSearch extends JPanel {
 		add(btnSearch, gc);
 	}
 	
-	//kad stisnemo ENTER da reagira na button U»ITAJ
+	//kad stisnemo ENTER da reagira na button UÔøΩITAJ
 	@Override
     public void addNotify() {
         super.addNotify();

@@ -70,15 +70,15 @@ public class CustomersFormAdd extends JPanel {
 
 				if (txtName.getText().equals("") || txtAddress.getText().equals("") || txtOib.getText().equals("") || txtId.getText().equals("") || txtCity.getText().equals("")
 						|| comboBoxCountry.getSelectedItem().toString().equals("") || txtPerson.getText().equals("") ) {
-					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtId.getText()))) {
-					JOptionPane.showMessageDialog(null, "ID MOŽE SADRŽAVATI SAMO BROJEVE", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ID MOÅ½E SADRÅ½AVATI SAMO BROJEVE", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtZipCode.getText())) && !(txtZipCode.getText().equals("")) ) {
-						JOptionPane.showMessageDialog(null, "POŠTANSKI BROJ MOŽE SADRŽAVATI SAMO BROJEVE", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "POÅ TANSKI BROJ MOÅ½E SADRÅ½AVATI SAMO BROJEVE", "GREï¿½KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtOib.getText()))) {
-					JOptionPane.showMessageDialog(null, "OIB MOŽE SADRŽAVATI SAMO BROJEVE", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "OIB MOÅ½E SADRÅ½AVATI SAMO BROJEVE", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if ((txtOib.getDocument().getLength() < 11) || (txtOib.getDocument().getLength() > 11)) {
-					JOptionPane.showMessageDialog(null, "OIB MORA IMATE 11 BROJEVA!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "OIB MORA IMATE 11 BROJEVA!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 
 					CustomersTemp customer = new CustomersTemp(Integer.parseInt(txtId.getText()), txtName.getText(), txtAddress.getText(), txtCity.getText(), txtZipCode.getText(),
@@ -106,10 +106,10 @@ public class CustomersFormAdd extends JPanel {
 		txtAddress = new JTextField(20);
 		lblCity = new JLabel("*Grad: ");
 		txtCity = new JTextField(20);
-		lblZipCode = new JLabel("Poštanski broj: ");
+		lblZipCode = new JLabel("PoÅ¡tanski broj: ");
 		txtZipCode = new JTextField(20);
 		
-		lblCountry = new JLabel("*Država: ");
+		lblCountry = new JLabel("*DrÅ¾ava: ");
 		comboBoxCountry = new JComboBox<String>(controller.getAllCountries());
 		comboBoxCountry.setPrototypeDisplayValue("width drzavabox label wwwewwwww");
 		comboBoxCountry.setSelectedItem("Croatia");

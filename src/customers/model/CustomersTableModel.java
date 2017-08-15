@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 public class CustomersTableModel extends AbstractTableModel {
 
 	private List<CustomersModel> dbCustomersModel;
-	private String[] colNames = {"Klijent ID", "Naziv", "Adresa", "Grad", "Poötanski broj", "Drûava", "Telefon", "Fax", "Mail", "Mobitel", "OIB", "Ugovor", "Osoba" };
+	private String[] colNames = {"Klijent ID", "Naziv", "Adresa", "Grad", "Po≈°tanski broj", "Dr≈æava", "Telefon", "Fax", "Mail", "Mobitel", "OIB", "Ugovor", "Osoba" };
 	
 	@Override
 	public String getColumnName(int col) {

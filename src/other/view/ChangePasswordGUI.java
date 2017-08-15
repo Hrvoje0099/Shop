@@ -82,7 +82,7 @@ public class ChangePasswordGUI extends JFrame {
 						fos.close();
 					} catch (IOException e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -91,7 +91,7 @@ public class ChangePasswordGUI extends JFrame {
 					dispose();
 
 				} else {
-					JOptionPane.showMessageDialog(null, "STARA LOZINKA JE KRIVA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "STARA LOZINKA JE KRIVA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -116,7 +116,7 @@ public class ChangePasswordGUI extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 
 		JMenu menu = new JMenu("IZBORNIK");
-		JMenuItem oldPasswordItem = new JMenuItem("Prikaži staru lozinku");
+		JMenuItem oldPasswordItem = new JMenuItem("PrikaÅ¾i staru lozinku");
 		menu.add(oldPasswordItem);
 		menuBar.add(menu);
 
@@ -125,14 +125,14 @@ public class ChangePasswordGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				JLabel label = new JLabel("Upišite glavnu lozinku:");
+				JLabel label = new JLabel("UpiÅ¡ite glavnu lozinku:");
 				JPasswordField passField = new JPasswordField();
 				JOptionPane.showConfirmDialog(null, new Object[] { label, passField }, "UNOS LOZINKE ", JOptionPane.OK_CANCEL_OPTION);
 
 				if (passField.getText().equals("hrvoje"))
 					JOptionPane.showMessageDialog(null, "STARA LOZINKA JE: " + password.myPassword, "INFO", JOptionPane.INFORMATION_MESSAGE);
 				else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREï¿½KA", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 

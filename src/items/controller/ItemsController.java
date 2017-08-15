@@ -51,7 +51,7 @@ public class ItemsController extends BaseController {
 	
 	public void saveItem(ItemsTemp itemTemp) throws SQLException {
 		
-		// provjera dali veæ imamo artikl sa istom ŠIFROM
+		// provjera dali veÄ‡ imamo artikl sa istom Å IFROM
 		ItemsModel itemsModelCheck = new ItemsModel(itemTemp.getItemCode());
 		ItemsModel itemsModelTrue = new ItemsModel(itemTemp.getItemCode(), itemTemp.getName(), itemTemp.getBarcode1(), itemTemp.getBarcode2(), itemTemp.getSupplier(), itemTemp.getDiscount(), itemTemp.getTax(), itemTemp.getUnit(), itemTemp.getPurchaseWP(), itemTemp.getPurchaseRP(), itemTemp.getSellingWP(), itemTemp.getSellingRP(), itemTemp.getMargin(), 0 );
 		
@@ -93,7 +93,7 @@ public class ItemsController extends BaseController {
 					
 					csInsert.executeUpdate();
 					
-					JOptionPane.showMessageDialog(null, "ARTIKL USPIJEŠNO UNESEN! ŠIFRA: " + item.getItemCode(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "ARTIKL USPIJEÅ NO UNESEN! Å IFRA: " + item.getItemCode(), "INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 			
@@ -102,7 +102,7 @@ public class ItemsController extends BaseController {
 			csInsert.close();
 		}
 		else if (checkItemBeforeSave(itemsModelCheck) == true)
-			JOptionPane.showMessageDialog(null, "ŠIFRA VEÆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Å IFRA VEÄ† POSTOJI!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public boolean checkItemBeforeSave(ItemsModel item) {
@@ -122,7 +122,7 @@ public class ItemsController extends BaseController {
 		
 		csUpdate.executeUpdate();
 		
-		JOptionPane.showMessageDialog(null, "ARTIKL USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "ARTIKL USPJEÅ NO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
 		
 		csUpdate.close();
 	}
@@ -191,7 +191,7 @@ public class ItemsController extends BaseController {
 		String procSql = "{ call zavrsni.deleteItem('"+itemCode+"') }";
 		CallableStatement csDelete = con.prepareCall(procSql);
 		
-		JOptionPane.showMessageDialog(null, "ARTIKL USPIJEŠNO IZBRISAN! ŠIFRA: " + itemCode, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "ARTIKL USPIJEÅ NO IZBRISAN! Å IFRA: " + itemCode, "INFO", JOptionPane.INFORMATION_MESSAGE);
 		
 		csDelete.executeUpdate();
 		csDelete.close();

@@ -57,7 +57,7 @@ public class CustomersFormSearch extends JPanel {
 		loadComponents();
 		layoutComponents();
 		
-		// ActionListener za 'TRAŽI' button
+		// ActionListener za 'TRAÅ½I' button
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -92,7 +92,7 @@ public class CustomersFormSearch extends JPanel {
 		lblCity = new JLabel("Grad: ");
 		txtCity = new JTextField(20);
 		
-		lblCountry = new JLabel("Država: ");
+		lblCountry = new JLabel("DrÅ¾ava: ");
 		comboBoxCountry = new JComboBox<String>(controller.getAllCountriesForSearch());
 		comboBoxCountry.setPrototypeDisplayValue("width drzavabox label wwwewwwww");
 		comboBoxCountry.setSelectedItem("");
@@ -111,7 +111,7 @@ public class CustomersFormSearch extends JPanel {
 		txtContract = new JTextField(20);
 		lblPerson = new JLabel("Osoba: ");
 		txtPerson = new JTextField(20);
-		btnSearch = new JButton("TRAŽI");
+		btnSearch = new JButton("TRAÅ½I");
 	}
 
 	private void layoutComponents() {

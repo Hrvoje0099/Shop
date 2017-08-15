@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 public class ItemsTableEntryOfGoodsModel extends AbstractTableModel {
 	
 	private List<EntryOfGoodsModel> dbEntryOfGoodsModel;
-	private String[] colNames = {"äifra", "Naziv", "Barkod 1", "Barkod 2", "DobavljaË", "Rabat", "Porez", "Mjera", "Nabavna(VP)", "Nabavna(MP)", "Prodajna(VP)", "Prodajna(MP)", "Marûa(%)", "Ulaz(koliËina)" };
+	private String[] colNames = {"≈†ifra", "Naziv", "Barkod 1", "Barkod 2", "Dobavljaƒá", "Rabat", "Porez", "Mjera", "Nabavna(VP)", "Nabavna(MP)", "Prodajna(VP)", "Prodajna(MP)", "Mar≈æa(%)", "Ulaz(koliƒçina)" };
 
 	@Override
 	public String getColumnName(int col) {

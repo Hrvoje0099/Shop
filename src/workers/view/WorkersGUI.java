@@ -100,14 +100,14 @@ public class WorkersGUI extends JFrame {
 					workersTableAdd.refresh();		
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
 			}
 		});
 
-		// delete i pokaži lozinku
+		// delete i pokaÅ¾i lozinku
 		workersTableAdd.setWorkersTableListener(new WorkersTableListener() {
 
 			// delete radnik
@@ -126,7 +126,7 @@ public class WorkersGUI extends JFrame {
 						controller.deleteWorker(row_index, workerId);
 					} catch (SQLException e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -134,10 +134,10 @@ public class WorkersGUI extends JFrame {
 					workersTableAdd.refresh();
 
 				} else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			}
 
-			// pokaži lozinku radnika
+			// pokaÅ¾i lozinku radnika
 			public void showWorkerPassword() {
 
 				JPasswordField passwordField = Utility.setPaneForEnterTheAccessPassword();
@@ -157,14 +157,13 @@ public class WorkersGUI extends JFrame {
 						password = controller.showWorkerPassword(workerId);
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
-					JOptionPane.showMessageDialog(null, "LOZINKA OVOG RADNIKA: " + password, "INFO",
-							JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "LOZINKA OVOG RADNIKA: " + password, "INFO", JOptionPane.INFORMATION_MESSAGE);
 				} else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
@@ -194,7 +193,7 @@ public class WorkersGUI extends JFrame {
 			controller.loadWorkers();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -256,7 +255,7 @@ public class WorkersGUI extends JFrame {
 			        	table1.addCell(new PdfPCell(new Phrase("Ime", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Prezime", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("OIB", f2)));
-			        	table1.addCell(new PdfPCell(new Phrase("Godina roðenja", f2)));
+			        	table1.addCell(new PdfPCell(new Phrase("Godina roÄ‘enja", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Spol", f2)));
 			        }
 			        document.add(table1);
@@ -286,7 +285,7 @@ public class WorkersGUI extends JFrame {
 					
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}

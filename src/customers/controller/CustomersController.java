@@ -38,7 +38,7 @@ public class CustomersController extends BaseController {
 	
 	public void saveCustomer(CustomersTemp customerTemp) throws SQLException {
 				
-		// provjera dali veæ imamo klijenta sa istim ID-om ili OIB-om
+		// provjera dali veÄ‡ imamo klijenta sa istim ID-om ili OIB-om
 		CustomersModel customerModelCheck = new CustomersModel(customerTemp.getId(), customerTemp.getOib());
 		CustomersModel customerModelTrue = new CustomersModel(customerTemp.getId(), customerTemp.getName(), customerTemp.getAddress(), customerTemp.getCity(), customerTemp.getZipCode(), customerTemp.getCountry(), customerTemp.getPhone(), customerTemp.getFax(), customerTemp.getMail(), customerTemp.getMobilePhone(), customerTemp.getOib(), customerTemp.getContract(), customerTemp.getPerson() );	
 				
@@ -78,7 +78,7 @@ public class CustomersController extends BaseController {
 					
 					csInsert.executeUpdate();
 					
-					JOptionPane.showMessageDialog(null, "KLIJENT USPIJEŠNO UNESEN! ID: " + customer.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KLIJENT USPIJEÅ NO UNESEN! ID: " + customer.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 			
@@ -87,10 +87,10 @@ public class CustomersController extends BaseController {
 			csInsert.close();
 		}
 		else if (checkCustomerBeforeSave(customerModelCheck) == 1) {
-			JOptionPane.showMessageDialog(null, "OBI VEÆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "OBI VEÄ† POSTOJI!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 		}
 		else if (checkCustomerBeforeSave(customerModelCheck) == 2) {
-			JOptionPane.showMessageDialog(null, "ID VEÆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ID VEÄ† POSTOJI!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -115,7 +115,7 @@ public class CustomersController extends BaseController {
 		
 		csUpdate.executeUpdate();	
 		
-		JOptionPane.showMessageDialog(null, "KLIJENT USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "KLIJENT USPJEÅ NO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
 		
 		csUpdate.close();
 	}
@@ -189,7 +189,7 @@ public class CustomersController extends BaseController {
 		csDelete.executeUpdate();
 		customersAddListCM.remove(row_index);
 		
-		JOptionPane.showMessageDialog(null, "KLIJENT USPIJEŠNO IZBRISAN! ID: " + idCustomer, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "KLIJENT USPIJEÅ NO IZBRISAN! ID: " + idCustomer, "INFO", JOptionPane.INFORMATION_MESSAGE);
 		
 		csDelete.close();
 	}

@@ -51,7 +51,7 @@ public class CashRegisterLogin extends JFrame {
 		txtName = new JTextField(20);
 		lblSurname = new JLabel("Prezime: ");
 		txtSurname = new JTextField(20);
-		lblPassword = new JLabel("Šifra: ");
+		lblPassword = new JLabel("Å ifra: ");
 		txtPassword = new JPasswordField(20);
 		btnLogin = new JButton("PRIJAVA");
 		
@@ -63,9 +63,9 @@ public class CashRegisterLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (txtName.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "NISTE UNJELI IME RADNIKA!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNJELI IME RADNIKA!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if ( txtSurname.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "NISTE UNJELI PREZIME RADNIKA!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNJELI PREZIME RADNIKA!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 					String name = txtName.getText();
 					String surname = txtSurname.getText();
@@ -78,7 +78,7 @@ public class CashRegisterLogin extends JFrame {
 						controller.loadWorkers();
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}

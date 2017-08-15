@@ -96,7 +96,7 @@ public class MainFrameGUI extends JFrame {
 					itemsGUI.setVisible(true);
 				}
 				else
-					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 */						
 				ItemsGUI itemsGUI = new ItemsGUI();
 				itemsGUI.setVisible(true);
@@ -122,7 +122,7 @@ public class MainFrameGUI extends JFrame {
 					workersGUI.setVisible(true);
 				}
 				else
-					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 */						
 				WorkersGUI workersGUI = new WorkersGUI();
 				workersGUI.setVisible(true);
@@ -148,7 +148,7 @@ public class MainFrameGUI extends JFrame {
 					customersGUI.setVisible(true);
 				}
 				else
-					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);		
+					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);		
 */		
 				CustomersGUI customersGUI = new CustomersGUI();
 				customersGUI.setVisible(true);
@@ -158,7 +158,7 @@ public class MainFrameGUI extends JFrame {
 		btnCustomers.setBounds(245, 180, 150, 100);
 		getContentPane().add(btnCustomers);
 		
-		btnBills = new JButton("RA\u010CUNI");
+		btnBills = new JButton("RAÄŒUNI");
 		btnBills.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {				
@@ -242,7 +242,7 @@ public class MainFrameGUI extends JFrame {
 					changePasswordGUI.setVisible(true);
 				} catch (IOException e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -275,7 +275,7 @@ public class MainFrameGUI extends JFrame {
 					admin.setVisible(true);
 				}
 				else
-					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		

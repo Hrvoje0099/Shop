@@ -223,7 +223,7 @@ public class BillsReview extends JFrame {
 		lblDate.setBounds(10, 14, 46, 15);
 		contentPane.add(lblDate);
 
-		lblBillNumber = new JLabel("Broj ra\u010Duna:");
+		lblBillNumber = new JLabel("Broj računa:");
 		lblBillNumber.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblBillNumber.setBounds(10, 55, 75, 15);
 		contentPane.add(lblBillNumber);
@@ -272,7 +272,7 @@ public class BillsReview extends JFrame {
 		lblCustomer.setBounds(633, 14, 50, 15);
 		contentPane.add(lblCustomer);
 
-		lblPaymentMethod = new JLabel("Na\u010Din pla\u0107anja:");
+		lblPaymentMethod = new JLabel("Način plaćanja:");
 		lblPaymentMethod.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPaymentMethod.setBounds(308, 55, 90, 15);
 		contentPane.add(lblPaymentMethod);

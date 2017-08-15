@@ -58,14 +58,14 @@ public class ItemsTableEntryOfGoods extends JPanel {
 						
 						controller.addToState(itemCode, amountInput);
 					}
-					JOptionPane.showMessageDialog(null, "KOLIÈINE USPIJEŠNO DODANE NA STANJE!", "INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KOLIÄŒINE USPIJEÅ NO DODANE NA STANJE!", "INFO", JOptionPane.INFORMATION_MESSAGE);
 
 					if (itemsTableEntryOfGoodsListener != null) 
 						itemsTableEntryOfGoodsListener.cleanEntryOfGoodsTableAfterSave();
 					
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}

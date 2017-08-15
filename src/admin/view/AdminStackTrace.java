@@ -51,7 +51,7 @@ public class AdminStackTrace extends JFrame {
 		
 		loadComponents();
 		
-		// load Stack Trace iz odreðenog Exception-a
+		// load Stack Trace iz odreÄ‘enog Exception-a
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -66,7 +66,7 @@ public class AdminStackTrace extends JFrame {
 					txtAreaStackTrace.setText(stackTrace);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}

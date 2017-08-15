@@ -35,7 +35,7 @@ public class WorkersTableAdd extends JPanel {
 		popupMenu = new JPopupMenu();
 
 		menuItemWorkerDelete = new JMenuItem("Izbrisati radnika");
-		menuItemWorkerPassword = new JMenuItem("Pokaûi lozinku");
+		menuItemWorkerPassword = new JMenuItem("Poka≈æi lozinku");
 		popupMenu.add(menuItemWorkerDelete);
 		popupMenu.add(menuItemWorkerPassword);
 		

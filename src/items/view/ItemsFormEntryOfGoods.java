@@ -75,15 +75,15 @@ public class ItemsFormEntryOfGoods extends JPanel {
 		loadComponents();
 		layoutComponents();
 		
-		// ActionListener za U»ITAJ button
+		// ActionListener za UƒåITAJ button
 		btnReload.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				if (txtBarcode.getText().equals("") ) {
-					JOptionPane.showMessageDialog(null, "MORATE UNIJETI BARKOD!!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "MORATE UNIJETI BARKOD!!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtBarcode.getText()))) {
-					JOptionPane.showMessageDialog(null, "BARKOD MOéE SADRéAVATI SAMO BROJEVE", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "BARKOD MO≈ΩE SADR≈ΩAVATI SAMO BROJEVE", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 					
 					String barcode = txtBarcode.getText();
@@ -94,12 +94,12 @@ public class ItemsFormEntryOfGoods extends JPanel {
 						controller.connect();
 						item = controller.loadItemForEntryOfGoods(barcode);
 						if (item == null) {
-							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -151,9 +151,9 @@ public class ItemsFormEntryOfGoods extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				if (txtAmountInput.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "MORATE UNIJENTI KOLI»INU ULAZA ROBE!!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "MORATE UNIJENTI KOLIÔøΩINU ULAZA ROBE!!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0.0-9.9]+$", txtAmountInput.getText().replaceAll(",", ".")))) {
-					JOptionPane.showMessageDialog(null, "KOLI»INA ULAZA ROBE MOéE SADRéAVATI SAMO BROJEVE", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KOLIƒåINA ULAZA ROBE MO≈ΩE SADR≈ΩAVATI SAMO BROJEVE", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 					
 					double amountInput;
@@ -167,7 +167,7 @@ public class ItemsFormEntryOfGoods extends JPanel {
 						}
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 						return;
@@ -192,9 +192,9 @@ public class ItemsFormEntryOfGoods extends JPanel {
 		lblBarcode = new JLabel("Barkod: ");
 		txtBarcode = new JTextField(20);
 		
-		btnReload = new JButton("U»ITAJ");
+		btnReload = new JButton("UƒåITAJ");
 		
-		lblItemCode = new JLabel("äifra artikla: ");
+		lblItemCode = new JLabel("≈†ifra artikla: ");
 		txtItemCode = new JTextField(20);
 		txtItemCode.setEditable(false);
 		txtItemCode.setEnabled(false);
@@ -205,7 +205,7 @@ public class ItemsFormEntryOfGoods extends JPanel {
 		txtAreaName.setEditable(false);
 		txtAreaName.setEnabled(false);
 		
-		lblSupplier = new JLabel("DobavljaË: ");
+		lblSupplier = new JLabel("Dobavljaƒç: ");
 		txtSupplier = new JTextField(20);
 		txtSupplier.setEditable(false);
 		txtSupplier.setEnabled(false);
@@ -245,7 +245,7 @@ public class ItemsFormEntryOfGoods extends JPanel {
 		txtSellingRP.setEditable(false);
 		txtSellingRP.setEnabled(false);
 		
-		lblMargin = new JLabel("Marûa(%): ");
+		lblMargin = new JLabel("Mar≈æa(%): ");
 		txtMargin = new JTextField(20);
 		txtMargin.setEditable(false);
 		txtMargin.setEnabled(false);

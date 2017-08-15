@@ -18,7 +18,6 @@ public class OtherController {
 	
 	public OtherController() {
 		
-		// za spremanje Exception
 		errors = new StringWriter();
 	}
 	
@@ -30,12 +29,12 @@ public class OtherController {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			
 			try {
 				saveException(e1.getMessage(), errors.toString());
 			} catch (SQLException e2) {
-				JOptionPane.showMessageDialog(null, e2, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, e2, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		
@@ -51,12 +50,12 @@ public class OtherController {
 				con.close();
 			} catch (SQLException e1) {
 				e1.printStackTrace(new PrintWriter(errors));
-				JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				
 				try {
 					saveException(e1.getMessage(), errors.toString());
 				} catch (SQLException e2) {
-					JOptionPane.showMessageDialog(null, e2, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e2, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		} else return;

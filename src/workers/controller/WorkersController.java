@@ -29,7 +29,7 @@ public class WorkersController extends BaseController {
 	
 	public void saveWorker(WorkersTemp workerTemp) throws SQLException {
 		
-		// provjera dali veæ imamo radnika sa istim ID-om ili OIB-om
+		// provjera dali veÄ‡ imamo radnika sa istim ID-om ili OIB-om
 		WorkersModel workersModelCheck = new WorkersModel(workerTemp.getId(), workerTemp.getOib());
 		WorkersModel workersModelTrue = new WorkersModel(workerTemp.getId(), workerTemp.getName(), workerTemp.getSurname(), workerTemp.getOib(), workerTemp.getBirthYear(), workerTemp.getSex(), workerTemp.getPassword());	
 				
@@ -64,7 +64,7 @@ public class WorkersController extends BaseController {
 					
 					csInsert.executeUpdate();
 					
-					JOptionPane.showMessageDialog(null, "RADNIK USPIJEŠNO UNESEN! ID: " + worker.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "RADNIK USPIJEÅ NO UNESEN! ID: " + worker.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
 				}
 					
 			}
@@ -74,10 +74,10 @@ public class WorkersController extends BaseController {
 			csCount.close();
 		}
 		else if (checkWorkerBeforeSave(workersModelCheck) == 1) {
-			JOptionPane.showMessageDialog(null, "OBI VEÆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "OBI VEÄ† POSTOJI!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 		}
 		else if (checkWorkerBeforeSave(workersModelCheck) == 2) {
-			JOptionPane.showMessageDialog(null, "ID VEÆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ID VEÄ† POSTOJI!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -123,7 +123,7 @@ public class WorkersController extends BaseController {
 		String procSql = "{ call zavrsni.deleteWorker('"+workerId+"') }";
 		CallableStatement csDelete = con.prepareCall(procSql);
 		
-		JOptionPane.showMessageDialog(null, "RADNIK USPIJEŠNO IZBRISAN! ID: " + workerId, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "RADNIK USPIJEÅ NO IZBRISAN! ID: " + workerId, "INFO", JOptionPane.INFORMATION_MESSAGE);
 		
 		csDelete.executeUpdate();
 		csDelete.close();

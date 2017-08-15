@@ -98,17 +98,17 @@ public class ItemsFormAdd extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (txtItemCode.getText().equals("") || txtAreaName.getText().equals("") || txtBarcode1.getText().equals("") || txtPurchaseWP.getText().equals("") || txtSellingWP.getText().equals("") ) {
-					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if (txtItemCode.getText().equals("0")) {
-					JOptionPane.showMessageDialog(null, "äIFRA NE MOéE BITI BROJ 0!!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "≈†IFRA NE MO≈ΩE BITI BROJ 0!!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtItemCode.getText()))) {
-					JOptionPane.showMessageDialog(null, "äIFRA MOéE SADRéAVATI SAMO BROJEVE", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "≈†IFRA MO≈ΩE SADR≈ΩAVATI SAMO BROJEVE", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0-9]+$", txtBarcode1.getText()))) {
-					JOptionPane.showMessageDialog(null, "BARKOD 1 MOéE SADRéAVATI SAMO BROJEVE", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "BARKOD 1 MO≈ΩE SADR≈ΩAVATI SAMO BROJEVE", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if ( !(Pattern.matches("^[0-9]+$", txtBarcode2.getText())) && !(txtBarcode2.getText().equals("")) ) {
-					JOptionPane.showMessageDialog(null, "BARKOD 2 MOéE SADRéAVATI SAMO BROJEVE", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "BARKOD 2 MO≈ΩE SADR≈ΩAVATI SAMO BROJEVE", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if ((txtItemCode.getDocument().getLength() < 6) || (txtItemCode.getDocument().getLength() > 6)) {
-					JOptionPane.showMessageDialog(null, "äIFRA MORA IMATE 6 BROJEVA!!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "≈†IFRA MORA IMATE 6 BROJEVA!!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 					
 					ItemsTemp item = new ItemsTemp(Integer.parseInt(txtItemCode.getText()), txtAreaName.getText(), txtBarcode1.getText(), txtBarcode2.getText(),
@@ -130,7 +130,7 @@ public class ItemsFormAdd extends JPanel {
 	
 	private void loadComponents() {
 		
-		lblItemCode = new JLabel("äifra artikla: ");
+		lblItemCode = new JLabel("≈†ifra artikla: ");
 		txtItemCode = new JTextField(20);
 		
 		lblName = new JLabel("Naziv: ");
@@ -143,7 +143,7 @@ public class ItemsFormAdd extends JPanel {
 		lblBarcode2 = new JLabel("Barkod 2: ");
 		txtBarcode2 = new JTextField(20);
 
-		lblSupplier = new JLabel("DobavljaË: ");
+		lblSupplier = new JLabel("Dobavljaƒç: ");
 		comboBoxSupplier = new JComboBox<String>();
 		comboBoxSupplier.setPrototypeDisplayValue("qwqwqwqwqwqwqwqwqwqwqwqwq");
 		try {
@@ -159,7 +159,7 @@ public class ItemsFormAdd extends JPanel {
 			
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -230,7 +230,7 @@ public class ItemsFormAdd extends JPanel {
 						txtPurchaseRP.setText(null);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -272,14 +272,14 @@ public class ItemsFormAdd extends JPanel {
 						txtSellingRP.setText(null);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
 			}
 		});
 		
-		lblMargin = new JLabel("Marûa(%): ");
+		lblMargin = new JLabel("Mar≈æa(%): ");
 		txtMargin = new JTextField(20);
 		txtMargin.setEditable(false);
 		
@@ -297,7 +297,7 @@ public class ItemsFormAdd extends JPanel {
 				txtMargin.setText(null);
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}

@@ -115,7 +115,7 @@ public class ItemsDetails extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (txtAreaName.getText().equals("") || txtPurchaseWP.getText().equals("") || txtSellingWP.getText().equals("") || txtBarcode1.getText().equals("") ) {
-					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 					
 					ItemsTemp itemsTemp = new ItemsTemp(txtAreaName.getText(), comboBoxSuplier.getSelectedItem().toString(), txtBarcode1.getText(), txtBarcode2.getText(),
@@ -127,7 +127,7 @@ public class ItemsDetails extends JFrame {
 						controller.updateItem(itemsTemp, itemCode);
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -151,11 +151,11 @@ public class ItemsDetails extends JFrame {
 				
 				if (checkBoxBarcode1.isSelected()) {
 					txtBarcode1.setEditable(false);
-					checkBoxBarcode1.setText("BARKOD ZAKLJU»AN");
+					checkBoxBarcode1.setText("BARKOD ZAKLJUƒåAN");
 				}
 				else {
 					txtBarcode1.setEditable(true);
-					checkBoxBarcode1.setText("BARKOD OTKLJU»AN");
+					checkBoxBarcode1.setText("BARKOD OTKLJUƒåAN");
 				}
 			}
 		});
@@ -167,11 +167,11 @@ public class ItemsDetails extends JFrame {
 				
 				if (checkBoxBarcode2.isSelected()) {
 					txtBarcode2.setEditable(false);
-					checkBoxBarcode2.setText("BARKOD ZAKLJU»AN");
+					checkBoxBarcode2.setText("BARKOD ZAKLJUƒåAN");
 				}
 				else {
 					txtBarcode2.setEditable(true);
-					checkBoxBarcode2.setText("BARKOD OTKLJU»AN");
+					checkBoxBarcode2.setText("BARKOD OTKLJUƒåAN");
 				}
 			}
 		});
@@ -197,7 +197,7 @@ public class ItemsDetails extends JFrame {
 	
 	private void loadComponents() {
 		
-		lblItemCode = new JLabel("\u0160ifra:");
+		lblItemCode = new JLabel("≈†ifra:");
 		lblItemCode.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblItemCode.setBounds(454, 11, 46, 14);
 		contentPane.add(lblItemCode);
@@ -217,7 +217,7 @@ public class ItemsDetails extends JFrame {
 		lblBarcode2.setBounds(10, 177, 65, 14);
 		contentPane.add(lblBarcode2);
 		
-		lblSuplier = new JLabel("Dobavlja\u010D:");
+		lblSuplier = new JLabel("Dobavljaƒç:");
 		lblSuplier.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblSuplier.setBounds(10, 105, 65, 14);
 		contentPane.add(lblSuplier);
@@ -249,7 +249,7 @@ public class ItemsDetails extends JFrame {
 		txtItemCode.setColumns(10);
 		txtItemCode.setHorizontalAlignment((int) CENTER_ALIGNMENT);
 		
-		btnAddSupplier = new JButton("DODAJ DOBAVLJA\u010CA");
+		btnAddSupplier = new JButton("DODAJ DOBAVLJAƒåA");
 		btnAddSupplier.setBounds(345, 100, 265, 25);
 		contentPane.add(btnAddSupplier);
 		
@@ -265,12 +265,12 @@ public class ItemsDetails extends JFrame {
 		contentPane.add(txtBarcode2);
 		txtBarcode2.setColumns(10);
 		
-		checkBoxBarcode1 = new JCheckBox("BARKOD ZAKLJU»AN");
+		checkBoxBarcode1 = new JCheckBox("BARKOD ZAKLJUƒåAN");
 		checkBoxBarcode1.setSelected(true);
 		checkBoxBarcode1.setBounds(345, 141, 155, 25);
 		contentPane.add(checkBoxBarcode1);
 		
-		checkBoxBarcode2 = new JCheckBox("BARKOD ZAKLJU»AN");
+		checkBoxBarcode2 = new JCheckBox("BARKOD ZAKLJUƒåAN");
 		checkBoxBarcode2.setSelected(true);
 		checkBoxBarcode2.setBounds(345, 174, 155, 25);
 		contentPane.add(checkBoxBarcode2);
@@ -419,7 +419,7 @@ public class ItemsDetails extends JFrame {
 		lblSellingRP.setBounds(205, 323, 115, 14);
 		contentPane.add(lblSellingRP);
 		
-		lblMargin = new JLabel("Mar\u017Ea(%):");
+		lblMargin = new JLabel("Mar≈æa(%):");
 		lblMargin.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMargin.setBounds(414, 305, 70, 14);
 		contentPane.add(lblMargin);
@@ -482,7 +482,7 @@ public class ItemsDetails extends JFrame {
 			
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -533,7 +533,7 @@ public class ItemsDetails extends JFrame {
 				txtMargin.setText(null);
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -549,7 +549,7 @@ public class ItemsDetails extends JFrame {
 				txtPurchaseRP.setText(null);
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -565,7 +565,7 @@ public class ItemsDetails extends JFrame {
 				txtSellingRP.setText(null);
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}

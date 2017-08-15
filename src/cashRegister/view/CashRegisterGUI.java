@@ -185,9 +185,9 @@ public class CashRegisterGUI extends JFrame {
 //				item = null;
 
 				if (txtItem.getText().isEmpty())
-					JOptionPane.showMessageDialog(null, "NISTE NIäTA UNIJELI!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE NI≈†TA UNIJELI!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				else {
-					// sprema samo na tablicu(ne u bazu joö)
+					// sprema samo na tablicu(ne u bazu joÔøΩ)
 
 					String barcode = txtItem.getText().toString();
 
@@ -213,11 +213,11 @@ public class CashRegisterGUI extends JFrame {
 							txtQuantity.setText("1");
 							txtDiscount.setText("0");
 						} else
-							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GREÔøΩKA", JOptionPane.ERROR_MESSAGE);
 
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -225,13 +225,13 @@ public class CashRegisterGUI extends JFrame {
 			}
 		});
 		
-		// ActionListener za naËin plaÊanja KARTICOM gdje Êemo spremiti i koöaricu i blagajnu u bazu
+		// ActionListener za naƒçin plaƒáanja KARTICOM gdje ƒáemo spremiti i ko≈°aricu i blagajnu u bazu
 		btnCard.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				if (tableCashRegister.tableCashRegister.getRowCount() == 0) {
-					JOptionPane.showMessageDialog(null, "NISTE UNIJELI NITI JEDAN ARTIKL!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNIJELI NITI JEDAN ARTIKL!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				
@@ -245,13 +245,13 @@ public class CashRegisterGUI extends JFrame {
 			}
 		});
 		
-		// ActionListener za naËin plaÊanja GOTOVINOM gdje Êemo spremiti i koöaricu i blagajnu u bazu
+		// ActionListener za naƒçin plaƒáanja GOTOVINOM gdje ƒáemo spremiti i ko≈°aricu i blagajnu u bazu
 		btnCash.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				if (tableCashRegister.tableCashRegister.getRowCount() == 0) {
-					JOptionPane.showMessageDialog(null, "NISTE UNIJELI NITI JEDAN ARTIKL!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNIJELI NITI JEDAN ARTIKL!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				
@@ -259,7 +259,7 @@ public class CashRegisterGUI extends JFrame {
 					String entry = JOptionPane.showInputDialog(null, "Unesite iznos gotovine: ", "UNOS", JOptionPane.QUESTION_MESSAGE);
 
 					if (Double.valueOf(txtAmountTotal.getText().toString().replaceAll(",", ".")) <= 0) {
-						JOptionPane.showMessageDialog(null, "NISTE UNIJELI NITI JEDAN ARTIKL!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "NISTE UNIJELI NITI JEDAN ARTIKL!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 						return;
 					} else if (Double.valueOf(entry.replaceAll(",", ".")) > Double.valueOf(txtAmountTotal.getText().toString().replaceAll(",", "."))) {
 						double returnAmount = (Double.valueOf(entry.replaceAll(",", ".")) - Double.valueOf(txtAmountTotal.getText().toString().replaceAll(",", ".")));
@@ -269,10 +269,10 @@ public class CashRegisterGUI extends JFrame {
 						printBill("gotovina");
 						saveCashRegister("gotovina");
 					} else
-						JOptionPane.showMessageDialog(null, "UNOS GOTOVINE MORA BITI VE∆I OD IZNOSA RA»UNA!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "UNOS GOTOVINE MORA BITI VEƒÜI OD IZNOSA RAƒåUNA!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 					return;
@@ -310,7 +310,7 @@ public class CashRegisterGUI extends JFrame {
 			}
 		});
 		
-		// ActionListener za RA»UNI button
+		// ActionListener za RAƒåUNI button
 		btnBills.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -319,7 +319,7 @@ public class CashRegisterGUI extends JFrame {
 			}
 		});
 		
-		// ActionListener za PREGLED PROODAJE button
+		// ActionListener za PREGLED PRODAJE button
 		btnReviewSales.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -338,7 +338,7 @@ public class CashRegisterGUI extends JFrame {
 			}
 		});
 
-		// izbriöi oznaËeni red u tablici kada stisnemo DELETE na tipkovnici
+		// izbri≈°i oznaƒçeni red u tablici kada stisnemo DELETE na tipkovnici
 		tableCashRegister.tableCashRegister.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -372,7 +372,7 @@ public class CashRegisterGUI extends JFrame {
 				quantityFormat = Double.valueOf(df3.format(quantity).replace(",", "."));
 			} else {
 				if (!(Pattern.matches("^[0-9]+$", txtQuantity.getText()))) {
-					JOptionPane.showMessageDialog(null, "KOLI»INA NE MOéE BITI DECIMALNA", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KOLIƒåINA NE MO≈ΩE BITI DECIMALNA", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				}
 				else
 					quantityFormat = Integer.valueOf(txtQuantity.getText().toString());
@@ -387,17 +387,17 @@ public class CashRegisterGUI extends JFrame {
 		if (item.getDiscount().equals("DA")) {
 			try {
 				if (txtDiscount.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "KRIVO UNESEN POPUST!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVO UNESEN POPUST!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				} else if ((Integer.valueOf(txtDiscount.getText()) < 0) || (Integer.valueOf(txtDiscount.getText()) > 100)) {
-					JOptionPane.showMessageDialog(null, "KRIVO UNESEN POPUST!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVO UNESEN POPUST!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					return discount;
 				}
 				discount = Integer.valueOf(txtDiscount.getText());
 			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "KRIVO UNESEN POPUST!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "KRIVO UNESEN POPUST!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, "POPUST NA OVAJ ARTIKL NIJE DOZVOLJEN!", "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "POPUST NA OVAJ ARTIKL NIJE DOZVOLJEN!", "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 		}
 		return discount;
 	}
@@ -476,7 +476,7 @@ public class CashRegisterGUI extends JFrame {
 				controller.removeFromState(itemCode, quantity);
 			} catch (Exception e1) {
 				e1.printStackTrace(new PrintWriter(errors));
-				JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 				
 				Utility.saveException(e1.getMessage(), errors.toString());
 			}
@@ -501,7 +501,7 @@ public class CashRegisterGUI extends JFrame {
 			document.add(new Paragraph("\n"));
 
 			Chunk chunkDate = new Chunk(new VerticalPositionMark());
-			Paragraph paragraphBillNumber = new Paragraph("Broj raËuna: " + txtBillNumber.getText(), f1);
+			Paragraph paragraphBillNumber = new Paragraph("Broj raƒçuna: " + txtBillNumber.getText(), f1);
 			paragraphBillNumber.add(new Chunk(chunkDate));
 			paragraphBillNumber.add(new Paragraph("Datum: " + cal.get(Calendar.DAY_OF_MONTH) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.YEAR) + " " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + "h"));
 			document.add(paragraphBillNumber);
@@ -516,11 +516,11 @@ public class CashRegisterGUI extends JFrame {
 			table1.setLockedWidth(true);
 			table1.setWidths(new float[]{3, 7, 2, 2, 3, 3, 3, 3});
 			for (int i = 0; i < 1; i++) {
-				table1.addCell(new PdfPCell(new Phrase("äifra", f2)));
+				table1.addCell(new PdfPCell(new Phrase("ÔøΩifra", f2)));
 				table1.addCell(new PdfPCell(new Phrase("Naziv", f2)));
 				table1.addCell(new PdfPCell(new Phrase("Mj.jd.", f2)));
 				table1.addCell(new PdfPCell(new Phrase("PDV (%)", f2)));
-				table1.addCell(new PdfPCell(new Phrase("KoliËina", f2)));
+				table1.addCell(new PdfPCell(new Phrase("Koliƒçina", f2)));
 				table1.addCell(new PdfPCell(new Phrase("MPC", f2)));
 				table1.addCell(new PdfPCell(new Phrase("Popust", f2)));
 				table1.addCell(new PdfPCell(new Phrase("Iznos", f2)));
@@ -541,7 +541,7 @@ public class CashRegisterGUI extends JFrame {
 			document.add(table2);
 			document.add(new Paragraph("\n"));
 
-			Chunk chunkPaymentMethod = new Chunk("NaËin plaÊanja: " + paymentMethod, f1);
+			Chunk chunkPaymentMethod = new Chunk("Naƒçin plaƒáanja: " + paymentMethod, f1);
 			Paragraph paragraphPaymentMethod = new Paragraph();
 			paragraphPaymentMethod.add(chunkPaymentMethod);
 			paragraphPaymentMethod.setAlignment(Element.ALIGN_RIGHT);
@@ -563,7 +563,7 @@ public class CashRegisterGUI extends JFrame {
 
 			document.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
 
-			Chunk chunkFooter = new Chunk("OTISNUTI RA»UN JE PUNOVAéAN BEZ POTPISA I PE»ATA SUKLADNO ODREDBAMA ZAKONA", f2);
+			Chunk chunkFooter = new Chunk("OTISNUTI RAƒåUN JE PUNOVA≈ΩAN BEZ POTPISA I PEƒåATA SUKLADNO ODREDBAMA ZAKONA", f2);
 			Paragraph paragraphFooter = new Paragraph();
 			paragraphFooter.add(chunkFooter);
 			paragraphFooter.setAlignment(Element.ALIGN_CENTER);
@@ -579,7 +579,7 @@ public class CashRegisterGUI extends JFrame {
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -605,7 +605,7 @@ public class CashRegisterGUI extends JFrame {
 			controller.saveCashRegister(cashRegister);
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -646,7 +646,7 @@ public class CashRegisterGUI extends JFrame {
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -660,7 +660,7 @@ public class CashRegisterGUI extends JFrame {
 			bw.close();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -681,7 +681,7 @@ public class CashRegisterGUI extends JFrame {
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -695,13 +695,13 @@ public class CashRegisterGUI extends JFrame {
 			bw.close();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
 	}
 
-	// count za brojRaËuna
+	// count za brojRaÔøΩuna
 	private int getCount3() {
 
 		int count = 0;
@@ -716,7 +716,7 @@ public class CashRegisterGUI extends JFrame {
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -730,7 +730,7 @@ public class CashRegisterGUI extends JFrame {
 			bw.close();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -743,7 +743,7 @@ public class CashRegisterGUI extends JFrame {
 		lblWorker.setBounds(10, 11, 90, 14);
 		contentPane.add(lblWorker);
 		
-		lblBillNumber = new JLabel("RA\u010CUN           :");
+		lblBillNumber = new JLabel("RAƒåUN           :");
 		lblBillNumber.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblBillNumber.setBounds(10, 44, 90, 14);
 		contentPane.add(lblBillNumber);
@@ -826,7 +826,7 @@ public class CashRegisterGUI extends JFrame {
 		separator2.setBounds(420, 726, 5, 14);
 		contentPane.add(separator2);
 		
-		lblPaymentMethod = new JLabel("NA\u010CIN PLA\u0106ANJA: GOTOVINA ili KARTICA");
+		lblPaymentMethod = new JLabel("NAƒåIN PLAƒÜANJA: GOTOVINA ili KARTICA");
 		lblPaymentMethod.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPaymentMethod.setBounds(175, 726, 230, 14);
 		contentPane.add(lblPaymentMethod);
@@ -836,7 +836,7 @@ public class CashRegisterGUI extends JFrame {
 		separator1.setBounds(155, 726, 5, 14);
 		contentPane.add(separator1);
 		
-		lblBills = new JLabel("RA\u010CUNI: PREGLED, \u0160TAMPANJE");
+		lblBills = new JLabel("RAƒåUNI: PREGLED, ≈†TAMPANJE");
 		lblBills.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblBills.setBounds(440, 726, 175, 14);
 		contentPane.add(lblBills);
@@ -873,7 +873,7 @@ public class CashRegisterGUI extends JFrame {
 		btnCard.setBounds(175, 647, 100, 55);
 		contentPane.add(btnCard);
 		
-		btnBills = new JButton("RA\u010CUNI");
+		btnBills = new JButton("RAƒåUNI");
 		btnBills.setBounds(458, 647, 135, 55);
 		contentPane.add(btnBills);
 		
@@ -909,7 +909,7 @@ public class CashRegisterGUI extends JFrame {
 		btnMinus.setBounds(1097, 608, 40, 28);
 		contentPane.add(btnMinus);
 		
-		lblQuantity = new JLabel("KOLI\u010CINA");
+		lblQuantity = new JLabel("KOLIƒåINA");
 		lblQuantity.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblQuantity.setBounds(1010, 576, 55, 14);
 		contentPane.add(lblQuantity);

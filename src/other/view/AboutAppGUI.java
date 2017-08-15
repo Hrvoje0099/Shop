@@ -48,7 +48,7 @@ public class AboutAppGUI extends JFrame {
 		txtMyName.setBorder(null);
 		txtMyName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtMyName.setEditable(false);
-		txtMyName.setText("HRVOJE VUKOVI\u0106");
+		txtMyName.setText("HRVOJE VUKOVIĆ");
 		txtMyName.setBounds(147, 101, 150, 24);
 		contentPane.add(txtMyName);
 		txtMyName.setColumns(10);
@@ -65,7 +65,7 @@ public class AboutAppGUI extends JFrame {
 		txtVerzion.setColumns(10);
 		
 		txtFinalWork = new JTextField();
-		txtFinalWork.setText("ZAVR\u0160NI RAD 2017.");
+		txtFinalWork.setText("ZAVRŠNI RAD 2017.");
 		txtFinalWork.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFinalWork.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtFinalWork.setEditable(false);

@@ -149,7 +149,7 @@ public class CashRegisterController extends BaseController {
 			return true;
 		}
 		else if (checkWorkerLoginInCashRegister(workersModel) == false) {
-			JOptionPane.showMessageDialog(null, "NEŠTO JE KRIVO UNESENO ILI RADNIK NE POSTOJI", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "NEÅ TO JE KRIVO UNESENO ILI RADNIK NE POSTOJI", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		return false;

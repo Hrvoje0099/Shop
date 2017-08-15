@@ -105,14 +105,14 @@ public class CustomersGUI extends JFrame {
 					customersTableAdd.refresh();
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREï¿½KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
 			}
 		});
 
-		// TRAŽI button - traži klijenta
+		// TRAï¿½I button - traÅ¾i klijenta
 		customersFormaSearch.setCustomersFormSearchListener(new CustomersFormSearchListener() {
 			@Override
 			public void searchCustomer(CustomersTemp customer) {
@@ -122,7 +122,7 @@ public class CustomersGUI extends JFrame {
 					controller.searchCustomers(customer);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREï¿½KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -130,7 +130,7 @@ public class CustomersGUI extends JFrame {
 			}
 		});
 		
-		// REFRESH button
+		// refresh button
 		refreshBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -155,7 +155,7 @@ public class CustomersGUI extends JFrame {
 						controller.deleteCustomer(row_index, customerId);
 					} catch (SQLException e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -163,7 +163,7 @@ public class CustomersGUI extends JFrame {
 					customersTableAdd.refresh();
 
 				} else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 
@@ -188,14 +188,14 @@ public class CustomersGUI extends JFrame {
 		// tabPaneLeft
 		tabPaneLeft = new JTabbedPane();
 		tabPaneLeft.addTab("Dodaj Klijenta", customersFormaAdd);
-		tabPaneLeft.addTab("Traži Klijenta", customersFormaSearch);
+		tabPaneLeft.addTab("TraÅ¾i Klijenta", customersFormaSearch);
 		tabPaneLeft.setFocusable(false);
 		getContentPane().add(tabPaneLeft, BorderLayout.WEST);
 
 		// tabPaneRight
 		tabPaneRight = new JTabbedPane();
 		tabPaneRight.addTab("Popis Klijenata", customersTableAdd);
-		tabPaneRight.addTab("Pretraživanje Klijenata", customersTableSearch);
+		tabPaneRight.addTab("PretraÅ¾ivanje Klijenata", customersTableSearch);
 		getContentPane().add(tabPaneRight, BorderLayout.CENTER);
 
 		// tabPane ChangeListener
@@ -226,7 +226,7 @@ public class CustomersGUI extends JFrame {
 			controller.loadCustomers();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -288,7 +288,7 @@ public class CustomersGUI extends JFrame {
 			        	table1.addCell(new PdfPCell(new Phrase("Adresa", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Grad", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Pos.br.", f2)));
-			        	table1.addCell(new PdfPCell(new Phrase("Država", f2)));
+			        	table1.addCell(new PdfPCell(new Phrase("DrÅ¾ava", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Telefon", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Fax", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Mail", f2)));
@@ -322,7 +322,7 @@ public class CustomersGUI extends JFrame {
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}

@@ -73,8 +73,9 @@ public class AdminGUI extends JFrame {
 			controller.connect();
 			controller.loadExceptions();
 		} catch (Exception e1) {	
+//			e1.printStackTrace();
 			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 			
 			Utility.saveException(e1.getMessage(), errors.toString());
 		}
@@ -100,7 +101,7 @@ public class AdminGUI extends JFrame {
 		
 		menuBar.add(menuLabel);
 		horizontalGlue = Box.createHorizontalGlue();
-		menuBar.add(horizontalGlue);  //postavlja menu bar u desni Êoöak
+		menuBar.add(horizontalGlue);  //postavlja menu bar u desni ƒço≈°ak
 		menuBar.add(menuDate);
 		menuBar.add(menuTime);
 

@@ -92,7 +92,7 @@ public class CustomersDetails extends JFrame {
 					customersTemp = controller.loadCustomerDetails(customerId);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -121,9 +121,9 @@ public class CustomersDetails extends JFrame {
 
 				if (txtName.getText().equals("") || txtAddress.getText().equals("") || txtOib.getText().equals("") || txtID.getText().equals("") || txtCity.getText().equals("")
 						|| comboBoxCountry.getSelectedItem().toString().equals("") || txtPerson.getText().equals("") ) {
-					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "NISTE UNJELI SVE PODATKE!!", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else if ( !(Pattern.matches("^[0-9]+$", txtZipCode.getText())) && !(txtZipCode.getText().equals("")) ) {
-					JOptionPane.showMessageDialog(null, "POŠTANSKI BROJ MOŽE SADRŽAVATI SAMO BROJEVE", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "POÅ TANSKI BROJ MOÅ½E SADRÅ½AVATI SAMO BROJEVE", "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 				} else {
 			
 					CustomersTemp customer = new CustomersTemp(txtName.getText(), txtAddress.getText(), txtCity.getText(), txtZipCode.getText(), comboBoxCountry.getSelectedItem().toString(), txtPhone.getText(), txtFax.getText(), txtMail.getText(), txtMobilePhone.getText(), txtContract.getText(), txtPerson.getText(), txtAreaMessage.getText());
@@ -133,7 +133,7 @@ public class CustomersDetails extends JFrame {
 						controller.updateCustomer(customer, customerId);
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GREÅ KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());					
 					}
@@ -180,13 +180,13 @@ public class CustomersDetails extends JFrame {
 		txtCity = new JTextField();
 		txtCity.setColumns(10);
 
-		lblZipCode = new JLabel("Po\u0161tanski br:");
+		lblZipCode = new JLabel("PoÅ¡tanski br:");
 		lblZipCode.setFont(new Font("Tahoma", Font.BOLD, 11));
 
 		txtZipCode = new JTextField();
 		txtZipCode.setColumns(10);
 
-		lblCountry = new JLabel("Dr\u017Eava:");
+		lblCountry = new JLabel("DrÅ¾ava:");
 		lblCountry.setFont(new Font("Tahoma", Font.BOLD, 11));
 		comboBoxCountry = new JComboBox<String>(controller.getAllCountries());
 

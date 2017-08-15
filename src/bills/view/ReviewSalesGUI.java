@@ -110,7 +110,7 @@ public class ReviewSalesGUI extends JFrame {
 		loadComponents();
 		setJMenuBar(createMenuBar());
 		
-		// ActionListener za otvaranje/zatvarajne CheckBox-a izbora radnika
+		// ActionListener za otvaranje/zatvaranje CheckBox-a izbora radnika
 		chckbxReviewByWorker.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class ReviewSalesGUI extends JFrame {
 						
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -149,7 +149,7 @@ public class ReviewSalesGUI extends JFrame {
 						controller.loadBillsByDate(date);
 					} catch (SQLException e1) {
 						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 						
 						Utility.saveException(e1.getMessage(), errors.toString());
 					}
@@ -165,20 +165,20 @@ public class ReviewSalesGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				// load raËuna odreenog datuma
+				// load raƒçuna odreƒëenog datuma
 				try {
 					String date = datePicker.getJFormattedTextField().getText();
 					controller.connect();
 					
 					if (chckbxReviewByWorker.isSelected()) {
 						
-						// load raËuna odreenog datuma i odreenog radnika
+						// load raÔøΩuna odreƒëenog datuma i odreƒëenog radnika
 						try {
 							String worker = (String) comboBoxWorkers.getSelectedItem();
 							controller.loadBillsByDateAndWorker(date, worker);
 						} catch (Exception e1) {
 							e1.printStackTrace(new PrintWriter(errors));
-							JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 							
 							Utility.saveException(e1.getMessage(), errors.toString());
 						}
@@ -189,7 +189,7 @@ public class ReviewSalesGUI extends JFrame {
 
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -199,12 +199,12 @@ public class ReviewSalesGUI extends JFrame {
 			}
 		});
 		
-		// ActionListener za U»ITAJ button
+		// ActionListener za UƒåITAJ button
 		btnReload.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				// load raËuna odreenog datuma i odreenog radnika
+				// load raƒçuna odreƒëenog datuma i odreƒëenog radnika
 				try {
 					String date = datePicker.getJFormattedTextField().getText();
 					String worker = (String) comboBoxWorkers.getSelectedItem();
@@ -213,7 +213,7 @@ public class ReviewSalesGUI extends JFrame {
 
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -251,7 +251,7 @@ public class ReviewSalesGUI extends JFrame {
 					
 					document.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
 					
-					document.add(new Paragraph("Ukupan broj raËuna: " + txtBillNumber.getText(), f1));
+					document.add(new Paragraph("Ukupan broj raƒçuna: " + txtBillNumber.getText(), f1));
 					
 					document.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
 					
@@ -277,7 +277,7 @@ public class ReviewSalesGUI extends JFrame {
 					
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -296,7 +296,7 @@ public class ReviewSalesGUI extends JFrame {
 					com.itextpdf.text.Font f2 = FontFactory.getFont(FONT, BaseFont.IDENTITY_H, true, 13, Font.BOLD);
 					com.itextpdf.text.Font f3 = FontFactory.getFont(FONT, BaseFont.IDENTITY_H, true, 16, Font.BOLD);
 					
-					Chunk chunkTitle = new Chunk("PREGLED PRODAJE POJEDINA»NO", f3);
+					Chunk chunkTitle = new Chunk("PREGLED PRODAJE POJEDINAƒåNO", f3);
 					chunkTitle.setUnderline(0.1f, -2f);
 					Chunk chunkDate = new Chunk(datePicker.getJFormattedTextField().getText(), f2);
 					chunkDate.setUnderline(0.1f, -2f);
@@ -318,13 +318,13 @@ public class ReviewSalesGUI extends JFrame {
 			        for(int i = 0; i < 1; i++) {
 			        	table1.addCell(new PdfPCell(new Phrase("Datum", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Vrijeme", f2)));
-			        	table1.addCell(new PdfPCell(new Phrase("Br. raËuna", f2)));
+			        	table1.addCell(new PdfPCell(new Phrase("Br. raƒçuna", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("S", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Ukupan iznos", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Ukupan popust", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Klijent", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("Radnik", f2)));
-			        	table1.addCell(new PdfPCell(new Phrase("NaËin plaÊanja", f2)));
+			        	table1.addCell(new PdfPCell(new Phrase("Naƒçin plaƒáanja", f2)));
 			        	table1.addCell(new PdfPCell(new Phrase("ID", f2)));
 			        }
 			        document.add(table1);
@@ -347,7 +347,7 @@ public class ReviewSalesGUI extends JFrame {
 					
 					document.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
 					
-					document.add(new Paragraph("Ukupan broj raËuna: " + txtBillNumber.getText(), f1));
+					document.add(new Paragraph("Ukupan broj raƒçuna: " + txtBillNumber.getText(), f1));
 					
 					document.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
 					
@@ -373,7 +373,7 @@ public class ReviewSalesGUI extends JFrame {
 					
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREäKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e1, "GRE≈†KA", JOptionPane.ERROR_MESSAGE);
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
@@ -394,7 +394,7 @@ public class ReviewSalesGUI extends JFrame {
 	
 	private void setTextfields() {
 		
-		// ukupan broj raËuna
+		// ukupan broj raƒçuna
 		txtBillNumber.setText(String.valueOf(billsTable.tableBills.getRowCount()));
 
 		double totalAmount = 0;
@@ -444,7 +444,7 @@ public class ReviewSalesGUI extends JFrame {
 		menuTime.setText(hour + ":" + minute + "h");
 		
 		Component horizontalGlue = Box.createHorizontalGlue();
-		menuBar.add(horizontalGlue);  //postavlja menu bar u desni Êoöak
+		menuBar.add(horizontalGlue);  //postavlja menu bar u desni ƒço≈°ak
 		menuBar.add(menuDate);
 		menuBar.add(menuTime);
 
@@ -478,7 +478,7 @@ public class ReviewSalesGUI extends JFrame {
 		billsTable.setData(controller.getBillsList());
 		contentPane.add(billsTable);
 		
-		lblBillNumber = new JLabel("Ukupan broj ra\u010Duna:");
+		lblBillNumber = new JLabel("Ukupan broj raƒçuna:");
 		lblBillNumber.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblBillNumber.setBounds(10, 439, 120, 20);
 		contentPane.add(lblBillNumber);
@@ -556,7 +556,7 @@ public class ReviewSalesGUI extends JFrame {
 		chckbxReviewByWorker.setBounds(10, 45, 145, 25);
 		contentPane.add(chckbxReviewByWorker);
 		
-		btnReload = new JButton("U\u010CITAJ");
+		btnReload = new JButton("UƒåITAJ");
 		btnReload.setEnabled(false);
 		btnReload.setBounds(367, 46, 70, 23);
 		contentPane.add(btnReload);
