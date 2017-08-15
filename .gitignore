@@ -1,4 +1,5 @@
 /.settings
+/.gradle/
 /bin/
 /src/db.properties
 /.classpath
