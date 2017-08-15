@@ -19,7 +19,7 @@ public class App {
 		// Definicija: Thread predstavlja jedan sekvencijalni tok izvr�avanja unutar programa!
 		// Ažuriranja GUI-a, preko Swing-a, mora uslijediti na Event Dispatch Thread (EDT), a kod koji radi bilo što drugo
 		//		(npr pristupa nekim resursima na bazi podataka) treba koristiti jedan ili više drugih niti (thread) i
-		//  	invokeLater() omogućuje ove druge niti da ažuriraju GUI s njihovim rezultatima.
+		//  	invokeLater() omogućuje ove druge niti da ažuriraju GUI s njihovim rezultatima!
 		
 		errors = new StringWriter();
 		
