@@ -1,6 +1,6 @@
-/.gradle/
-/.settings/
-/bin/
+# Eclipse
+.settings/
+bin/
 /src/db.properties
-/.classpath
-/.project
+.classpath
+.project
