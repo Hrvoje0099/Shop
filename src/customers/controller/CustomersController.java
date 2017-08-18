@@ -46,45 +46,46 @@ public class CustomersController extends BaseController {
 			customersAddListCM.add(customerModelTrue);
 			
 			String procCountSql = "{ call zavrsni.countCustomers(?) }";
-			CallableStatement csCount = con.prepareCall(procCountSql);
-			
 			String procInsertSql = "{ call zavrsni.saveCustomer(?,?,?,?,?,?,?,?,?,?,?,?,?,null) }";
-			CallableStatement csInsert = con.prepareCall(procInsertSql);
 			
-			ResultSet checkResult = null;
-			
-			for(CustomersModel customer : customersAddListCM) {
+			try (CallableStatement csCount = con.prepareCall(procCountSql)) {
 				
-				csCount.setInt(1, customer.getId());
+				try (CallableStatement csInsert = con.prepareCall(procInsertSql)) {
+					
+					for(CustomersModel customer : customersAddListCM) {
+						
+						csCount.setInt(1, customer.getId());
 
-				checkResult = csCount.executeQuery();
-				checkResult.next();
-				
-				int count = checkResult.getInt(1);
-				if(count == 0) {
-					csInsert.setInt(CustomerEnum.CUSTOMER_ID.getKey(), customer.getId());
-					csInsert.setString(CustomerEnum.CUSTOMER_NAME.getKey(), customer.getName());
-					csInsert.setString(CustomerEnum.ADDRESS.getKey(), customer.getAddress());
-					csInsert.setString(CustomerEnum.CITY.getKey(), customer.getCity());
-					csInsert.setString(CustomerEnum.ZIP_CODE.getKey(), customer.getZipCode());
-					csInsert.setString(CustomerEnum.COUNTRY.getKey(), customer.getCountry());
-					csInsert.setString(CustomerEnum.PHONE.getKey(), customer.getPhone());
-					csInsert.setString(CustomerEnum.FAX.getKey(), customer.getFax());
-					csInsert.setString(CustomerEnum.MAIL.getKey(), customer.getMail());
-					csInsert.setString(CustomerEnum.MOBILE_PHONE.getKey(), customer.getMobilePhone());
-					csInsert.setString(CustomerEnum.OIB.getKey(), customer.getOib());
-					csInsert.setString(CustomerEnum.CONTRACT.getKey(), customer.getContract());
-					csInsert.setString(CustomerEnum.PERSON.getKey(), customer.getPerson());
-					
-					csInsert.executeUpdate();
-					
-					JOptionPane.showMessageDialog(null, "KLIJENT USPIJEŠNO UNESEN! ID: " + customer.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+						try (ResultSet checkResult = csCount.executeQuery()) {
+							
+							checkResult.next();
+							
+							int count = checkResult.getInt(1);
+							if(count == 0) {
+								
+								csInsert.setInt(CustomerEnum.CUSTOMER_ID.getKey(), customer.getId());
+								csInsert.setString(CustomerEnum.CUSTOMER_NAME.getKey(), customer.getName());
+								csInsert.setString(CustomerEnum.ADDRESS.getKey(), customer.getAddress());
+								csInsert.setString(CustomerEnum.CITY.getKey(), customer.getCity());
+								csInsert.setString(CustomerEnum.ZIP_CODE.getKey(), customer.getZipCode());
+								csInsert.setString(CustomerEnum.COUNTRY.getKey(), customer.getCountry());
+								csInsert.setString(CustomerEnum.PHONE.getKey(), customer.getPhone());
+								csInsert.setString(CustomerEnum.FAX.getKey(), customer.getFax());
+								csInsert.setString(CustomerEnum.MAIL.getKey(), customer.getMail());
+								csInsert.setString(CustomerEnum.MOBILE_PHONE.getKey(), customer.getMobilePhone());
+								csInsert.setString(CustomerEnum.OIB.getKey(), customer.getOib());
+								csInsert.setString(CustomerEnum.CONTRACT.getKey(), customer.getContract());
+								csInsert.setString(CustomerEnum.PERSON.getKey(), customer.getPerson());
+								
+								csInsert.executeUpdate();
+								
+								JOptionPane.showMessageDialog(null, "KLIJENT USPIJEŠNO UNESEN! ID: " + customer.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+					}
 				}
 			}
-			
-			checkResult.close();
-			csCount.close();
-			csInsert.close();
+
 		}
 		else if (checkCustomerBeforeSave(customerModelCheck) == 1) {
 			JOptionPane.showMessageDialog(null, "OBI VEĆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
@@ -111,37 +112,39 @@ public class CustomersController extends BaseController {
 	public void updateCustomer(CustomersTemp customer, int idKCustomer) throws SQLException {
 		
 		String procSql = "{ call zavrsni.updateCustomer('"+customer.getName()+"', '"+customer.getAddress()+"', '"+customer.getCity()+"', '"+customer.getZipCode()+"', '"+customer.getCountry()+"', '"+customer.getPhone()+"', '"+customer.getFax()+"', '"+customer.getMail()+"', '"+customer.getMobilePhone()+"', '"+customer.getContract()+"', '"+customer.getPerson()+"', '"+customer.getMessage()+"', '"+idKCustomer+"') }";
-		CallableStatement csUpdate = con.prepareCall(procSql);
 		
-		csUpdate.executeUpdate();	
+		try (CallableStatement csUpdate = con.prepareCall(procSql)) {
+			
+			csUpdate.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "KLIJENT USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
-		JOptionPane.showMessageDialog(null, "KLIJENT USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
-		
-		csUpdate.close();
 	}
 	
 	public void loadCustomers() throws SQLException {
 		customersAddListCM.clear();
 		
 		String procSql = "{ call zavrsni.loadCustomers() }";
-		CallableStatement cs = con.prepareCall(procSql);
 		
-		ResultSet result = cs.executeQuery();
-		
-		while (result.next()) {
-			CustomersModel customer = new CustomersModel(result.getInt(CustomerEnum.CUSTOMER_ID.getValue()),
-					result.getString(CustomerEnum.CUSTOMER_NAME.getValue()), result.getString(CustomerEnum.ADDRESS.getValue()),
-					result.getString(CustomerEnum.CITY.getValue()), result.getString(CustomerEnum.ZIP_CODE.getValue()),
-					result.getString(CustomerEnum.COUNTRY.getValue()), result.getString(CustomerEnum.PHONE.getValue()),
-					result.getString(CustomerEnum.FAX.getValue()), result.getString(CustomerEnum.MAIL.getValue()),
-					result.getString(CustomerEnum.MOBILE_PHONE.getValue()), result.getString(CustomerEnum.OIB.getValue()),
-					result.getString(CustomerEnum.CONTRACT.getValue()), result.getString(CustomerEnum.PERSON.getValue()));
+		try (CallableStatement cs = con.prepareCall(procSql)) {
 			
-			customersAddListCM.add(customer);
+			try (ResultSet result = cs.executeQuery()) {
+				
+				while (result.next()) {
+					CustomersModel customer = new CustomersModel(result.getInt(CustomerEnum.CUSTOMER_ID.getValue()),
+							result.getString(CustomerEnum.CUSTOMER_NAME.getValue()), result.getString(CustomerEnum.ADDRESS.getValue()),
+							result.getString(CustomerEnum.CITY.getValue()), result.getString(CustomerEnum.ZIP_CODE.getValue()),
+							result.getString(CustomerEnum.COUNTRY.getValue()), result.getString(CustomerEnum.PHONE.getValue()),
+							result.getString(CustomerEnum.FAX.getValue()), result.getString(CustomerEnum.MAIL.getValue()),
+							result.getString(CustomerEnum.MOBILE_PHONE.getValue()), result.getString(CustomerEnum.OIB.getValue()),
+							result.getString(CustomerEnum.CONTRACT.getValue()), result.getString(CustomerEnum.PERSON.getValue()));
+					
+					customersAddListCM.add(customer);
+				}
+			}
 		}
-		
-		result.close();
-		cs.close();
+
 	}
 	
  	public void searchCustomers(CustomersTemp customerTemp) throws SQLException {
@@ -161,61 +164,64 @@ public class CustomersController extends BaseController {
 		customersSearchListCM.clear();
 		
 		String procSql = "{ call zavrsni.searchCustomers('%"+name+"%', '%"+address+"%', '%"+city+"%', '%"+country+"%', '%"+phone+"%', '%"+fax+"%', '%"+mail+"%', '%"+mobilePhone+"%', '%"+oib+"%', '%"+contract+"%', '%"+person+"%') }";
-		CallableStatement csSearch = con.prepareCall(procSql);
 		
-		ResultSet result = csSearch.executeQuery();
-		
-		while (result.next()) {
-			CustomersModel customer = new CustomersModel(result.getInt(CustomerEnum.CUSTOMER_ID.getValue()),
-					result.getString(CustomerEnum.CUSTOMER_NAME.getValue()), result.getString(CustomerEnum.ADDRESS.getValue()),
-					result.getString(CustomerEnum.CITY.getValue()), result.getString(CustomerEnum.ZIP_CODE.getValue()),
-					result.getString(CustomerEnum.COUNTRY.getValue()), result.getString(CustomerEnum.PHONE.getValue()),
-					result.getString(CustomerEnum.FAX.getValue()), result.getString(CustomerEnum.MAIL.getValue()),
-					result.getString(CustomerEnum.MOBILE_PHONE.getValue()), result.getString(CustomerEnum.OIB.getValue()),
-					result.getString(CustomerEnum.CONTRACT.getValue()), result.getString(CustomerEnum.PERSON.getValue()));
+		try (CallableStatement csSearch = con.prepareCall(procSql)) {
 			
-			customersSearchListCM.add(customer);
+			try (ResultSet result = csSearch.executeQuery()) {
+				
+				while (result.next()) {
+					CustomersModel customer = new CustomersModel(result.getInt(CustomerEnum.CUSTOMER_ID.getValue()),
+							result.getString(CustomerEnum.CUSTOMER_NAME.getValue()), result.getString(CustomerEnum.ADDRESS.getValue()),
+							result.getString(CustomerEnum.CITY.getValue()), result.getString(CustomerEnum.ZIP_CODE.getValue()),
+							result.getString(CustomerEnum.COUNTRY.getValue()), result.getString(CustomerEnum.PHONE.getValue()),
+							result.getString(CustomerEnum.FAX.getValue()), result.getString(CustomerEnum.MAIL.getValue()),
+							result.getString(CustomerEnum.MOBILE_PHONE.getValue()), result.getString(CustomerEnum.OIB.getValue()),
+							result.getString(CustomerEnum.CONTRACT.getValue()), result.getString(CustomerEnum.PERSON.getValue()));
+					
+					customersSearchListCM.add(customer);
+				}
+			}
 		}
-		
-		result.close();
-		csSearch.close();
+
 	}
  	
 	public void deleteCustomer(int row_index, int idCustomer) throws SQLException {
 		
 		String procSql = "{ call zavrsni.deleteCustomer('"+idCustomer+"') }";
-		CallableStatement csDelete = con.prepareCall(procSql);
 		
-		csDelete.executeUpdate();
-		customersAddListCM.remove(row_index);
-		
-		JOptionPane.showMessageDialog(null, "KLIJENT USPIJEŠNO IZBRISAN! ID: " + idCustomer, "INFO", JOptionPane.INFORMATION_MESSAGE);
-		
-		csDelete.close();
+		try (CallableStatement csDelete = con.prepareCall(procSql)) {
+			
+			csDelete.executeUpdate();
+			customersAddListCM.remove(row_index);
+			
+			JOptionPane.showMessageDialog(null, "KLIJENT USPIJEŠNO IZBRISAN! ID: " + idCustomer, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		}
+
 	}
 	
 	public CustomersTemp loadCustomerDetails(int idCustomer) throws SQLException {
 		
 		String procSql = "{ call zavrsni.loadCustomerDetails('"+idCustomer+"') }";
-		CallableStatement csLoad = con.prepareCall(procSql);
-		ResultSet result = csLoad.executeQuery();
 		
 		CustomersTemp customer = null;
 		
-		while (result.next()) {
+		try (CallableStatement csLoad = con.prepareCall(procSql)) {
 			
-			customer = new CustomersTemp(
-					result.getInt(CustomerEnum.CUSTOMER_ID.getValue()), result.getString(CustomerEnum.CUSTOMER_NAME.getValue()),
-					result.getString(CustomerEnum.ADDRESS.getValue()), result.getString(CustomerEnum.CITY.getValue()),
-					result.getString(CustomerEnum.ZIP_CODE.getValue()), result.getString(CustomerEnum.COUNTRY.getValue()),
-					result.getString(CustomerEnum.PHONE.getValue()), result.getString(CustomerEnum.FAX.getValue()),
-					result.getString(CustomerEnum.MAIL.getValue()), result.getString(CustomerEnum.MOBILE_PHONE.getValue()),
-					result.getString(CustomerEnum.OIB.getValue()), result.getString(CustomerEnum.CONTRACT.getValue()),
-					result.getString(CustomerEnum.PERSON.getValue()), result.getString(CustomerEnum.MESSAGE.getValue()));
+			try (ResultSet result = csLoad.executeQuery()) {
+				
+				while (result.next()) {
+					
+					customer = new CustomersTemp(
+							result.getInt(CustomerEnum.CUSTOMER_ID.getValue()), result.getString(CustomerEnum.CUSTOMER_NAME.getValue()),
+							result.getString(CustomerEnum.ADDRESS.getValue()), result.getString(CustomerEnum.CITY.getValue()),
+							result.getString(CustomerEnum.ZIP_CODE.getValue()), result.getString(CustomerEnum.COUNTRY.getValue()),
+							result.getString(CustomerEnum.PHONE.getValue()), result.getString(CustomerEnum.FAX.getValue()),
+							result.getString(CustomerEnum.MAIL.getValue()), result.getString(CustomerEnum.MOBILE_PHONE.getValue()),
+							result.getString(CustomerEnum.OIB.getValue()), result.getString(CustomerEnum.CONTRACT.getValue()),
+							result.getString(CustomerEnum.PERSON.getValue()), result.getString(CustomerEnum.MESSAGE.getValue()));
+				}
+			}
 		}
-		
-		result.close();
-		csLoad.close();
 		
 		return customer;
 	}

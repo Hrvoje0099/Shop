@@ -46,94 +46,96 @@ public class CashRegisterController extends BaseController {
 	public void saveCashRegister(CashRegisterTemp cashRegister) throws SQLException {
 
 		String procCountSql = "{ call zavrsni.countCashRegister(?) }";
-		CallableStatement csCount = con.prepareCall(procCountSql);
-
 		String procInsertSql = "{ call zavrsni.saveCashRegister(?,?,?,?,?,?,?,?,?,?) }";
-		CallableStatement csInsert = con.prepareCall(procInsertSql);
+		
+		try (CallableStatement csCount = con.prepareCall(procCountSql)) {
+			
+			try (CallableStatement csInsert = con.prepareCall(procInsertSql)) {
+				
+				csCount.setInt(1, cashRegister.getId());
+				
+				try (ResultSet checkResult = csCount.executeQuery()) {
+					
+					checkResult.next();
 
-		ResultSet checkResult = null;
+					int count = checkResult.getInt(1);
+					if (count == 0) {
+						csInsert.setInt(CashRegisterEnum.ID.getKey(), cashRegister.getId());
+						csInsert.setString(CashRegisterEnum.BILL_NUMBER.getKey(), cashRegister.getBillNumber());
+						csInsert.setInt(CashRegisterEnum.CART_ID.getKey(), cashRegister.getCartID());
+						csInsert.setInt(CashRegisterEnum.NUMBER_OF_ITEMS.getKey(), cashRegister.getNumberOfItems());
+						csInsert.setString(CashRegisterEnum.AMOUNT_TOTAL.getKey(), cashRegister.getAmountTotal());
+						csInsert.setDouble(CashRegisterEnum.DISCOUNT.getKey(), cashRegister.getDiscount());
+						csInsert.setString(CashRegisterEnum.CUSTOMER.getKey(), cashRegister.getR1Client());
+						csInsert.setString(CashRegisterEnum.WORKER.getKey(), cashRegister.getWorker());
+						csInsert.setString(CashRegisterEnum.PAYMENT_METHOD.getKey(), cashRegister.getPaymentMethode());
+						csInsert.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
 
-		csCount.setInt(1, cashRegister.getId());
-
-		checkResult = csCount.executeQuery();
-		checkResult.next();
-
-		int count = checkResult.getInt(1);
-		if (count == 0) {
-			csInsert.setInt(CashRegisterEnum.ID.getKey(), cashRegister.getId());
-			csInsert.setString(CashRegisterEnum.BILL_NUMBER.getKey(), cashRegister.getBillNumber());
-			csInsert.setInt(CashRegisterEnum.CART_ID.getKey(), cashRegister.getCartID());
-			csInsert.setInt(CashRegisterEnum.NUMBER_OF_ITEMS.getKey(), cashRegister.getNumberOfItems());
-			csInsert.setString(CashRegisterEnum.AMOUNT_TOTAL.getKey(), cashRegister.getAmountTotal());
-			csInsert.setDouble(CashRegisterEnum.DISCOUNT.getKey(), cashRegister.getDiscount());
-			csInsert.setString(CashRegisterEnum.CUSTOMER.getKey(), cashRegister.getR1Client());
-			csInsert.setString(CashRegisterEnum.WORKER.getKey(), cashRegister.getWorker());
-			csInsert.setString(CashRegisterEnum.PAYMENT_METHOD.getKey(), cashRegister.getPaymentMethode());
-			csInsert.setTimestamp(10, new Timestamp(System.currentTimeMillis()));
-
-			csInsert.executeUpdate();
+						csInsert.executeUpdate();
+					}
+				}
+				
+			}
 		}
 
-		checkResult.close();
-		csCount.close();
-		csInsert.close();
 	}
 	
 	public void saveCart(CartTemp cart) throws SQLException {
 		
 		String procCountSql = "{ call zavrsni.countCart(?) }";
-		CallableStatement csCount = con.prepareCall(procCountSql);
-
 		String procInsertSql = "{ call zavrsni.saveCart(?,?,?,?,?,?,?,?,?,?) }";
-		CallableStatement csInsert = con.prepareCall(procInsertSql);
+		
+		try (CallableStatement csCount = con.prepareCall(procCountSql)) {
+			
+			try (CallableStatement csInsert = con.prepareCall(procInsertSql)) {
+				
+				csCount.setInt(1, cart.getId());
+				
+				try (ResultSet checkResult = csCount.executeQuery()) {
+					
+					checkResult.next();
 
-		ResultSet checkResult = null;
+					int count = checkResult.getInt(1);
+					if (count == 0) {
+						csInsert.setInt(CartEnum.ID.getKey(), cart.getId());
+						csInsert.setInt(CartEnum.CART_ID.getKey(), cart.getCartID());
+						csInsert.setInt(CartEnum.ITEM_CODE.getKey(), cart.getItemCode());
+						csInsert.setString(CartEnum.ITEM_NAME.getKey(), cart.getName());
+						csInsert.setString(CartEnum.UNIT.getKey(), cart.getUnit());
+						csInsert.setString(CartEnum.TAX.getKey(), cart.getTax());
+						csInsert.setDouble(CartEnum.QUANTITY.getKey(), cart.getQuantity());
+						csInsert.setString(CartEnum.SELLING_RP.getKey(), cart.getSellingRP());
+						csInsert.setDouble(CartEnum.DISCOUNT.getKey(), cart.getDiscount());
+						csInsert.setString(CartEnum.AMOUNT.getKey(), cart.getAmount());
 
-		csCount.setInt(1, cart.getId());
-
-		checkResult = csCount.executeQuery();
-		checkResult.next();
-
-		int count = checkResult.getInt(1);
-		if (count == 0) {
-			csInsert.setInt(CartEnum.ID.getKey(), cart.getId());
-			csInsert.setInt(CartEnum.CART_ID.getKey(), cart.getCartID());
-			csInsert.setInt(CartEnum.ITEM_CODE.getKey(), cart.getItemCode());
-			csInsert.setString(CartEnum.ITEM_NAME.getKey(), cart.getName());
-			csInsert.setString(CartEnum.UNIT.getKey(), cart.getUnit());
-			csInsert.setString(CartEnum.TAX.getKey(), cart.getTax());
-			csInsert.setDouble(CartEnum.QUANTITY.getKey(), cart.getQuantity());
-			csInsert.setString(CartEnum.SELLING_RP.getKey(), cart.getSellingRP());
-			csInsert.setDouble(CartEnum.DISCOUNT.getKey(), cart.getDiscount());
-			csInsert.setString(CartEnum.AMOUNT.getKey(), cart.getAmount());
-
-			csInsert.executeUpdate();
+						csInsert.executeUpdate();
+					}
+				}
+			}
 		}
 
-		checkResult.close();
-		csCount.close();
-		csInsert.close();
 	}
 	
 	public ItemsTemp searchItemByBarcode(String barcode) throws SQLException {
 		
 		String procSql = "{ call zavrsni.searchItemByBarcode('"+barcode+"') }";
-		CallableStatement csLoad = con.prepareCall(procSql);
-		ResultSet result = csLoad.executeQuery();
 		
 		ItemsTemp item = null;
 		
-		while (result.next()) {
-			item = new ItemsTemp(result.getInt(CartEnum.ITEM_CODE.getValue()),
-					result.getString(CartEnum.ITEM_NAME.getValue()),
-					result.getString(CartEnum.DISCOUNT.getValue()),
-					result.getString(CartEnum.TAX.getValue()),
-					result.getString(CartEnum.UNIT.getValue()),
-					result.getString(CartEnum.SELLING_RP.getValue()));
+		try (CallableStatement csLoad = con.prepareCall(procSql)) {
+			
+			try (ResultSet result = csLoad.executeQuery()) {
+				
+				while (result.next()) {
+					item = new ItemsTemp(result.getInt(CartEnum.ITEM_CODE.getValue()),
+							result.getString(CartEnum.ITEM_NAME.getValue()),
+							result.getString(CartEnum.DISCOUNT.getValue()),
+							result.getString(CartEnum.TAX.getValue()),
+							result.getString(CartEnum.UNIT.getValue()),
+							result.getString(CartEnum.SELLING_RP.getValue()));
+				}
+			}
 		}
-
-		result.close();
-		csLoad.close();
 		
 		if (item == null)
 			return null;
@@ -179,49 +181,51 @@ public class CashRegisterController extends BaseController {
 	public void removeFromState(int itemCode, double quantity) throws SQLException {
 		
 		String procSql = "{ call zavrsni.removeFromState('"+itemCode+"', '"+quantity+"') }";
-		CallableStatement csUpdate = con.prepareCall(procSql);
 		
-		csUpdate.executeUpdate();
-		
-		csUpdate.close();
+		try (CallableStatement csUpdate = con.prepareCall(procSql)) {
+			
+			csUpdate.executeUpdate();
+		}
+
 	}
 	
 	public void loadWorkers() throws SQLException {
 		workerAddListWM.clear();
 		
 		String procSql = "{ call zavrsni.loadWorkers() }";
-		CallableStatement cs = con.prepareCall(procSql);
 		
-		ResultSet result = cs.executeQuery();
-		
-		while(result.next()) {
+		try (CallableStatement cs = con.prepareCall(procSql)) {
 			
-			WorkersModel radnik = new WorkersModel(result.getInt(WorkersEnum.WORKER_ID.getValue()),
-					result.getString(WorkersEnum.WORKER_NAME.getValue()), result.getString(WorkersEnum.WORKER_SURNAME.getValue()),
-					result.getString(WorkersEnum.WORKER_OIB.getValue()), result.getInt(WorkersEnum.BIRTH_YEAR.getValue()),
-					result.getString(WorkersEnum.SEX.getValue()), result.getString(WorkersEnum.PASSWORD.getValue()));
-			
-			workerAddListWM.add(radnik);
+			try (ResultSet result = cs.executeQuery()) {
+				
+				while(result.next()) {
+					
+					WorkersModel radnik = new WorkersModel(result.getInt(WorkersEnum.WORKER_ID.getValue()),
+							result.getString(WorkersEnum.WORKER_NAME.getValue()), result.getString(WorkersEnum.WORKER_SURNAME.getValue()),
+							result.getString(WorkersEnum.WORKER_OIB.getValue()), result.getInt(WorkersEnum.BIRTH_YEAR.getValue()),
+							result.getString(WorkersEnum.SEX.getValue()), result.getString(WorkersEnum.PASSWORD.getValue()));
+					
+					workerAddListWM.add(radnik);
+				}
+			}
 		}
-		
-		result.close();
-		cs.close();
+
 	}
 	
 	public List<String> loadSuppliers() throws SQLException {
 		supplierList.clear();
 		
 		String procSql = "{ call zavrsni.loadSuppliers() }";
-		CallableStatement cs = con.prepareCall(procSql);
 		
-		ResultSet result = cs.executeQuery();
-		
-		while(result.next()) {
-			supplierList.add(result.getString(CustomerEnum.CUSTOMER_NAME.getValue()));
+		try (CallableStatement cs = con.prepareCall(procSql)) {
+			
+			try (ResultSet result = cs.executeQuery()) {
+				
+				while(result.next()) {
+					supplierList.add(result.getString(CustomerEnum.CUSTOMER_NAME.getValue()));
+				}
+			}
 		}
-		
-		result.close();
-		cs.close();
 		
 		return supplierList;
 	}

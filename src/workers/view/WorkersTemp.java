@@ -57,7 +57,3 @@ public class WorkersTemp {
 	}
 
 }
-
-// public class RadniciFormEvent extends EventObject {
-// EventObject	- root klase iz koje æe biti izvedeni sve event state objects
-//				- koristi je se kreæemo prema više Swing rodnoj arhitekturi kasnije

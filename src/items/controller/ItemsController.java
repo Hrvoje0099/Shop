@@ -53,53 +53,52 @@ public class ItemsController extends BaseController {
 		
 		// provjera dali već imamo artikl sa istom ŠIFROM
 		ItemsModel itemsModelCheck = new ItemsModel(itemTemp.getItemCode());
-		ItemsModel itemsModelTrue = new ItemsModel(itemTemp.getItemCode(), itemTemp.getName(), itemTemp.getBarcode1(), itemTemp.getBarcode2(), itemTemp.getSupplier(), itemTemp.getDiscount(), itemTemp.getTax(), itemTemp.getUnit(), itemTemp.getPurchaseWP(), itemTemp.getPurchaseRP(), itemTemp.getSellingWP(), itemTemp.getSellingRP(), itemTemp.getMargin(), 0 );
+		ItemsModel itemsModelTrue = new ItemsModel(itemTemp.getItemCode(), itemTemp.getName(), itemTemp.getBarcode1(), itemTemp.getBarcode2(), itemTemp.getSupplier(), itemTemp.getDiscount(), itemTemp.getTax(), itemTemp.getUnit(), itemTemp.getPurchaseWP(), itemTemp.getPurchaseRP(), itemTemp.getSellingWP(), itemTemp.getSellingRP(), itemTemp.getMargin() );
 		
 		if (checkItemBeforeSave(itemsModelCheck) == false) {
 			itemsAddListIM.add(itemsModelTrue);
 
 			String procCountSql = "{ call zavrsni.countItems(?) }";
-			CallableStatement csCount = con.prepareCall(procCountSql);
+			String procInsertSql = "{ call zavrsni.saveItem(?,?,?,?,?,?,?,?,?,?,?,?,?,null,0) }";
 			
-			String procInsertSql = "{ call zavrsni.saveItem(?,?,?,?,?,?,?,?,?,?,?,?,?,?) }";
-			CallableStatement csInsert = con.prepareCall(procInsertSql);
-			
-			ResultSet checkResult = null;
-			
-			for(ItemsModel item : itemsAddListIM) {
+			try (CallableStatement csCount = con.prepareCall(procCountSql)) {
+				
+				try (CallableStatement csInsert = con.prepareCall(procInsertSql)) {
+					
+					for(ItemsModel item : itemsAddListIM) {
 
-				csCount.setInt(1, item.getItemCode());
-				
-				checkResult = csCount.executeQuery();
-				checkResult.next();
-				
-				int count = checkResult.getInt(1);
-				if(count == 0) {
-					
-					csInsert.setInt(ItemsEnum.ITEM_CODE.getKey(), item.getItemCode());
-					csInsert.setString(ItemsEnum.ITEM_NAME.getKey(), item.getName());
-					csInsert.setString(ItemsEnum.BARCODE_1.getKey(), item.getBarcode1());
-					csInsert.setString(ItemsEnum.BARCODE_2.getKey(), item.getBarcode2());
-					csInsert.setString(ItemsEnum.SUPPLIER.getKey(), item.getSupplier());
-					csInsert.setString(ItemsEnum.DISCOUNT.getKey(), item.getDiscount());
-					csInsert.setString(ItemsEnum.TAX.getKey(), item.getTax());
-					csInsert.setString(ItemsEnum.UNIT.getKey(), item.getUnit());
-					csInsert.setString(ItemsEnum.PURCHASE_WP.getKey(), item.getPurchaseWP());
-					csInsert.setString(ItemsEnum.PURCHASE_RP.getKey(), item.getPurchaseRP());
-					csInsert.setString(ItemsEnum.SELLING_WP.getKey(), item.getSellingWP());
-					csInsert.setString(ItemsEnum.SELLING_RP.getKey(), item.getSellingRP());
-					csInsert.setString(ItemsEnum.MARGIN.getKey(), item.getMargin());
-					csInsert.setDouble(ItemsEnum.ITEM_STATE.getKey(), item.getItemState());
-					
-					csInsert.executeUpdate();
-					
-					JOptionPane.showMessageDialog(null, "ARTIKL USPIJEŠNO UNESEN! ŠIFRA: " + item.getItemCode(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+						csCount.setInt(1, item.getItemCode());
+						
+						try (ResultSet checkResult = csCount.executeQuery()) {
+							
+							checkResult.next();
+							
+							int count = checkResult.getInt(1);
+							if(count == 0) {
+								
+								csInsert.setInt(ItemsEnum.ITEM_CODE.getKey(), item.getItemCode());
+								csInsert.setString(ItemsEnum.ITEM_NAME.getKey(), item.getName());
+								csInsert.setString(ItemsEnum.BARCODE_1.getKey(), item.getBarcode1());
+								csInsert.setString(ItemsEnum.BARCODE_2.getKey(), item.getBarcode2());
+								csInsert.setString(ItemsEnum.SUPPLIER.getKey(), item.getSupplier());
+								csInsert.setString(ItemsEnum.DISCOUNT.getKey(), item.getDiscount());
+								csInsert.setString(ItemsEnum.TAX.getKey(), item.getTax());
+								csInsert.setString(ItemsEnum.UNIT.getKey(), item.getUnit());
+								csInsert.setString(ItemsEnum.PURCHASE_WP.getKey(), item.getPurchaseWP());
+								csInsert.setString(ItemsEnum.PURCHASE_RP.getKey(), item.getPurchaseRP());
+								csInsert.setString(ItemsEnum.SELLING_WP.getKey(), item.getSellingWP());
+								csInsert.setString(ItemsEnum.SELLING_RP.getKey(), item.getSellingRP());
+								csInsert.setString(ItemsEnum.MARGIN.getKey(), item.getMargin());
+								
+								csInsert.executeUpdate();
+								
+								JOptionPane.showMessageDialog(null, "ARTIKL USPIJEŠNO UNESEN! ŠIFRA: " + item.getItemCode(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+					}
 				}
 			}
 			
-			checkResult.close();
-			csCount.close();
-			csInsert.close();
 		}
 		else if (checkItemBeforeSave(itemsModelCheck) == true)
 			JOptionPane.showMessageDialog(null, "ŠIFRA VEĆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
@@ -118,39 +117,41 @@ public class ItemsController extends BaseController {
 	public void updateItem(ItemsTemp item, int itemCode) throws SQLException {
 		
 		String procSql = "{ call zavrsni.updateItem('"+item.getName()+"', '"+item.getSupplier()+"', '"+item.getBarcode1()+"', '"+item.getBarcode2()+"', '"+item.getDiscount()+"', '"+item.getTax()+"', '"+item.getUnit()+"', '"+item.getPurchaseWP()+"', '"+item.getPurchaseRP()+"', '"+item.getSellingWP()+"', '"+item.getSellingRP()+"', '"+item.getMargin()+"', '"+item.getMessage()+"', '"+itemCode+"') }";
-		CallableStatement csUpdate = con.prepareCall(procSql);
 		
-		csUpdate.executeUpdate();
+		try (CallableStatement csUpdate = con.prepareCall(procSql)) {
+			
+			csUpdate.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "ARTIKL USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
-		JOptionPane.showMessageDialog(null, "ARTIKL USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
-		
-		csUpdate.close();
 	}
 	
 	public void loadItems() throws SQLException {
 		itemsAddListIM.clear();
 		
 		String procSql = "{ call zavrsni.loadItems() }";
-		CallableStatement cs = con.prepareCall(procSql);
 		
-		ResultSet result = cs.executeQuery();
-		
-		while(result.next()) {
-
-			ItemsModel item = new ItemsModel(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
-					result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
-					result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
-					result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
-					result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
-					result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
-					result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()),
-					result.getDouble(ItemsEnum.ITEM_STATE.getValue()));
+		try (CallableStatement cs = con.prepareCall(procSql)) {
 			
-			itemsAddListIM.add(item);
+			try (ResultSet result = cs.executeQuery()) {
+				
+				while(result.next()) {
+
+					ItemsModel item = new ItemsModel(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
+							result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
+							result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
+							result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
+							result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
+							result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
+							result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()),
+							result.getDouble(ItemsEnum.ITEM_STATE.getValue()));
+					
+					itemsAddListIM.add(item);
+				}
+			}
 		}
-		
-		result.close();
-		cs.close();
+
 	}
 	
 	public void searchItems(ItemsTemp itemTemp) throws SQLException {
@@ -162,26 +163,27 @@ public class ItemsController extends BaseController {
 		itemsSearchListIM.clear();
 		
 		String procSql = "{ call zavrsni.searchItems('"+itemTemp.getItemCode()+"', '%"+name+"%', '%"+barcode+"%', '%"+supplier+"%') }";
-		CallableStatement csSearch = con.prepareCall(procSql);
 		
-		ResultSet result = csSearch.executeQuery();
-		
-		while(result.next()) {
+		try (CallableStatement csSearch = con.prepareCall(procSql)) {
 			
-			ItemsModel item = new ItemsModel(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
-					result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
-					result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
-					result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
-					result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
-					result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
-					result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()),
-					result.getDouble(ItemsEnum.ITEM_STATE.getValue()));
-			
-			itemsSearchListIM.add(item);
+			try (ResultSet result = csSearch.executeQuery()) {
+				
+				while(result.next()) {
+					
+					ItemsModel item = new ItemsModel(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
+							result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
+							result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
+							result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
+							result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
+							result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
+							result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()),
+							result.getDouble(ItemsEnum.ITEM_STATE.getValue()));
+					
+					itemsSearchListIM.add(item);
+				}
+			}
 		}
-		
-		result.close();
-		csSearch.close();
+
 	}
 	
 	public void deleteItem(int row_index, int itemCode) throws SQLException {
@@ -189,36 +191,39 @@ public class ItemsController extends BaseController {
 		itemsAddListIM.remove(row_index);
 		
 		String procSql = "{ call zavrsni.deleteItem('"+itemCode+"') }";
-		CallableStatement csDelete = con.prepareCall(procSql);
 		
-		JOptionPane.showMessageDialog(null, "ARTIKL USPIJEŠNO IZBRISAN! ŠIFRA: " + itemCode, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		try (CallableStatement csDelete = con.prepareCall(procSql)) {
+			
+			csDelete.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "ARTIKL USPIJEŠNO IZBRISAN! ŠIFRA: " + itemCode, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
-		csDelete.executeUpdate();
-		csDelete.close();
 	}
 	
 	public ItemsTemp loadItemDetails(int itemCode) throws SQLException {
 		
 		String procSql = "{ call zavrsni.loadItemDetails('"+itemCode+"') }";
-		CallableStatement csLoad = con.prepareCall(procSql);
-		ResultSet result = csLoad.executeQuery();
 		
 		ItemsTemp item = null;
-
-		while (result.next()) {
-			item = new ItemsTemp(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
-					result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
-					result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
-					result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
-					result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
-					result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
-					result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()), 
-					result.getString(ItemsEnum.MESSAGE.getValue()),
-					result.getDouble(ItemsEnum.ITEM_STATE.getValue()));
-		}
 		
-		result.close();
-		csLoad.close();
+		try (CallableStatement csLoad = con.prepareCall(procSql)) {
+			
+			try (ResultSet result = csLoad.executeQuery()) {
+				
+				while (result.next()) {
+					item = new ItemsTemp(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
+							result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
+							result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
+							result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
+							result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
+							result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
+							result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()), 
+							result.getString(ItemsEnum.MESSAGE.getValue()),
+							result.getDouble(ItemsEnum.ITEM_STATE.getValue()));
+				}
+			}
+		}
 				
 		return item;
 	}
@@ -239,25 +244,26 @@ public class ItemsController extends BaseController {
 	public ItemsTemp loadItemForEntryOfGoods(String barcode) throws SQLException {
 		
 		String procSql = "{ call zavrsni.loadItemForEntryOfGoods('"+barcode+"') }";
-		CallableStatement csLoad = con.prepareCall(procSql);
-		ResultSet result = csLoad.executeQuery();
 		
 		ItemsTemp item = null;
 		
-		while (result.next()) {
+		try (CallableStatement csLoad = con.prepareCall(procSql)) {
 			
-			item = new ItemsTemp(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
-					result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
-					result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
-					result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
-					result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
-					result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
-					result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()));
+			try (ResultSet result = csLoad.executeQuery()) {
+				
+				while (result.next()) {
+					
+					item = new ItemsTemp(result.getInt(ItemsEnum.ITEM_CODE.getValue()),
+							result.getString(ItemsEnum.ITEM_NAME.getValue()), result.getString(ItemsEnum.BARCODE_1.getValue()),
+							result.getString(ItemsEnum.BARCODE_2.getValue()), result.getString(ItemsEnum.SUPPLIER.getValue()),
+							result.getString(ItemsEnum.DISCOUNT.getValue()), result.getString(ItemsEnum.TAX.getValue()),
+							result.getString(ItemsEnum.UNIT.getValue()), result.getString(ItemsEnum.PURCHASE_WP.getValue()),
+							result.getString(ItemsEnum.PURCHASE_RP.getValue()), result.getString(ItemsEnum.SELLING_WP.getValue()),
+							result.getString(ItemsEnum.SELLING_RP.getValue()), result.getString(ItemsEnum.MARGIN.getValue()));
+				}
+			}
 		}
-		
-		result.close();
-		csLoad.close();
-		
+
 		if (item == null)
 			return null;
 		
@@ -267,27 +273,28 @@ public class ItemsController extends BaseController {
 	public void addToState(int itemCode, double amountInput) throws SQLException {
 		
 		String procSql = "{ call zavrsni.addToState('"+itemCode+"', '"+amountInput+"') }";
-		CallableStatement csUpdate = con.prepareCall(procSql);
 		
-		csUpdate.executeUpdate();
+		try (CallableStatement csUpdate = con.prepareCall(procSql)) {
+			
+			csUpdate.executeUpdate();
+		}
 		
-		csUpdate.close();	
 	}
 	
 	public List<String> loadSuppliers() throws SQLException {
 		supplierList.clear();
 		
 		String procSql = "{ call zavrsni.loadSuppliers() }";
-		CallableStatement cs = con.prepareCall(procSql);
 		
-		ResultSet result = cs.executeQuery();
-		
-		while(result.next()) {
-			supplierList.add(result.getString(CustomerEnum.CUSTOMER_NAME.getValue()));
+		try (CallableStatement cs = con.prepareCall(procSql)) {
+			
+			try (ResultSet result = cs.executeQuery()) {
+				
+				while(result.next()) {
+					supplierList.add(result.getString(CustomerEnum.CUSTOMER_NAME.getValue()));
+				}
+			}
 		}
-		
-		result.close();
-		cs.close();
 		
 		return supplierList;
 	}

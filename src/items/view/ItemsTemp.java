@@ -95,8 +95,9 @@ public class ItemsTemp {
 	}
 	
 	// ItemsFormEntryOfGoods: btnInput ActionListener
-	public ItemsTemp(int itemCode, String name, String barcode1, String barcode2, String supplier, String discount, String tax,
-			String unit, String purchaseWP, String purchaseRP, String sellingWP, String sellingRP, String margin, double amountInput) {
+	public ItemsTemp(int itemCode, String name, String barcode1, String barcode2, String supplier, String discount,
+			String tax, String unit, String purchaseWP, String purchaseRP, String sellingWP, String sellingRP,
+			String margin, double amountInput) {
 		this.itemCode = itemCode;
 		this.name = name;
 		this.barcode1 = barcode1;
@@ -112,7 +113,7 @@ public class ItemsTemp {
 		this.margin = margin;
 		this.amountInput = amountInput;
 	}
-	
+
 	public int getItemCode() {
 		return itemCode;
 	}
@@ -172,7 +173,7 @@ public class ItemsTemp {
 	public double getItemState() {
 		return itemState;
 	}
-	
+
 	public double getAmountInput() {
 		return amountInput;
 	}

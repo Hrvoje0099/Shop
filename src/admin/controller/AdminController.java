@@ -28,33 +28,35 @@ public class AdminController extends BaseController {
 		exceptionsListEM.clear();
 		
 		String procSql = "{ call zavrsni.loadExceptions() }";
-		CallableStatement cs = con.prepareCall(procSql);
 		
-		ResultSet result = cs.executeQuery();
-		
-		while(result.next()) {
-			ExceptionsModel exception = new ExceptionsModel(result.getInt(ExceptionsEnum.ID.getValue()), result.getDate(ExceptionsEnum.TIME.getValue()), result.getTime(ExceptionsEnum.TIME.getValue()), result.getString(ExceptionsEnum.MESSAGE.getValue()));
-			exceptionsListEM.add(exception);
+		try (CallableStatement cs = con.prepareCall(procSql)) {
+			
+			try (ResultSet result = cs.executeQuery()) {
+				
+				while(result.next()) {
+					ExceptionsModel exception = new ExceptionsModel(result.getInt(ExceptionsEnum.ID.getValue()), result.getDate(ExceptionsEnum.TIME.getValue()), result.getTime(ExceptionsEnum.TIME.getValue()), result.getString(ExceptionsEnum.MESSAGE.getValue()));
+					exceptionsListEM.add(exception);
+				}
+			}
 		}
 		
-		result.close();
-		cs.close();
 	}
 		
 	public String loadExceptionsStackTrace(int id) throws SQLException {
 		
 		String procSql = "{ call zavrsni.loadExceptionsStackTrace('"+id+"') }";
-		CallableStatement csLoad = con.prepareCall(procSql);
-		ResultSet result = csLoad.executeQuery();
 		
 		String stackTrace = null;
 		
-		while(result.next()) {
-			stackTrace = result.getString(ExceptionsEnum.STACK_TRACE.getValue());
+		try (CallableStatement csLoad = con.prepareCall(procSql)) {
+			
+			try (ResultSet result = csLoad.executeQuery()) {
+				
+				while(result.next()) {
+					stackTrace = result.getString(ExceptionsEnum.STACK_TRACE.getValue());
+				}
+			}
 		}
-		
-		result.close();
-		csLoad.close();
 		
 		return stackTrace;
 	}

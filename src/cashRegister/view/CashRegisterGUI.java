@@ -510,7 +510,7 @@ public class CashRegisterGUI extends JFrame {
 			table1.setLockedWidth(true);
 			table1.setWidths(new float[]{3, 7, 2, 2, 3, 3, 3, 3});
 			for (int i = 0; i < 1; i++) {
-				table1.addCell(new PdfPCell(new Phrase("�ifra", f2)));
+				table1.addCell(new PdfPCell(new Phrase("Šifra", f2)));
 				table1.addCell(new PdfPCell(new Phrase("Naziv", f2)));
 				table1.addCell(new PdfPCell(new Phrase("Mj.jd.", f2)));
 				table1.addCell(new PdfPCell(new Phrase("PDV (%)", f2)));

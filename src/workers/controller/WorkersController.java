@@ -37,41 +37,40 @@ public class WorkersController extends BaseController {
 			workerAddListWM.add(workersModelTrue);
 			
 			String procCountSql = "{ call zavrsni.countWorkers(?) }";
-			CallableStatement csCount = con.prepareCall(procCountSql);
-			
 			String procInsertSql = "{ call zavrsni.saveWorker(?,?,?,?,?,?,?) }";
-			CallableStatement csInsert = con.prepareCall(procInsertSql);
 			
-			ResultSet checkResult = null;
-			
-			for(WorkersModel worker : workerAddListWM) {
-		
-				csCount.setInt(1, worker.getId());
+			try (CallableStatement csCount = con.prepareCall(procCountSql)) {
 				
-				checkResult = csCount.executeQuery();
-				checkResult.next();
-				
-				int count = checkResult.getInt(1);
-				
-				if(count == 0) {
-					csInsert.setInt(WorkersEnum.WORKER_ID.getKey(), worker.getId());
-					csInsert.setString(WorkersEnum.WORKER_NAME.getKey(), worker.getName());
-					csInsert.setString(WorkersEnum.WORKER_SURNAME.getKey(), worker.getSurname());
-					csInsert.setString(WorkersEnum.WORKER_OIB.getKey(), worker.getOib());
-					csInsert.setInt(WorkersEnum.BIRTH_YEAR.getKey(), worker.getBirthYear());
-					csInsert.setString(WorkersEnum.SEX.getKey(), worker.getSex());
-					csInsert.setString(WorkersEnum.PASSWORD.getKey(), worker.getPassword());
+				try (CallableStatement csInsert = con.prepareCall(procInsertSql)) {
 					
-					csInsert.executeUpdate();
-					
-					JOptionPane.showMessageDialog(null, "RADNIK USPIJEŠNO UNESEN! ID: " + worker.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+					for(WorkersModel worker : workerAddListWM) {
+						
+						csCount.setInt(1, worker.getId());
+						
+						try (ResultSet checkResult = csCount.executeQuery()) {
+							
+							checkResult.next();
+							
+							int count = checkResult.getInt(1);
+							
+							if(count == 0) {
+								csInsert.setInt(WorkersEnum.WORKER_ID.getKey(), worker.getId());
+								csInsert.setString(WorkersEnum.WORKER_NAME.getKey(), worker.getName());
+								csInsert.setString(WorkersEnum.WORKER_SURNAME.getKey(), worker.getSurname());
+								csInsert.setString(WorkersEnum.WORKER_OIB.getKey(), worker.getOib());
+								csInsert.setInt(WorkersEnum.BIRTH_YEAR.getKey(), worker.getBirthYear());
+								csInsert.setString(WorkersEnum.SEX.getKey(), worker.getSex());
+								csInsert.setString(WorkersEnum.PASSWORD.getKey(), worker.getPassword());
+								
+								csInsert.executeUpdate();
+								
+								JOptionPane.showMessageDialog(null, "RADNIK USPIJEŠNO UNESEN! ID: " + worker.getId(), "INFO", JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+					}
 				}
-					
 			}
 			
-			checkResult.close();
-			csInsert.close();
-			csCount.close();
 		}
 		else if (checkWorkerBeforeSave(workersModelCheck) == 1) {
 			JOptionPane.showMessageDialog(null, "OBI VEĆ POSTOJI!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
@@ -98,22 +97,23 @@ public class WorkersController extends BaseController {
 		workerAddListWM.clear();
 		
 		String procSql = "{ call zavrsni.loadWorkers() }";
-		CallableStatement cs = con.prepareCall(procSql);
 		
-		ResultSet result = cs.executeQuery();
-		
-		while(result.next()) {
-
-			WorkersModel radnik = new WorkersModel(result.getInt(WorkersEnum.WORKER_ID.getValue()),
-					result.getString(WorkersEnum.WORKER_NAME.getValue()), result.getString(WorkersEnum.WORKER_SURNAME.getValue()),
-					result.getString(WorkersEnum.WORKER_OIB.getValue()), result.getInt(WorkersEnum.BIRTH_YEAR.getValue()),
-					result.getString(WorkersEnum.SEX.getValue()), result.getString(WorkersEnum.PASSWORD.getValue()));
+		try (CallableStatement cs = con.prepareCall(procSql)) {
 			
-			workerAddListWM.add(radnik);
+			try (ResultSet result = cs.executeQuery()) {
+				
+				while(result.next()) {
+
+					WorkersModel radnik = new WorkersModel(result.getInt(WorkersEnum.WORKER_ID.getValue()),
+							result.getString(WorkersEnum.WORKER_NAME.getValue()), result.getString(WorkersEnum.WORKER_SURNAME.getValue()),
+							result.getString(WorkersEnum.WORKER_OIB.getValue()), result.getInt(WorkersEnum.BIRTH_YEAR.getValue()),
+							result.getString(WorkersEnum.SEX.getValue()), result.getString(WorkersEnum.PASSWORD.getValue()));
+					
+					workerAddListWM.add(radnik);
+				}
+			}
 		}
 		
-		result.close();
-		cs.close();
 	}
 	
 	public void deleteWorker(int row_index, int workerId) throws SQLException {
@@ -121,12 +121,14 @@ public class WorkersController extends BaseController {
 		workerAddListWM.remove(row_index);
 			
 		String procSql = "{ call zavrsni.deleteWorker('"+workerId+"') }";
-		CallableStatement csDelete = con.prepareCall(procSql);
 		
-		JOptionPane.showMessageDialog(null, "RADNIK USPIJEŠNO IZBRISAN! ID: " + workerId, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		try (CallableStatement csDelete = con.prepareCall(procSql)) {
+			
+			csDelete.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "RADNIK USPIJEŠNO IZBRISAN! ID: " + workerId, "INFO", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
-		csDelete.executeUpdate();
-		csDelete.close();
 	}
 	
 	public String showWorkerPassword(int workerId) throws SQLException {
@@ -134,16 +136,16 @@ public class WorkersController extends BaseController {
 		String password = null;
 		
 		String procSql = "{ call zavrsni.passwordWorker('"+workerId+"') }";
-		CallableStatement csPassword = con.prepareCall(procSql);
 		
-		ResultSet result = csPassword.executeQuery();
-		
-		while (result.next()) {
-			password = result.getString("password");
+		try (CallableStatement csPassword = con.prepareCall(procSql)) {
+			
+			try (ResultSet result = csPassword.executeQuery()) {
+				
+				while (result.next()) {
+					password = result.getString("password");
+				}
+			}
 		}
-		
-		result.close();
-		csPassword.close();
 		
 		return password;
 	}

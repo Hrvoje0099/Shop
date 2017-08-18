@@ -15,10 +15,8 @@ public class ItemsModel {
 	private String sellingWP;	
 	private String sellingRP;
 	private String margin;
-	private String message;
 	private double itemState;
 		
-	// saveItem() <- Controller <- ItemsGUI <- ItemsFormAddListener <- ItemsFormAdd
 	// loadItems() <- Controller <- ItemsGUI
 	// searchItems() <- Controller <- ItemsGUI <- ItemsFormSearchListener <- ItemsFormSearch
 	public ItemsModel(int itemCode, String name, String barcode1, String barcode2, String supplier, String discount, String tax,
@@ -37,6 +35,24 @@ public class ItemsModel {
 		this.sellingRP = sellingRP;
 		this.margin = margin;
 		this.itemState = itemState;
+	}
+	
+	// saveItem() <- Controller <- ItemsGUI <- ItemsFormAddListener <- ItemsFormAdd
+	public ItemsModel(int itemCode, String name, String barcode1, String barcode2, String supplier, String discount, String tax,
+			String unit, String purchaseWP, String purchaseRP, String sellingWP, String sellingRP, String margin) {
+		this.itemCode = itemCode;
+		this.name = name;
+		this.barcode1 = barcode1;
+		this.barcode2 = barcode2;
+		this.supplier = supplier;
+		this.discount = discount;
+		this.tax = tax;
+		this.unit = unit;
+		this.purchaseWP = purchaseWP;
+		this.purchaseRP = purchaseRP;
+		this.sellingWP = sellingWP;
+		this.sellingRP = sellingRP;
+		this.margin = margin;
 	}
 				
 	// checkItemBeforeSave() <- Controller <- ItemsFormAdd
@@ -94,10 +110,6 @@ public class ItemsModel {
 
 	public String getMargin() {
 		return margin;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 
 	public double getItemState() {

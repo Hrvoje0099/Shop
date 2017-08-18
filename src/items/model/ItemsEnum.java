@@ -16,9 +16,7 @@ public enum ItemsEnum {
 	SELLING_RP(12, "sellingRP"),
 	MARGIN(13, "margin"),
 	MESSAGE(14, "message"),
-	ITEM_STATE(15, "itemState"),
-	AMOUNT_INPUT(16, "amountInput");
-	
+	ITEM_STATE(15, "itemState");
 
     private final int key;
     private final String value;
