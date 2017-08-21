@@ -28,7 +28,6 @@ import javax.swing.SwingUtilities;
 
 import common.Password;
 import common.Utility;
-import other.controller.OtherController;
 
 public class ChangePasswordGUI extends JFrame {
 
@@ -40,13 +39,11 @@ public class ChangePasswordGUI extends JFrame {
 	private JButton btnSave;
 	
 	private File file;
-	private static OtherController controller;
 	
 	private StringWriter errors;
 
 	public ChangePasswordGUI() throws IOException {
 		
-		controller = new OtherController();
 		errors = new StringWriter();
 
 		setTitle("PROMJENA LOZINKE");
@@ -97,13 +94,11 @@ public class ChangePasswordGUI extends JFrame {
 			}
 		});
 		
-		// disconnect
+		// dispose window
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 

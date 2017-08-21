@@ -1,51 +1,36 @@
 package common;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Properties;
 
-import javax.sql.DataSource;
 import javax.swing.JOptionPane;
-
-import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 public abstract class BaseController {
 	
-	protected Connection con;
+	public Connection con;
 	private final StringWriter errors;
-	private DataSource dataSource;
 	
 	public BaseController() {
 		
 		errors = new StringWriter();
+		try {
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
-	public void connect() throws Exception {
+	public void connect() {
 		
-		Properties props = new Properties();
-		
-		try (InputStream istream = Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
-			if (istream == null) 
-				throw new FileNotFoundException("Could not find JDBC properties");
-			props.load(istream);
-			dataSource = BasicDataSourceFactory.createDataSource(props);
-		} catch (Exception e1) {
-			e1.printStackTrace(new PrintWriter(errors));
+		try {
+			con = DataSourceSingleton.getInstance().getConnection();
+//			System.out.println("connect");
+		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
 
-			try {
-				saveException(e1.getMessage(), errors.toString());
-			} catch (SQLException e2) {
-				JOptionPane.showMessageDialog(null, e2, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-			}
-		}
-		
-		con = dataSource.getConnection();		
+		}	
 	}
 	
 	public void disconnect() {
@@ -53,6 +38,7 @@ public abstract class BaseController {
 		if (con != null) {
 			try {
 				con.close();
+//				System.out.println("disconnect");
 			} catch (SQLException e1) {
 				e1.printStackTrace(new PrintWriter(errors));
 				JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
@@ -69,15 +55,16 @@ public abstract class BaseController {
 	public void saveException(String message, String stackTrace) throws SQLException {
 		
 		String procInsertSql = "{ call zavrsni.saveException(?,?,?) }";
-		CallableStatement csInsert = con.prepareCall(procInsertSql);
+		
+		try (CallableStatement csInsert = con.prepareCall(procInsertSql)) {
+			
+			csInsert.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
+			csInsert.setString(2, message);
+			csInsert.setString(3, stackTrace);
 
-		csInsert.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
-		csInsert.setString(2, message);
-		csInsert.setString(3, stackTrace);
+			csInsert.executeUpdate();
+		}
 
-		csInsert.executeUpdate();
-
-		csInsert.close();
 	}
 	
 }

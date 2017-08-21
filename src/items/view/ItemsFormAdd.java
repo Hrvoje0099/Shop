@@ -157,6 +157,8 @@ public class ItemsFormAdd extends JPanel {
 				comboBoxSupplier.addItem(listDobavljaca.get(i));
 			}
 			
+			controller.disconnect();
+			
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
 			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);

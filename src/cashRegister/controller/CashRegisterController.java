@@ -145,7 +145,7 @@ public class CashRegisterController extends BaseController {
 	
 	public boolean checkWorkerLoginInCashRegister(WorkersTemp worker) {
 		
-		WorkersModel workersModel = new WorkersModel(worker.getName(), worker.getSurname(), worker.getPassword());
+		WorkersModel workersModel = new WorkersModel(worker.getId(), worker.getName(), worker.getSurname(), worker.getOib(), worker.getBirthYear(), worker.getSex(), worker.getPassword());
 		
 		if (checkWorkerLoginInCashRegister(workersModel) == true) {
 			return true;

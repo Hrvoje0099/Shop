@@ -95,7 +95,6 @@ public class WorkersGUI extends JFrame {
 			public void addWorker(WorkersTemp radnik) {
 				
 				try {
-					controller.connect();
 					controller.saveWorker(radnik);
 					workersTableAdd.refresh();		
 				} catch (Exception e1) {
@@ -153,7 +152,6 @@ public class WorkersGUI extends JFrame {
 					int workerId = (int) workersTableAdd.tableWorkers.getValueAt(row_index, 0);
 
 					try {
-						controller.connect();
 						password = controller.showWorkerPassword(workerId);
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
@@ -181,7 +179,6 @@ public class WorkersGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 
@@ -298,7 +295,6 @@ public class WorkersGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 

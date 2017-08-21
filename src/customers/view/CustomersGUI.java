@@ -100,7 +100,6 @@ public class CustomersGUI extends JFrame {
 			public void addCustomer(CustomersTemp customer) {
 
 				try {
-					controller.connect();
 					controller.saveCustomer(customer);
 					customersTableAdd.refresh();
 				} catch (Exception e1) {
@@ -112,13 +111,12 @@ public class CustomersGUI extends JFrame {
 			}
 		});
 
-		// TRA�I button - traži klijenta
+		// TRAŽI button - traži klijenta
 		customersFormaSearch.setCustomersFormSearchListener(new CustomersFormSearchListener() {
 			@Override
 			public void searchCustomer(CustomersTemp customer) {
 
 				try {
-					controller.connect();
 					controller.searchCustomers(customer);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
@@ -173,13 +171,14 @@ public class CustomersGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 
 	}
 	
 	private void loadComponents() {
+		
+		controller.connect();
 		
 		refreshBtn = new JButton("");
 		refreshBtn.setIcon(new ImageIcon(ItemsDetails.class.getResource("/images/Refresh16.gif")));
@@ -222,7 +221,6 @@ public class CustomersGUI extends JFrame {
 	
 	private void loadAndRefresh() {
 		try {
-			controller.connect();
 			controller.loadCustomers();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
@@ -335,7 +333,6 @@ public class CustomersGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 

@@ -88,7 +88,6 @@ public class CustomersDetails extends JFrame {
 				CustomersTemp customersTemp = null;
 
 				try {
-					controller.connect();
 					customersTemp = controller.loadCustomerDetails(customerId);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
@@ -129,7 +128,6 @@ public class CustomersDetails extends JFrame {
 					CustomersTemp customer = new CustomersTemp(txtName.getText(), txtAddress.getText(), txtCity.getText(), txtZipCode.getText(), comboBoxCountry.getSelectedItem().toString(), txtPhone.getText(), txtFax.getText(), txtMail.getText(), txtMobilePhone.getText(), txtContract.getText(), txtPerson.getText(), txtAreaMessage.getText());
 
 					try {
-						controller.connect();
 						controller.updateCustomer(customer, customerId);
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
@@ -147,13 +145,14 @@ public class CustomersDetails extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 
 	}
 	
 	private void loadComponents() {
+		
+		controller.connect();
 		
 		lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.BOLD, 11));

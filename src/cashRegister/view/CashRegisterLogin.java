@@ -98,7 +98,6 @@ public class CashRegisterLogin extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 

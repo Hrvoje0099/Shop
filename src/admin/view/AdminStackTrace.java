@@ -71,17 +71,15 @@ public class AdminStackTrace extends JFrame {
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
 			}	
-		});
-		
-		// disconnect
-		addWindowListener(new WindowAdapter() {
+			
 			@Override
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
+			
 		});
+
 	}
 	
 	private void loadComponents() {

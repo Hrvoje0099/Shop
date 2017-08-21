@@ -123,7 +123,6 @@ public class ItemsDetails extends JFrame {
 							txtPurchaseWP.getText(), txtPurchaseRP.getText(), txtSellingWP.getText(), txtSellingRP.getText(), txtMargin.getText(), txtAreaMessage.getText());
 
 					try {
-						controller.connect();
 						controller.updateItem(itemsTemp, itemCode);
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
@@ -190,12 +189,13 @@ public class ItemsDetails extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 	}
 	
 	private void loadComponents() {
+
+		controller.connect();
 		
 		lblItemCode = new JLabel("Šifra:");
 		lblItemCode.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -468,7 +468,6 @@ public class ItemsDetails extends JFrame {
 		item = null;
 		
 		try {
-			controller.connect();
 			item = controller.loadItemDetails(itemCode);
 			
 			listSuppliera = new LinkedList<String>();

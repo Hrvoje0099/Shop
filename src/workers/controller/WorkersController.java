@@ -30,7 +30,7 @@ public class WorkersController extends BaseController {
 	public void saveWorker(WorkersTemp workerTemp) throws SQLException {
 		
 		// provjera dali već imamo radnika sa istim ID-om ili OIB-om
-		WorkersModel workersModelCheck = new WorkersModel(workerTemp.getId(), workerTemp.getOib());
+		WorkersModel workersModelCheck = new WorkersModel(workerTemp.getId(), workerTemp.getName(), workerTemp.getSurname(), workerTemp.getOib(), workerTemp.getBirthYear(), workerTemp.getSex(), workerTemp.getPassword());
 		WorkersModel workersModelTrue = new WorkersModel(workerTemp.getId(), workerTemp.getName(), workerTemp.getSurname(), workerTemp.getOib(), workerTemp.getBirthYear(), workerTemp.getSex(), workerTemp.getPassword());	
 				
 		if (checkWorkerBeforeSave(workersModelCheck) == 0) {

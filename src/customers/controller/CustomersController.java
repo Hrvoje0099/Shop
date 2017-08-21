@@ -39,7 +39,7 @@ public class CustomersController extends BaseController {
 	public void saveCustomer(CustomersTemp customerTemp) throws SQLException {
 				
 		// provjera dali već imamo klijenta sa istim ID-om ili OIB-om
-		CustomersModel customerModelCheck = new CustomersModel(customerTemp.getId(), customerTemp.getOib());
+		CustomersModel customerModelCheck = new CustomersModel(customerTemp.getId(), customerTemp.getName(), customerTemp.getAddress(), customerTemp.getCity(), customerTemp.getZipCode(), customerTemp.getCountry(), customerTemp.getPhone(), customerTemp.getFax(), customerTemp.getMail(), customerTemp.getMobilePhone(), customerTemp.getOib(), customerTemp.getContract(), customerTemp.getPerson() );
 		CustomersModel customerModelTrue = new CustomersModel(customerTemp.getId(), customerTemp.getName(), customerTemp.getAddress(), customerTemp.getCity(), customerTemp.getZipCode(), customerTemp.getCountry(), customerTemp.getPhone(), customerTemp.getFax(), customerTemp.getMail(), customerTemp.getMobilePhone(), customerTemp.getOib(), customerTemp.getContract(), customerTemp.getPerson() );	
 				
 		if (checkCustomerBeforeSave(customerModelCheck) == 0) {

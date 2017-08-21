@@ -54,6 +54,8 @@ public class AdminGUI extends JFrame {
 
 		loadExceptionsToTable();
 		tableAdmin.refresh();
+		
+		setJMenuBar(createMenuBar());
 			
 		// disconnect
 		addWindowListener(new WindowAdapter() {
@@ -61,14 +63,13 @@ public class AdminGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
-
-		setJMenuBar(createMenuBar());
+		
 	}
 	
 	private void loadExceptionsToTable() {
+		
 		try {
 			controller.connect();
 			controller.loadExceptions();

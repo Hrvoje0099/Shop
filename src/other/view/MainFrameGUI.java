@@ -29,7 +29,6 @@ import common.Password;
 import common.Utility;
 import customers.view.CustomersGUI;
 import items.view.ItemsGUI;
-import other.controller.OtherController;
 import workers.view.WorkersGUI;
 
 public class MainFrameGUI extends JFrame {
@@ -45,12 +44,10 @@ public class MainFrameGUI extends JFrame {
 	private Password password;
 	private StringWriter errors;
 	
-	private OtherController controller;
 	
 	public MainFrameGUI() {
 		
 		errors = new StringWriter();
-		controller = new OtherController();
 		password = new Password();
 		passwordField = new JPasswordField(10);
 		
@@ -190,13 +187,12 @@ public class MainFrameGUI extends JFrame {
 		btnReviewSales.setMnemonic(KeyEvent.VK_P);
 		
 		// disconnect
-		addWindowListener(new WindowAdapter() {
+		MainFrameGUI.this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				controller.disconnect();
-				dispose();
-				System.gc();
+				System.exit(0);
 			}
+		
 		});
 		
 	}
@@ -254,7 +250,6 @@ public class MainFrameGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
-				System.gc();
 			}
 		});
 		

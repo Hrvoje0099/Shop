@@ -2,14 +2,14 @@ package cashRegister.model;
 
 public class CartModel {
 		
-	private int itemCode;
-	private String name;
-	private String unit;
-	private String tax;
-	private double quantity;
-	private String sellingRP;
-	private double discount;
-	private String amount;
+	private final int itemCode;
+	private final String name;
+	private final String unit;
+	private final String tax;
+	private final double quantity;
+	private final String sellingRP;
+	private final double discount;
+	private final String amount;
 	
 	// addItemToTableOfCashRegister() <- Controller <- CashRegisterGUI
 	// loadBill() <- Controlelr <- BillsReview

@@ -52,8 +52,8 @@ public class ItemsController extends BaseController {
 	public void saveItem(ItemsTemp itemTemp) throws SQLException {
 		
 		// provjera dali već imamo artikl sa istom ŠIFROM
-		ItemsModel itemsModelCheck = new ItemsModel(itemTemp.getItemCode());
-		ItemsModel itemsModelTrue = new ItemsModel(itemTemp.getItemCode(), itemTemp.getName(), itemTemp.getBarcode1(), itemTemp.getBarcode2(), itemTemp.getSupplier(), itemTemp.getDiscount(), itemTemp.getTax(), itemTemp.getUnit(), itemTemp.getPurchaseWP(), itemTemp.getPurchaseRP(), itemTemp.getSellingWP(), itemTemp.getSellingRP(), itemTemp.getMargin() );
+		ItemsModel itemsModelCheck = new ItemsModel(itemTemp.getItemCode(), itemTemp.getName(), itemTemp.getBarcode1(), itemTemp.getBarcode2(), itemTemp.getSupplier(), itemTemp.getDiscount(), itemTemp.getTax(), itemTemp.getUnit(), itemTemp.getPurchaseWP(), itemTemp.getPurchaseRP(), itemTemp.getSellingWP(), itemTemp.getSellingRP(), itemTemp.getMargin(), itemTemp.getItemState() );
+		ItemsModel itemsModelTrue = new ItemsModel(itemTemp.getItemCode(), itemTemp.getName(), itemTemp.getBarcode1(), itemTemp.getBarcode2(), itemTemp.getSupplier(), itemTemp.getDiscount(), itemTemp.getTax(), itemTemp.getUnit(), itemTemp.getPurchaseWP(), itemTemp.getPurchaseRP(), itemTemp.getSellingWP(), itemTemp.getSellingRP(), itemTemp.getMargin(), itemTemp.getItemState() );
 		
 		if (checkItemBeforeSave(itemsModelCheck) == false) {
 			itemsAddListIM.add(itemsModelTrue);

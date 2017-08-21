@@ -2,22 +2,23 @@ package items.model;
 
 public class ItemsModel {
 	
-	private int itemCode;
-	private String name;
-	private String barcode1;
-	private String barcode2;
-	private String supplier;
-	private String discount;
-	private String tax;
-	private String unit;
-	private String purchaseWP;	// WP - wholesale price (veleprodajna cijena)
-	private String purchaseRP;	// RP - retail price (maloprodajna cijena)
-	private String sellingWP;	
-	private String sellingRP;
-	private String margin;
-	private double itemState;
+	private final int itemCode;
+	private final String name;
+	private final String barcode1;
+	private final String barcode2;
+	private final String supplier;
+	private final String discount;
+	private final String tax;
+	private final String unit;
+	private final String purchaseWP;	// WP - wholesale price (veleprodajna cijena)
+	private final String purchaseRP;	// RP - retail price (maloprodajna cijena)
+	private final String sellingWP;	
+	private final String sellingRP;
+	private final String margin;
+	private final double itemState;
 		
 	// loadItems() <- Controller <- ItemsGUI
+	// saveItem() <- Controller <- ItemsGUI <- ItemsFormAddListener <- ItemsFormAdd
 	// searchItems() <- Controller <- ItemsGUI <- ItemsFormSearchListener <- ItemsFormSearch
 	public ItemsModel(int itemCode, String name, String barcode1, String barcode2, String supplier, String discount, String tax,
 			String unit, String purchaseWP, String purchaseRP, String sellingWP, String sellingRP, String margin, double itemState) {
@@ -37,29 +38,6 @@ public class ItemsModel {
 		this.itemState = itemState;
 	}
 	
-	// saveItem() <- Controller <- ItemsGUI <- ItemsFormAddListener <- ItemsFormAdd
-	public ItemsModel(int itemCode, String name, String barcode1, String barcode2, String supplier, String discount, String tax,
-			String unit, String purchaseWP, String purchaseRP, String sellingWP, String sellingRP, String margin) {
-		this.itemCode = itemCode;
-		this.name = name;
-		this.barcode1 = barcode1;
-		this.barcode2 = barcode2;
-		this.supplier = supplier;
-		this.discount = discount;
-		this.tax = tax;
-		this.unit = unit;
-		this.purchaseWP = purchaseWP;
-		this.purchaseRP = purchaseRP;
-		this.sellingWP = sellingWP;
-		this.sellingRP = sellingRP;
-		this.margin = margin;
-	}
-				
-	// checkItemBeforeSave() <- Controller <- ItemsFormAdd
-	public ItemsModel(int itemCode) {
-		this.itemCode = itemCode;
-	}
-
 	public int getItemCode() {
 		return itemCode;
 	}

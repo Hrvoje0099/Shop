@@ -2,16 +2,18 @@ package workers.model;
 
 public class WorkersModel {
 	
-	private int id;
-	private String name;
-	private String surname;
-	private String oib;
-	private int birthYear;
-	private String sex;
-	private String password;
+	private final int id;
+	private final String name;
+	private final String surname;
+	private final String oib;
+	private final int birthYear;
+	private final String sex;
+	private final String password;
 	
 	// saveWorker() <- Controller <- WorkersGUI <- WorkersFormAddListener <- WorkersFormAdd
 	// loadWorkers() <- Controller <- CashRegisterLogin i WorkersGUI
+	// checkWorkerLoginInCashRegister() <- Controller <- CashRegisterLogin
+	// checkWorkerBeforeSave() <- Controllr <- WorkersFormAdd
 	public WorkersModel(int id, String name, String suname, String oib, int birthYear, String sex, String password) {
 		this.id = id;
 		this.name = name;
@@ -22,19 +24,6 @@ public class WorkersModel {
 		this.password = password;
 	}
 	
-	// checkWorkerLoginInCashRegister() <- Controller <- CashRegisterLogin
-	public WorkersModel(String name, String surname, String password) {
-		this.name = name;
-		this.surname = surname;
-		this.password = password;
-	}
-	
-	// checkWorkerBeforeSave() <- Controllr <- WorkersFormAdd
-	public WorkersModel(int id, String oib) {
-		this.id = id;
-		this.oib = oib;
-	}
-
 	public int getId() {
 		return id;
 	}

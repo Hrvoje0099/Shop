@@ -97,6 +97,9 @@ public class ItemsFormEntryOfGoods extends JPanel {
 							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
+						
+						controller.disconnect();
+						
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
 						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);

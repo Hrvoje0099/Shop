@@ -2,20 +2,19 @@ package customers.model;
 
 public class CustomersModel {
 	
-	private int id;
-	private String name;
-	private String address;
-	private String city;
-	private String zipCode;
-	private String country;
-	private String phone;
-	private String fax;
-	private String mail;
-	private String mobilePhone;
-	private String oib;
-	private String contract;
-	private String person;
-	private String message;
+	private final int id;
+	private final String name;
+	private final String address;
+	private final String city;
+	private final String zipCode;
+	private final String country;
+	private final String phone;
+	private final String fax;
+	private final String mail;
+	private final String mobilePhone;
+	private final String oib;
+	private final String contract;
+	private final String person;
 	
 	// saveCustomer() <- Controller <- CustomersGUI <- CustomersFormAddListener <- CustomersFormAdd
 	// loadCustomers() <- Controller <- CustomersGUI
@@ -37,12 +36,6 @@ public class CustomersModel {
 		this.person = person;
 	}
 	
-	//  checkCustomerBeforeSave() <- Controller: CustomersFormAdd
-	public CustomersModel(int id, String oib) {
-		this.id = id;
-		this.oib = oib;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -93,10 +86,6 @@ public class CustomersModel {
 
 	public String getPerson() {
 		return person;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 	
 }

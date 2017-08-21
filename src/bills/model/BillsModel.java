@@ -5,16 +5,16 @@ import java.sql.Time;
 
 public class BillsModel {
 		
-	private Date date;
-	private Time time;
-	private String billNumber;
-	private int cartID;
-	private int numberOfItems;
-	private String amount;
-	private double discount;
-	private String customer;
-	private String worker;
-	private String paymentMethod;
+	private final Date date;
+	private final Time time;
+	private final String billNumber;
+	private final int cartID;
+	private final int numberOfItems;
+	private final String amount;
+	private final double discount;
+	private final String customer;
+	private final String worker;
+	private final String paymentMethod;
 
 	// loadBills() <- Controller <- BillsGUI
 	// loadBillsByDate() <- Controller <- ReviewSaleseGUI

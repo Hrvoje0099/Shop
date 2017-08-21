@@ -106,6 +106,7 @@ public class ReviewSalesGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 1230, 590);
+		setLocationRelativeTo(null);
 		
 		loadComponents();
 		setJMenuBar(createMenuBar());
@@ -119,8 +120,6 @@ public class ReviewSalesGUI extends JFrame {
 					btnReload.setEnabled(true);
 					
 					try {
-						controller.connect();
-						
 						listWorkers = new LinkedList<String>();
 						
 						listWorkers = controller.loadWorkersReviewSales();
@@ -168,7 +167,6 @@ public class ReviewSalesGUI extends JFrame {
 				// load računa određenog datuma
 				try {
 					String date = datePicker.getJFormattedTextField().getText();
-					controller.connect();
 					
 					if (chckbxReviewByWorker.isSelected()) {
 						
@@ -208,7 +206,6 @@ public class ReviewSalesGUI extends JFrame {
 				try {
 					String date = datePicker.getJFormattedTextField().getText();
 					String worker = (String) comboBoxWorkers.getSelectedItem();
-					controller.connect();
 					controller.loadBillsByDateAndWorker(date, worker);
 
 				} catch (Exception e1) {
@@ -386,7 +383,6 @@ public class ReviewSalesGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 		
@@ -452,6 +448,8 @@ public class ReviewSalesGUI extends JFrame {
 	}
 	
 	private void loadComponents() {
+		
+		controller.connect();
 		
 		lblDateReviewSales = new JLabel("Datum pregled prodaje:");
 		lblDateReviewSales.setFont(new Font("Tahoma", Font.BOLD, 11));

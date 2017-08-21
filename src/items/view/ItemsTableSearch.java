@@ -23,7 +23,6 @@ public class ItemsTableSearch extends JPanel {
 		setLayout(new BorderLayout());
 		
 		add(new JScrollPane(tableSearchItem), BorderLayout.CENTER);
-		
 	}
 	
 	public void setData(List<ItemsModel> dbItemsModel) {

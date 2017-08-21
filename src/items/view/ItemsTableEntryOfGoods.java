@@ -63,6 +63,8 @@ public class ItemsTableEntryOfGoods extends JPanel {
 					if (itemsTableEntryOfGoodsListener != null) 
 						itemsTableEntryOfGoodsListener.cleanEntryOfGoodsTableAfterSave();
 					
+					controller.disconnect();
+					
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
 					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);

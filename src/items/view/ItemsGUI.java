@@ -106,7 +106,7 @@ public class ItemsGUI extends JFrame {
 			public void addItem(ItemsTemp item) {
 				
 				try {
-					controller.connect();
+//					controller.connect();
 					controller.saveItem(item);
 					itemsTableAdd.refresh();
 				} catch (Exception e1) {
@@ -123,7 +123,7 @@ public class ItemsGUI extends JFrame {
 			@Override
 			public void searchItem(ItemsTemp item) {
 				try {
-					controller.connect();
+//					controller.connect();
 					controller.searchItems(item);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
@@ -199,13 +199,14 @@ public class ItemsGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 		
 	}
 	
 	private void loadComponents() {
+		
+		controller.connect();
 		
 		refreshBtn = new JButton("");
 		refreshBtn.setIcon(new ImageIcon(ItemsDetails.class.getResource("/images/Refresh16.gif")));
@@ -254,7 +255,7 @@ public class ItemsGUI extends JFrame {
 	
 	private void loadAndRefresh() {
 		try {
-			controller.connect();
+//			controller.connect();
 			controller.loadItems();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
@@ -266,7 +267,7 @@ public class ItemsGUI extends JFrame {
 	}
 
 	private JMenuBar createMenuBar() {
-
+		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menuFile = new JMenu("FILE");
 		JMenu menuDate = new JMenu();
@@ -378,7 +379,6 @@ public class ItemsGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 

@@ -192,7 +192,7 @@ public class CashRegisterGUI extends JFrame {
 					String barcode = txtItem.getText().toString();
 
 					try {
-						controller.connect();
+//						controller.connect();
 						item = controller.searchItemByBarcode(barcode);
 
 						if (item != null) {
@@ -307,7 +307,6 @@ public class CashRegisterGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 		
@@ -335,7 +334,6 @@ public class CashRegisterGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
-				System.gc();
 			}
 		});
 
@@ -465,7 +463,7 @@ public class CashRegisterGUI extends JFrame {
 			CartTemp cart = new CartTemp(id, cartID, itemCode, itemName, unit, tax, quantity, sellingRP, discount, amount);
 
 			try {
-				controller.connect();
+//				controller.connect();
 				controller.saveCart(cart);
 				controller.removeFromState(itemCode, quantity);
 			} catch (Exception e1) {
@@ -595,7 +593,7 @@ public class CashRegisterGUI extends JFrame {
 		cashRegister = new CashRegisterTemp(id, billNumber, cartID, numberOfItems, amountTotal, discountTotalFormat, customer, worker, paymentMethod);
 
 		try {
-			controller.connect();
+//			controller.connect();
 			controller.saveCashRegister(cashRegister);
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
@@ -731,6 +729,8 @@ public class CashRegisterGUI extends JFrame {
 	}
 	
 	private void loadComponents(String name, String surname) {
+		
+		controller.connect();
 		
 		lblWorker = new JLabel("PRIJAVLJEN  :");
 		lblWorker.setFont(new Font("Tahoma", Font.BOLD, 11));

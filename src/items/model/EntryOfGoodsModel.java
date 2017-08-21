@@ -2,20 +2,20 @@ package items.model;
 
 public class EntryOfGoodsModel {
 	
-	private int itemCode;
-	private String name;
-	private String barcode1;
-	private String barcode2;
-	private String supplier;
-	private String discount;
-	private String tax;
-	private String unit;
-	private String purchaseWP;
-	private String purchaseRP;
-	private String sellingWP;
-	private String sellingRP;
-	private String margin;
-	private double amountInput;
+	private final int itemCode;
+	private final String name;
+	private final String barcode1;
+	private final String barcode2;
+	private final String supplier;
+	private final String discount;
+	private final String tax;
+	private final String unit;
+	private final String purchaseWP;
+	private final String purchaseRP;
+	private final String sellingWP;
+	private final String sellingRP;
+	private final String margin;
+	private final double amountInput;
 	
 	// addItemForEntryOfGoods() <- Controller <- ItemsGUI <- ItemsFormEntryOfGoodsListener <- ItemsFormEntryOfGoods
 	public EntryOfGoodsModel(int itemCode, String name, String barcode1, String barcode2, String supplier, String discount,

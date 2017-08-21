@@ -5,10 +5,10 @@ import java.sql.Time;
 
 public class ExceptionsModel {
 		
-	private int id;
-	private Date date;
-	private Time time;
-	private String message;
+	private final int id;
+	private final Date date;
+	private final Time time;
+	private final String message;
 	
 	// loadExceptions() <- Controller <- AdminGUI
 	public ExceptionsModel(int id, Date date, Time time, String message) {
