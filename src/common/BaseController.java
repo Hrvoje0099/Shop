@@ -26,7 +26,7 @@ public abstract class BaseController {
 		
 		try {
 			con = DataSourceSingleton.getInstance().getConnection();
-//			System.out.println("connect");
+			System.out.println("connect");
 		} catch (SQLException e1) {
 			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
 
@@ -38,7 +38,7 @@ public abstract class BaseController {
 		if (con != null) {
 			try {
 				con.close();
-//				System.out.println("disconnect");
+				System.out.println("disconnect");
 			} catch (SQLException e1) {
 				e1.printStackTrace(new PrintWriter(errors));
 				JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);

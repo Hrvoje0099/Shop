@@ -16,6 +16,8 @@ import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -63,6 +65,8 @@ public class ItemsGUI extends JFrame {
 	private ItemsTableSearch itemsTableSearch;
 	private ItemsTableEntryOfGoods itemsTableEntryOfGoods;
 	
+	protected ItemsDetails itemsDetails;
+	
 	private ItemsController controller;
 	private Password password;
 	
@@ -106,7 +110,6 @@ public class ItemsGUI extends JFrame {
 			public void addItem(ItemsTemp item) {
 				
 				try {
-//					controller.connect();
 					controller.saveItem(item);
 					itemsTableAdd.refresh();
 				} catch (Exception e1) {
@@ -116,6 +119,19 @@ public class ItemsGUI extends JFrame {
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
 			}
+
+			@Override
+			public List<String> loadSuppliers() {
+				
+				List<String> listDobavljaca = new LinkedList<String>();
+				try {
+					listDobavljaca = controller.loadSuppliers();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return listDobavljaca;
+			}
+			
 		});
 		
 		// TRAŽI button - traži artikl
@@ -123,7 +139,6 @@ public class ItemsGUI extends JFrame {
 			@Override
 			public void searchItem(ItemsTemp item) {
 				try {
-//					controller.connect();
 					controller.searchItems(item);
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));
@@ -133,8 +148,20 @@ public class ItemsGUI extends JFrame {
 				}
 				itemsTableSearch.refresh();
 			}
+
+			@Override
+			public List<String> loadSuppliers() {
+				
+				List<String> listDobavljaca = new LinkedList<String>();
+				try {
+					listDobavljaca = controller.loadSuppliers();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return listDobavljaca;
+			}
 		});
-		
+
 		// REFRESH button
 		refreshBtn.addActionListener(new ActionListener() {
 			@Override
@@ -143,7 +170,7 @@ public class ItemsGUI extends JFrame {
 			}
 		});
 		
-		// delete artikl
+		// izbriši artikl i otvori detalje artikla
 		itemsTableAdd.setItemsTableListener(new ItemsTableListener() {
 			@Override
 			public void deleteItem(int row_index, int itemCode) {
@@ -171,6 +198,7 @@ public class ItemsGUI extends JFrame {
 				} else
 					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
 			}
+
 		});
 		
 		// ulaz robe button
@@ -179,6 +207,20 @@ public class ItemsGUI extends JFrame {
 			public void addItemOnTableForEntryOfGoods(ItemsTemp item) {
 				controller.addItemForEntryOfGoods(item);
 				itemsTableEntryOfGoods.refresh();
+			}
+
+			@Override
+			public ItemsTemp loadItemForEntryOfGoods(String barcode) {
+				
+				ItemsTemp item = null;
+
+				try {
+					item = controller.loadItemForEntryOfGoods(barcode);		
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				return item;
 			}
 		});
 		
@@ -191,6 +233,15 @@ public class ItemsGUI extends JFrame {
 				}
 				itemsTableEntryOfGoods.refresh();
 			}
+
+			@Override
+			public void addToState(int itemCode, double amountInput) {
+				try {
+					controller.addToState(itemCode, amountInput);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		});
 		
 		// disconnect
@@ -199,6 +250,16 @@ public class ItemsGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
+				
+				if (itemsTableAdd.itemsDetails != null) {
+					itemsTableAdd.itemsDetails.dispose();
+					itemsTableAdd.itemsDetails.controller.disconnect();
+				}
+				
+				if (itemsTableSearch.itemsDetails != null) {
+					itemsTableSearch.itemsDetails.dispose();
+					itemsTableSearch.itemsDetails.controller.disconnect();
+				}
 			}
 		});
 		
@@ -255,7 +316,6 @@ public class ItemsGUI extends JFrame {
 	
 	private void loadAndRefresh() {
 		try {
-//			controller.connect();
 			controller.loadItems();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
@@ -379,6 +439,9 @@ public class ItemsGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				controller.disconnect();
 				dispose();
+				
+				if (itemsTableAdd.itemsDetails != null)
+					itemsTableAdd.itemsDetails.dispose();
 			}
 		});
 

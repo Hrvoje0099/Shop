@@ -55,6 +55,7 @@ public class CashRegisterR1 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (cashRegisterListeners != null)
 					cashRegisterListeners.setR1Customera(comboBoxCustomers.getSelectedItem().toString());
+				controller.disconnect();
 				dispose();
 			}
 		});

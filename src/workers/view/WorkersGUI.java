@@ -77,6 +77,8 @@ public class WorkersGUI extends JFrame {
 		setSize(1500, 800);
 		setLocationRelativeTo(null);
 		
+		controller.connect();
+		
 		workersTableAdd.setData(controller.getWorkersList());
 		workersTableAdd.tableWorkers.setAutoCreateRowSorter(true);
 		
@@ -186,7 +188,6 @@ public class WorkersGUI extends JFrame {
 	
 	private void loadAndRefresh() {
 		try {
-			controller.connect();
 			controller.loadWorkers();
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));

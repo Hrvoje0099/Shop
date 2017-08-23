@@ -63,6 +63,8 @@ public class CashRegisterGUI extends JFrame {
 	private CashRegisterController controller;
 	private ItemsTemp item;
 	private CashRegisterTemp cashRegister;
+	private BillsGUI billsGui;
+	private ReviewSalesGUI reviewSalesGui;
 
 	private JTextField txtAmountTotal;
 	private JLabel lblWorker;
@@ -164,6 +166,7 @@ public class CashRegisterGUI extends JFrame {
 				cashRegisterR1.setCashRegisterListeners(new CashRegisterListeners() {
 					public void setR1Customera(String customer) {
 						txtR1Customer.setText(customer);
+						btnR1.setEnabled(false);
 					}
 				});
 			}
@@ -174,6 +177,7 @@ public class CashRegisterGUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				txtR1Customer.setText("");
+				btnR1.setEnabled(true);
 			}
 		});
 		
@@ -192,7 +196,6 @@ public class CashRegisterGUI extends JFrame {
 					String barcode = txtItem.getText().toString();
 
 					try {
-//						controller.connect();
 						item = controller.searchItemByBarcode(barcode);
 
 						if (item != null) {
@@ -213,7 +216,7 @@ public class CashRegisterGUI extends JFrame {
 							txtQuantity.setText("1");
 							txtDiscount.setText("0");
 						} else
-							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GRE�KA", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
 
 					} catch (Exception e1) {
 						e1.printStackTrace(new PrintWriter(errors));
@@ -305,6 +308,12 @@ public class CashRegisterGUI extends JFrame {
 		btnExit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if(btnBills.isEnabled() == false  || btnReviewSales.isEnabled() == false) {
+					billsGui.dispose();
+					reviewSalesGui.dispose();
+				}
+				
 				controller.disconnect();
 				dispose();
 			}
@@ -314,8 +323,20 @@ public class CashRegisterGUI extends JFrame {
 		btnBills.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BillsGUI billsGui = new BillsGUI();
+				billsGui = new BillsGUI();
 				billsGui.setVisible(true);
+				
+				billsGui.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnBills.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnBills.setEnabled(true);
+					}
+				});	
 			}
 		});
 		
@@ -323,8 +344,20 @@ public class CashRegisterGUI extends JFrame {
 		btnReviewSales.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ReviewSalesGUI reviewSalesGui = new ReviewSalesGUI();
+				reviewSalesGui = new ReviewSalesGUI();
 				reviewSalesGui.setVisible(true);
+				
+				reviewSalesGui.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnReviewSales.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnReviewSales.setEnabled(true);
+					}
+				});	
 			}
 		});
 		
@@ -332,6 +365,17 @@ public class CashRegisterGUI extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
+				
+				if (btnBills.isEnabled() == false) {
+					billsGui.dispose();
+					billsGui.controller.disconnect();
+				}
+				
+				if (btnReviewSales.isEnabled() == false) {
+					reviewSalesGui.dispose();
+					reviewSalesGui.controller.disconnect();
+				}
+				
 				controller.disconnect();
 				dispose();
 			}
@@ -463,7 +507,6 @@ public class CashRegisterGUI extends JFrame {
 			CartTemp cart = new CartTemp(id, cartID, itemCode, itemName, unit, tax, quantity, sellingRP, discount, amount);
 
 			try {
-//				controller.connect();
 				controller.saveCart(cart);
 				controller.removeFromState(itemCode, quantity);
 			} catch (Exception e1) {
@@ -593,7 +636,6 @@ public class CashRegisterGUI extends JFrame {
 		cashRegister = new CashRegisterTemp(id, billNumber, cartID, numberOfItems, amountTotal, discountTotalFormat, customer, worker, paymentMethod);
 
 		try {
-//			controller.connect();
 			controller.saveCashRegister(cashRegister);
 		} catch (Exception e1) {
 			e1.printStackTrace(new PrintWriter(errors));
@@ -693,7 +735,7 @@ public class CashRegisterGUI extends JFrame {
 		}
 	}
 
-	// count za brojRa�una
+	// count za brojRačuna
 	private int getCount3() {
 
 		int count = 0;

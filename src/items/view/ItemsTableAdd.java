@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JMenuItem;
@@ -21,10 +23,11 @@ public class ItemsTableAdd extends JPanel {
 	protected JTable tableItemsAdd;
 	private JPopupMenu popupMenu;
 	private JMenuItem menuItemDeleteItem;
-	private JMenuItem menuItemDetailsItem;
+	protected JMenuItem menuItemDetailsItem;
 	
 	private ItemsTableAddAndSearchModel itemsTableAddAndSearchModel;
 	private ItemsTableListener itemsTableListener;
+	protected ItemsDetails itemsDetails;
 	
 	public ItemsTableAdd() {
 		
@@ -78,8 +81,21 @@ public class ItemsTableAdd extends JPanel {
 				int itemCode = (int) tableItemsAdd.getValueAt(row_index, 0);
 				String name = (String) tableItemsAdd.getValueAt(row_index, 1);
 				
-				ItemsDetails itemsDetails = new ItemsDetails(itemCode, name);
+				itemsDetails = new ItemsDetails(itemCode, name);
 				itemsDetails.setVisible(true);
+				
+				itemsDetails.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						menuItemDetailsItem.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						menuItemDetailsItem.setEnabled(true);
+					}
+				});	
+				
 			}
 		});
 		

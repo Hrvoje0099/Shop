@@ -40,6 +40,7 @@ public class DataSourceSingleton {
 				throw new FileNotFoundException("Could not find JDBC properties");
 			props.load(istream);
 			dataSource = BasicDataSourceFactory.createDataSource(props);
+			System.out.println("open datasource");
 
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);

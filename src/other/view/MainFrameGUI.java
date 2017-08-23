@@ -33,7 +33,7 @@ import workers.view.WorkersGUI;
 
 public class MainFrameGUI extends JFrame {
 	
-	private JButton btnCashRegister;
+	public JButton btnCashRegister;
 	private JButton btnItems;
 	private JButton btnWorkers;
 	private JButton btnCustomers;
@@ -44,6 +44,7 @@ public class MainFrameGUI extends JFrame {
 	private Password password;
 	private StringWriter errors;
 	
+	private CashRegisterGUI cashRegisterGUI;
 	
 	public MainFrameGUI() {
 		
@@ -65,12 +66,37 @@ public class MainFrameGUI extends JFrame {
 		btnCashRegister.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-//				CashRegisterLogin cashRegisterLogin = new CashRegisterLogin();
-//				cashRegisterLogin.setVisible(true);
+				
+/*				CashRegisterLogin login = new CashRegisterLogin(MainFrameGUI.this);
+				login.setVisible(true);
+				
+				login.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnCashRegister.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnCashRegister.setEnabled(true);
+					}
+				});	
+*/				
 				
 				CashRegisterGUI cashRegisterGUI = new CashRegisterGUI("ime", "prezime");
 				cashRegisterGUI.setVisible(true);
+				
+				cashRegisterGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnCashRegister.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnCashRegister.setEnabled(true);
+					}
+				});	
 				
 			}
 		});
@@ -97,6 +123,18 @@ public class MainFrameGUI extends JFrame {
 */						
 				ItemsGUI itemsGUI = new ItemsGUI();
 				itemsGUI.setVisible(true);
+				
+				itemsGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnItems.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnItems.setEnabled(true);
+					}
+				});	
 			
 			}
 		});
@@ -123,6 +161,18 @@ public class MainFrameGUI extends JFrame {
 */						
 				WorkersGUI workersGUI = new WorkersGUI();
 				workersGUI.setVisible(true);
+				
+				workersGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnWorkers.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnWorkers.setEnabled(true);
+					}
+				});		
 			
 			}
 		});
@@ -149,6 +199,18 @@ public class MainFrameGUI extends JFrame {
 */		
 				CustomersGUI customersGUI = new CustomersGUI();
 				customersGUI.setVisible(true);
+				
+				customersGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnCustomers.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnCustomers.setEnabled(true);
+					}
+				});	
 			
 			}
 		});
@@ -158,9 +220,22 @@ public class MainFrameGUI extends JFrame {
 		btnBills = new JButton("RAČUNI");
 		btnBills.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {	
+				
 				BillsGUI billsGUI = new BillsGUI();
 				billsGUI.setVisible(true);
+				
+				billsGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnBills.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnBills.setEnabled(true);
+					}
+				});	
 
 			}
 		});
@@ -171,8 +246,22 @@ public class MainFrameGUI extends JFrame {
 		btnReviewSales.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				ReviewSalesGUI reviewSalesGUI = new ReviewSalesGUI();
 				reviewSalesGUI.setVisible(true);
+				
+				reviewSalesGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnReviewSales.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnReviewSales.setEnabled(true);
+					}
+				});	
+				
 			}
 		});
 		btnReviewSales.setBounds(245, 320, 150, 100);
@@ -195,6 +284,13 @@ public class MainFrameGUI extends JFrame {
 		
 		});
 		
+	}
+	
+	public void enableAndDisableCashRegisterButton(boolean state) {
+		if (state == false)
+			btnCashRegister.setEnabled(false);
+		else
+			btnCashRegister.setEnabled(true);
 	}
 	
 	// Set up 'MenuBar' - IZBORNIK
@@ -225,6 +321,18 @@ public class MainFrameGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				AboutAppGUI aboutAppGUI = new AboutAppGUI();
 				aboutAppGUI.setVisible(true);
+				
+				aboutAppGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						itemAbout.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						itemAbout.setEnabled(true);
+					}
+				});	
 			}
 		});
 		
@@ -236,6 +344,19 @@ public class MainFrameGUI extends JFrame {
 				try {
 					changePasswordGUI = new ChangePasswordGUI();
 					changePasswordGUI.setVisible(true);
+					
+					changePasswordGUI.addWindowListener(new WindowAdapter() {
+						@Override
+						public void windowOpened(WindowEvent e) {
+							itemChangePassword.setEnabled(false);
+						}
+						
+						@Override
+						public void windowClosed(WindowEvent e) {
+							itemChangePassword.setEnabled(true);
+						}
+					});	
+					
 				} catch (IOException e1) {
 					e1.printStackTrace(new PrintWriter(errors));
 					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
@@ -266,8 +387,21 @@ public class MainFrameGUI extends JFrame {
 					return;
 				
 				if (passwordField.getText().equals(password.myPassword)) {
-					AdminGUI admin = new AdminGUI();
-					admin.setVisible(true);
+					AdminGUI adminGUI = new AdminGUI();
+					adminGUI.setVisible(true);
+					
+					adminGUI.addWindowListener(new WindowAdapter() {
+						@Override
+						public void windowOpened(WindowEvent e) {
+							itemAdmin.setEnabled(false);
+						}
+						
+						@Override
+						public void windowClosed(WindowEvent e) {
+							itemAdmin.setEnabled(true);
+						}
+					});	
+					
 				}
 				else
 					JOptionPane.showMessageDialog(MainFrameGUI.this, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
@@ -293,4 +427,6 @@ public class MainFrameGUI extends JFrame {
 		
 		return menuBar;
 	}
+	
+
 }

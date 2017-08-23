@@ -20,7 +20,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import common.Utility;
-import items.controller.ItemsController;
 
 public class ItemsFormEntryOfGoods extends JPanel {
 	
@@ -54,7 +53,6 @@ public class ItemsFormEntryOfGoods extends JPanel {
 	private JTextField txtAmountInput;
 	private JButton btnAmountInput;
 	
-	private ItemsController controller;
 	private ItemsTemp item;
 	private ItemsFormEntryOfGoodsListener itemsFormEntryOfGoodsListener;
 	
@@ -64,7 +62,6 @@ public class ItemsFormEntryOfGoods extends JPanel {
 	
 	public ItemsFormEntryOfGoods() {
 		
-		controller = new ItemsController();
 		errors = new StringWriter();
 		df = new DecimalFormat("0.000");
 		
@@ -90,23 +87,15 @@ public class ItemsFormEntryOfGoods extends JPanel {
 					
 					item = null;
 					
-					try {
-						controller.connect();
-						item = controller.loadItemForEntryOfGoods(barcode);
+					if (itemsFormEntryOfGoodsListener != null) {
+						item = itemsFormEntryOfGoodsListener.loadItemForEntryOfGoods(barcode);
+					
 						if (item == null) {
 							JOptionPane.showMessageDialog(null, "BARKOD NE POSTOJI!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
 							return;
 						}
-						
-						controller.disconnect();
-						
-					} catch (Exception e1) {
-						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-						
-						Utility.saveException(e1.getMessage(), errors.toString());
 					}
-					
+				
 					txtItemCode.setText(String.valueOf(item.getItemCode()));
 					txtItemCode.setEnabled(true);
 					
@@ -154,7 +143,7 @@ public class ItemsFormEntryOfGoods extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				if (txtAmountInput.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "MORATE UNIJENTI KOLI�INU ULAZA ROBE!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "MORATE UNIJENTI KOLIČINU ULAZA ROBE!!", "GREŠKA", JOptionPane.ERROR_MESSAGE);
 				} else if (!(Pattern.matches("^[0.0-9.9]+$", txtAmountInput.getText().replaceAll(",", ".")))) {
 					JOptionPane.showMessageDialog(null, "KOLIČINA ULAZA ROBE MOŽE SADRŽAVATI SAMO BROJEVE", "GREŠKA", JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -183,7 +172,7 @@ public class ItemsFormEntryOfGoods extends JPanel {
 				}
 			}
 		});
-		
+
 	}
 
 	public void setItemsFormEntryOfGoodsListener(ItemsFormEntryOfGoodsListener itemsFormEntryOfGoodsListener) {

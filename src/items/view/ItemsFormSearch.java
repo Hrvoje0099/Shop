@@ -6,7 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.PrintWriter;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +22,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import common.Utility;
 import items.controller.ItemsController;
 
 public class ItemsFormSearch extends JPanel {
@@ -97,28 +97,25 @@ public class ItemsFormSearch extends JPanel {
 		lblSupplier = new JLabel("Dobavljač: ");
 		comboBoxSupplier = new JComboBox<String>();
 		comboBoxSupplier.setPrototypeDisplayValue("qwqwqwqwqwqwqwqwqwqwqwqwq");
-		try {
-			controller.connect();
-			
-			listSupplier = new LinkedList<String>();
-			
-			listSupplier = controller.loadSuppliers();
-			
-			for (int i = 0; i < listSupplier.size(); i++) {
-				comboBoxSupplier.addItem(listSupplier.get(i));
+		comboBoxSupplier.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				
+				if (itemsFormSearchListener != null) {
+					
+					listSupplier = new LinkedList<String>();
+					listSupplier = itemsFormSearchListener.loadSuppliers();
+					
+					for (int i = 0; i < listSupplier.size(); i++) {
+						comboBoxSupplier.addItem(listSupplier.get(i));
+					}
+					comboBoxSupplier.addItem("");
+				}
+				comboBoxSupplier.setSelectedItem("");
 			}
-			comboBoxSupplier.addItem("");
+		});
+		comboBoxSupplier.setSelectedItem("test");
 			
-			controller.disconnect();
-			
-		} catch (Exception e1) {
-			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-			
-			Utility.saveException(e1.getMessage(), errors.toString());
-		}
-		comboBoxSupplier.setSelectedItem("");
-		
 		btnSearch = new JButton("TRAŽI");
 	}
 	

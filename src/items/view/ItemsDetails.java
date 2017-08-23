@@ -76,7 +76,7 @@ public class ItemsDetails extends JFrame {
 	private JButton btnSave;
 	private JButton btnRefresh;
 	
-	private ItemsController controller;
+	protected ItemsController controller;
 	private ItemsTemp item;
 	private List<String> listSuppliera;
 	
@@ -140,6 +140,19 @@ public class ItemsDetails extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				CustomersGUI customersGUI = new CustomersGUI();
 				customersGUI.setVisible(true);
+				
+				customersGUI.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						btnAddSupplier.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						btnAddSupplier.setEnabled(true);
+					}
+				});	
+				
 			}
 		});
 		

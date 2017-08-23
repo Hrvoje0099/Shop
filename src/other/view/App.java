@@ -32,7 +32,7 @@ public class App {
 				try {
 					UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 					new MainFrameGUI();
-					controller.disconnect();
+//					controller.disconnect();
 				} catch (Exception e) {
 					e.printStackTrace(new PrintWriter(errors));
 					JOptionPane.showMessageDialog(null, e, "GREŠKA", JOptionPane.ERROR_MESSAGE);

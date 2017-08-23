@@ -60,7 +60,7 @@ public class CustomersDetails extends JFrame {
 	private JButton btnSave;
 
 	private JPanel contentPane;
-	private CustomersController controller;
+	protected CustomersController controller;
 	
 	
 	private StringWriter errors;

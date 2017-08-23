@@ -54,7 +54,7 @@ public class BillsReview extends JFrame {
 	private JTextField txtCustomer;
 	private JButton btnPrint;
 
-	private BillsController controller;
+	protected BillsController controller;
 	private CashRegisterTable cashRegisterTable;
 	private BillsTemp billsTemp;
 

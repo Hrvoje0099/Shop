@@ -137,7 +137,7 @@ public class CustomersGUI extends JFrame {
 		});
 
 		// delete klijent
-		customersTableAdd.setCustomersTableAddListener(new CustomersTableAddListener() {
+		customersTableAdd.setCustomersTableListener(new CustomersTableListener() {
 			public void deleteCustomer(int row_index, int customerId) {
 				
 				JPasswordField passwordField = Utility.setPaneForEnterTheAccessPassword();
@@ -171,6 +171,16 @@ public class CustomersGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
+				
+				if (customersTableAdd.customersDetails != null) {
+					customersTableAdd.customersDetails.dispose();
+					customersTableAdd.customersDetails.controller.disconnect();
+				}
+				
+				if (customersTableSearch.customersDetails != null) {
+					customersTableSearch.customersDetails.dispose();
+					customersTableSearch.customersDetails.controller.disconnect();
+				}
 			}
 		});
 
@@ -333,6 +343,9 @@ public class CustomersGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				controller.disconnect();
 				dispose();
+				
+				if (customersTableAdd.customersDetails != null)
+					customersTableAdd.customersDetails.dispose();
 			}
 		});
 

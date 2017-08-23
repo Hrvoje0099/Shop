@@ -41,7 +41,7 @@ public class BillsGUI extends JFrame {
 	private JTextField txtSearch;
 	
 	private JPanel contentPane;
-	private BillsController controller;
+	public BillsController controller;
 	private BillsTable billsTable;
 	
 	private StringWriter errors;
@@ -92,6 +92,12 @@ public class BillsGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
+				
+				if (billsTable.billsReview != null) {
+					billsTable.billsReview.dispose();
+					billsTable.billsReview.controller.disconnect();
+				}
+				
 			}
 		});
 		
@@ -159,7 +165,7 @@ public class BillsGUI extends JFrame {
 		billsTable.setData(controller.getBillsList());
 		contentPane.add(billsTable);
 		
-		lblRightClick = new JLabel("DESNI KLIK NA RAČUN - OTVARAJU SE DETALJI RAČUNA(pregled, print)");
+		lblRightClick = new JLabel("DVOKLIK ZA OTVARANJE PREGLEDA RAČUNA(pregled, print)");
 		lblRightClick.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRightClick.setBounds(10, 657, 485, 14);
 		contentPane.add(lblRightClick);

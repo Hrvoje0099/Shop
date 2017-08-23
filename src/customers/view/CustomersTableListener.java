@@ -1,5 +1,5 @@
 package customers.view;
 
-public interface CustomersTableAddListener {
+public interface CustomersTableListener {
 	public void deleteCustomer(int row_index, int id);
 }

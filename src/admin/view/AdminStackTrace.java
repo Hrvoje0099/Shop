@@ -70,6 +70,8 @@ public class AdminStackTrace extends JFrame {
 					
 					Utility.saveException(e1.getMessage(), errors.toString());
 				}
+				
+				
 			}	
 			
 			@Override

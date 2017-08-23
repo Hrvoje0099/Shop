@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,10 +21,11 @@ import javax.swing.SwingUtilities;
 
 import cashRegister.controller.CashRegisterController;
 import common.Utility;
+import other.view.MainFrameGUI;
 import workers.view.WorkersTemp;
 
-public class CashRegisterLogin extends JFrame {
-
+public class CashRegisterLogin extends JDialog {
+	
 	private JLabel lblName;
 	private JTextField txtName;
 	private JLabel lblSurname;
@@ -33,14 +35,13 @@ public class CashRegisterLogin extends JFrame {
 	private JButton btnLogin;
 	
 	private CashRegisterController controller;
-	
 	private StringWriter errors;
 
-	public CashRegisterLogin() {
+	public CashRegisterLogin(MainFrameGUI mainFrame) {	
 		
 		controller = new CashRegisterController();
 		errors = new StringWriter();
-
+		
 		setTitle("PRIJAVA RADNIKA");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(350, 200);
@@ -54,7 +55,6 @@ public class CashRegisterLogin extends JFrame {
 		lblPassword = new JLabel("Šifra: ");
 		txtPassword = new JPasswordField(20);
 		btnLogin = new JButton("PRIJAVA");
-		
 		
 		//ActionListener za 'PRIJAVA' button
 		btnLogin.addActionListener(new ActionListener() {
@@ -87,6 +87,18 @@ public class CashRegisterLogin extends JFrame {
 						CashRegisterGUI cashRegisterGUI = new CashRegisterGUI(name, surname);
 						cashRegisterGUI.setVisible(true);
 						setVisible(false);
+						
+						cashRegisterGUI.addWindowListener(new WindowAdapter() {
+							@Override
+							public void windowOpened(WindowEvent e) {
+								mainFrame.enableAndDisableCashRegisterButton(false);
+							}
+							
+							@Override
+							public void windowClosed(WindowEvent e) {
+								mainFrame.enableAndDisableCashRegisterButton(true);
+							}
+						});	
 					}				
 				}
 			}
@@ -100,7 +112,7 @@ public class CashRegisterLogin extends JFrame {
 				dispose();
 			}
 		});
-
+		
 		layoutComponents();
 	}
 	
@@ -177,5 +189,5 @@ public class CashRegisterLogin extends JFrame {
 		add(btnLogin, gc);
 
 	}
-	
+
 }

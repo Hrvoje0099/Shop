@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.DecimalFormat;
@@ -30,7 +32,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import common.Utility;
-import items.controller.ItemsController;
 import items.model.TaxCategory;
 
 public class ItemsFormAdd extends JPanel {
@@ -71,17 +72,15 @@ public class ItemsFormAdd extends JPanel {
 	private JTextField txtMargin;
 	private JButton btnSave;
 	
-	private ItemsController controller;
 	private DecimalFormat df;
 	private ItemsFormAddListener itemsFormAddListener;
 	
-	private List<String> listDobavljaca;
+	private List<String> listSupplier;
 	
 	private StringWriter errors;
 
 	public ItemsFormAdd() {
 		
-		controller = new ItemsController();
 		errors = new StringWriter();
 		df = new DecimalFormat("#.00");
 		
@@ -146,25 +145,21 @@ public class ItemsFormAdd extends JPanel {
 		lblSupplier = new JLabel("Dobavljač: ");
 		comboBoxSupplier = new JComboBox<String>();
 		comboBoxSupplier.setPrototypeDisplayValue("qwqwqwqwqwqwqwqwqwqwqwqwq");
-		try {
-			controller.connect();
-			
-			listDobavljaca = new LinkedList<String>();
-			
-			listDobavljaca = controller.loadSuppliers();
-			
-			for (int i = 0; i < listDobavljaca.size(); i++) {
-				comboBoxSupplier.addItem(listDobavljaca.get(i));
+		comboBoxSupplier.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				
+				if (itemsFormAddListener != null) {
+					
+					listSupplier = new LinkedList<String>();
+					listSupplier = itemsFormAddListener.loadSuppliers();
+					
+					for (int i = 0; i < listSupplier.size(); i++) {
+						comboBoxSupplier.addItem(listSupplier.get(i));
+					}
+				}
 			}
-			
-			controller.disconnect();
-			
-		} catch (Exception e1) {
-			e1.printStackTrace(new PrintWriter(errors));
-			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-			
-			Utility.saveException(e1.getMessage(), errors.toString());
-		}
+		});
 		
 		lblDiscount = new JLabel("Rabat: ");
 		radioNo = new JRadioButton("NE");

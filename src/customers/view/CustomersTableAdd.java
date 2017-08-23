@@ -3,10 +3,10 @@ package customers.view;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JMenuItem;
@@ -21,11 +21,14 @@ import customers.model.CustomersTableModel;
 public class CustomersTableAdd extends JPanel {
 
 	protected JTable tableCustomersAdd;
-	private CustomersTableModel customersTableModel;
 	private JPopupMenu popupMenu;
 	private JMenuItem menuItemCustomerDelete;
 	private JMenuItem menuItemCustomerDetails;
-	private CustomersTableAddListener customersTableAddListener;
+	
+	private CustomersTableModel customersTableModel;
+	private CustomersTableListener customersTableListener;
+	
+	protected CustomersDetails customersDetails;
 	
 	public CustomersTableAdd() {
 		
@@ -41,36 +44,6 @@ public class CustomersTableAdd extends JPanel {
 		setLayout(new BorderLayout());
 		
 		add(new JScrollPane(tableCustomersAdd), BorderLayout.CENTER);
-		
-		// keyListener za otvaranje maske klijenta(ENTER) & keyListener za brisanje klijenta(DELETE)
-		tableCustomersAdd.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-				//System.out.println(e.getKeyCode());
-								
-				// 10 je ENTER
-				if ( e.getKeyCode() == 10 ) {
-					int row_index = tableCustomersAdd.getSelectedRow();
-					int customerId = (int) tableCustomersAdd.getValueAt(row_index, 0);
-					String name = (String) tableCustomersAdd.getValueAt(row_index, 1);
-					
-					CustomersDetails customersDetails = new CustomersDetails(customerId, name);
-					customersDetails.setVisible(true);
-				}
-				
-				// 127 je DELETE
-				if ( e.getKeyCode() == 127 ) {
-					int row_index = tableCustomersAdd.getSelectedRow();
-					int customerId = (int) tableCustomersAdd.getValueAt(row_index, 0);
-					
-					if (customersTableAddListener != null) {
-						customersTableAddListener.deleteCustomer(row_index, customerId);
-						customersTableModel.fireTableDataChanged();
-					}
-				}
-			}
-		});
 		
 		// MouseListener za desni klik nad klijentom za otvranje popup menu
 		tableCustomersAdd.addMouseListener(new MouseAdapter() {
@@ -94,8 +67,21 @@ public class CustomersTableAdd extends JPanel {
 				int customerId = (int) tableCustomersAdd.getValueAt(row_index, 0);
 				String name = (String) tableCustomersAdd.getValueAt(row_index, 1);
 				
-				CustomersDetails customersDetails = new CustomersDetails(customerId, name);
+				customersDetails = new CustomersDetails(customerId, name);
 				customersDetails.setVisible(true);
+				
+				customersDetails.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowOpened(WindowEvent e) {
+						menuItemCustomerDetails.setEnabled(false);
+					}
+					
+					@Override
+					public void windowClosed(WindowEvent e) {
+						menuItemCustomerDetails.setEnabled(true);
+					}
+				});	
+				
 			}
 		});
 		
@@ -107,8 +93,8 @@ public class CustomersTableAdd extends JPanel {
 				int row_index = tableCustomersAdd.getSelectedRow();
 				int customerId = (int) tableCustomersAdd.getValueAt(row_index, 0);
 				
-				if (customersTableAddListener != null) {
-					customersTableAddListener.deleteCustomer(row_index, customerId);
+				if (customersTableListener != null) {
+					customersTableListener.deleteCustomer(row_index, customerId);
 					//klijentiTableModel.fireTableRowsDeleted(row_index - 1, row_index - 1);
 					customersTableModel.fireTableDataChanged();
 				}
@@ -125,8 +111,8 @@ public class CustomersTableAdd extends JPanel {
 		customersTableModel.fireTableDataChanged();
 	}
 	
-	public void setCustomersTableAddListener(CustomersTableAddListener customersTableAddListener) {
-		this.customersTableAddListener = customersTableAddListener;
+	public void setCustomersTableListener(CustomersTableListener customersTableListener) {
+		this.customersTableListener = customersTableListener;
 	}
 	
 }

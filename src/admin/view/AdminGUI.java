@@ -63,6 +63,9 @@ public class AdminGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
+				
+				if (tableAdmin.adminStackTrace != null)
+					tableAdmin.adminStackTrace.dispose();
 			}
 		});
 		

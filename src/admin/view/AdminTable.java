@@ -3,13 +3,13 @@ package admin.view;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -20,17 +20,12 @@ public class AdminTable extends JPanel {
 	
 	protected JTable tableAdmin;
 	private AdminTableModel adminTableModel;
-	private JPopupMenu popupMenu;
-	private JMenuItem menuItemStackTrace;
+	protected AdminStackTrace adminStackTrace;
 
 	public AdminTable() {
 		
 		adminTableModel = new AdminTableModel();
 		tableAdmin = new JTable(adminTableModel);
-		popupMenu = new JPopupMenu();
-		
-		menuItemStackTrace = new JMenuItem("Stack Trace");
-		popupMenu.add(menuItemStackTrace);
 		
 		tableAdmin.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tableAdmin.getColumnModel().getColumn(0).setPreferredWidth(110);
@@ -53,8 +48,21 @@ public class AdminTable extends JPanel {
 					Time time = (Time) tableAdmin.getValueAt(row_index, 2);
 					String message = (String) tableAdmin.getValueAt(row_index, 3);
 					
-					AdminStackTrace adminStackTrace = new AdminStackTrace(id, date, time, message);
+					adminStackTrace = new AdminStackTrace(id, date, time, message);
 					adminStackTrace.setVisible(true);
+					
+					adminStackTrace.addWindowListener(new WindowAdapter() {
+						@Override
+						public void windowOpened(WindowEvent e) {
+							tableAdmin.setVisible(false);
+						}
+						
+						@Override
+						public void windowClosed(WindowEvent e) {
+							tableAdmin.setVisible(true);
+						}
+					});	
+					
 				}
 			}
 		});

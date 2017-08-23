@@ -14,7 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import common.Utility;
-import items.controller.ItemsController;
 import items.model.EntryOfGoodsModel;
 import items.model.ItemsTableEntryOfGoodsModel;
 
@@ -26,13 +25,11 @@ public class ItemsTableEntryOfGoods extends JPanel {
 	private ItemsTableEntryOfGoodsModel itemsTableEntryOfGoodsModel;
 	private ItemsTableEntryOfGoodsListener itemsTableEntryOfGoodsListener;
 	
-	private ItemsController controller;
 	
 	private StringWriter errors;
 	
 	public ItemsTableEntryOfGoods() {
 		
-		controller = new ItemsController();
 		errors = new StringWriter();
 		
 		itemsTableEntryOfGoodsModel = new ItemsTableEntryOfGoodsModel();
@@ -50,20 +47,19 @@ public class ItemsTableEntryOfGoods extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					controller.connect();
 					
 					for (int i = 0; i < tableEntryOfGoods.getRowCount(); i++) {
 						int itemCode = Integer.valueOf(tableEntryOfGoods.getValueAt(i, 0).toString());
 						double amountInput = Double.valueOf(tableEntryOfGoods.getValueAt(i, 13).toString());
 						
-						controller.addToState(itemCode, amountInput);
+						if (itemsTableEntryOfGoodsListener != null) 
+							itemsTableEntryOfGoodsListener.addToState(itemCode, amountInput);
+
 					}
 					JOptionPane.showMessageDialog(null, "KOLIČINE USPIJEŠNO DODANE NA STANJE!", "INFO", JOptionPane.INFORMATION_MESSAGE);
 
 					if (itemsTableEntryOfGoodsListener != null) 
 						itemsTableEntryOfGoodsListener.cleanEntryOfGoodsTableAfterSave();
-					
-					controller.disconnect();
 					
 				} catch (Exception e1) {
 					e1.printStackTrace(new PrintWriter(errors));

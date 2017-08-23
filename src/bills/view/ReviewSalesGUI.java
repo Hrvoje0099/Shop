@@ -81,7 +81,7 @@ public class ReviewSalesGUI extends JFrame {
 	private JDatePanelImpl datePanel;
 	
 	private JPanel contentPane;
-	private BillsController controller;
+	public BillsController controller;
 	private BillsTable billsTable;
 	private List<String> listWorkers;
 	
@@ -383,6 +383,11 @@ public class ReviewSalesGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				controller.disconnect();
 				dispose();
+				
+				if (billsTable.billsReview != null) {
+					billsTable.billsReview.dispose();
+					billsTable.billsReview.controller.disconnect();
+				}
 			}
 		});
 		
