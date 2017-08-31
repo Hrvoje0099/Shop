@@ -95,37 +95,31 @@ public class CustomersGUI extends JFrame {
 		setJMenuBar(createMenuBar());
 
 		// SPREMI button - dodaje klijenta na tablicu(desna strana) i sprema ga u bazu
-		customersFormaAdd.setCustomersFormAddListener(new CustomersFormAddListener() {
-			@Override
-			public void addCustomer(CustomersTemp customer) {
-
-				try {
-					controller.saveCustomer(customer);
-					customersTableAdd.refresh();
-				} catch (Exception e1) {
-					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-					
-					Utility.saveException(e1.getMessage(), errors.toString());
-				}
+		customersFormaAdd.setCustomersFormAddListener(customer -> {
+		
+			try {
+				controller.saveCustomer(customer);
+				customersTableAdd.refresh();
+			} catch (Exception e1) {
+				e1.printStackTrace(new PrintWriter(errors));
+				JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+				
+				Utility.saveException(e1.getMessage(), errors.toString());
 			}
 		});
 
 		// TRAŽI button - traži klijenta
-		customersFormaSearch.setCustomersFormSearchListener(new CustomersFormSearchListener() {
-			@Override
-			public void searchCustomer(CustomersTemp customer) {
-
-				try {
-					controller.searchCustomers(customer);
-				} catch (Exception e1) {
-					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-					
-					Utility.saveException(e1.getMessage(), errors.toString());
-				}
-				customersTableSearch.refresh();
+		customersFormaSearch.setCustomersFormSearchListener(customer -> {
+			
+			try {
+				controller.searchCustomers(customer);
+			} catch (Exception e1) {
+				e1.printStackTrace(new PrintWriter(errors));
+				JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+				
+				Utility.saveException(e1.getMessage(), errors.toString());
 			}
+			customersTableSearch.refresh();
 		});
 		
 		// refresh button
@@ -137,32 +131,31 @@ public class CustomersGUI extends JFrame {
 		});
 
 		// delete klijent
-		customersTableAdd.setCustomersTableListener(new CustomersTableListener() {
-			public void deleteCustomer(int row_index, int customerId) {
-				
-				JPasswordField passwordField = Utility.setPaneForEnterTheAccessPassword();
-				
-				password = Utility.checkPasswordFile();
-				
-				if (password == null || passwordField.getText().isEmpty() )
-					return;
+		customersTableAdd.setCustomersTableListener((row_index, customerId) -> {
+			
+			JPasswordField passwordField = Utility.setPaneForEnterTheAccessPassword();
+			
+			password = Utility.checkPasswordFile();
+			
+			if (password == null || passwordField.getText().isEmpty() )
+				return;
 
-				if (passwordField.getText().equals(password.myPassword)) {
+			if (passwordField.getText().equals(password.myPassword)) {
 
-					try {
-						controller.deleteCustomer(row_index, customerId);
-					} catch (SQLException e1) {
-						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-						
-						Utility.saveException(e1.getMessage(), errors.toString());
-					}
+				try {
+					controller.deleteCustomer(row_index, customerId);
+				} catch (SQLException e1) {
+					e1.printStackTrace(new PrintWriter(errors));
+					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					
+					Utility.saveException(e1.getMessage(), errors.toString());
+				}
 
-					customersTableAdd.refresh();
+				customersTableAdd.refresh();
 
-				} else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
-			}
+			} else
+				JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+		
 		});
 
 		// disconnect

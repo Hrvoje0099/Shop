@@ -93,21 +93,18 @@ public class WorkersGUI extends JFrame {
 		setJMenuBar(createMenuBar());
 		
 		// SPREMI button - dodaje radnika na tablicu(desna strana) i sprema ga u bazu
-		workersFormAdd.setWorkersFormAddListener(new WorkersFormAddListener() {
-			public void addWorker(WorkersTemp radnik) {
+		workersFormAdd.setWorkersFormAddListener(radnik -> {
+			try {
+				controller.saveWorker(radnik);
+				workersTableAdd.refresh();		
+			} catch (Exception e1) {
+				e1.printStackTrace(new PrintWriter(errors));
+				JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
 				
-				try {
-					controller.saveWorker(radnik);
-					workersTableAdd.refresh();		
-				} catch (Exception e1) {
-					e1.printStackTrace(new PrintWriter(errors));
-					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-					
-					Utility.saveException(e1.getMessage(), errors.toString());
-				}
+				Utility.saveException(e1.getMessage(), errors.toString());
 			}
 		});
-
+		
 		// delete i pokaži lozinku
 		workersTableAdd.setWorkersTableListener(new WorkersTableListener() {
 

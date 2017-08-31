@@ -14,7 +14,7 @@ import javax.swing.JPasswordField;
 
 public final class Utility {
 	
-	private static Password password = new Password();;
+	private static Password password = new Password();
 	private static File file = new File("password.ser");
 	private static StringWriter errors = new StringWriter();
 	private static BaseController controller = new BaseController() {};

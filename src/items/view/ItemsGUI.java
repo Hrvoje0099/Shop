@@ -170,35 +170,32 @@ public class ItemsGUI extends JFrame {
 			}
 		});
 		
-		// izbriši artikl i otvori detalje artikla
-		itemsTableAdd.setItemsTableListener(new ItemsTableListener() {
-			@Override
-			public void deleteItem(int row_index, int itemCode) {
-				
-				JPasswordField passwordField = Utility.setPaneForEnterTheAccessPassword();
-				
-				password = Utility.checkPasswordFile();
-				
-				if (password == null || passwordField.getText().isEmpty() )
-					return;
+		// izbriši artikl
+		itemsTableAdd.setItemsTableListener((row_index, itemCode) -> {
+			
+			JPasswordField passwordField = Utility.setPaneForEnterTheAccessPassword();
+			
+			password = Utility.checkPasswordFile();
+			
+			if (password == null || passwordField.getText().isEmpty() )
+				return;
 
-				if (passwordField.getText().equals(password.myPassword)) {
+			if (passwordField.getText().equals(password.myPassword)) {
 
-					try {
-						controller.deleteItem(row_index, itemCode);
-					} catch (SQLException e1) {
-						e1.printStackTrace(new PrintWriter(errors));
-						JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-						
-						Utility.saveException(e1.getMessage(), errors.toString());
-					}
+				try {
+					controller.deleteItem(row_index, itemCode);
+				} catch (SQLException e1) {
+					e1.printStackTrace(new PrintWriter(errors));
+					JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
+					
+					Utility.saveException(e1.getMessage(), errors.toString());
+				}
 
-					itemsTableAdd.refresh();
+				itemsTableAdd.refresh();
 
-				} else
-					JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
-			}
-
+			} else
+				JOptionPane.showMessageDialog(null, "KRIVA LOZINKA", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+		
 		});
 		
 		// ulaz robe button

@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -22,8 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import items.controller.ItemsController;
-
 public class ItemsFormSearch extends JPanel {
 
 	private JLabel lblItemCode;
@@ -36,18 +33,11 @@ public class ItemsFormSearch extends JPanel {
 	private JComboBox<String> comboBoxSupplier;
 	private JButton btnSearch;
 	
-	private ItemsController controller;
-	
 	private List<String> listSupplier;
 	
 	private ItemsFormSearchListener itemsFormSearchListener;
 	
-	private StringWriter errors;
-	
 	public ItemsFormSearch() {
-		
-		controller = new ItemsController();
-		errors = new StringWriter();
 		
 		Dimension dim = getPreferredSize();
 		dim.width = 360;

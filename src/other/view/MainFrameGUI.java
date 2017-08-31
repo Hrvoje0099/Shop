@@ -44,8 +44,6 @@ public class MainFrameGUI extends JFrame {
 	private Password password;
 	private StringWriter errors;
 	
-	private CashRegisterGUI cashRegisterGUI;
-	
 	public MainFrameGUI() {
 		
 		errors = new StringWriter();
@@ -281,7 +279,7 @@ public class MainFrameGUI extends JFrame {
 			public void windowClosing(WindowEvent arg0) {
 				System.exit(0);
 			}
-		
+			
 		});
 		
 	}

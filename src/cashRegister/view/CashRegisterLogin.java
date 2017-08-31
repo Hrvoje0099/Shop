@@ -87,6 +87,7 @@ public class CashRegisterLogin extends JDialog {
 						CashRegisterGUI cashRegisterGUI = new CashRegisterGUI(name, surname);
 						cashRegisterGUI.setVisible(true);
 						setVisible(false);
+						controller.disconnect();
 						
 						cashRegisterGUI.addWindowListener(new WindowAdapter() {
 							@Override
@@ -101,15 +102,6 @@ public class CashRegisterLogin extends JDialog {
 						});	
 					}				
 				}
-			}
-		});
-		
-		// disconnect
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent arg0) {
-				controller.disconnect();
-				dispose();
 			}
 		});
 		
