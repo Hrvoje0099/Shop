@@ -16,7 +16,6 @@ public class AdminController extends BaseController {
 	private List<ExceptionsModel> exceptionsListEM;
 	
 	public AdminController() {
-		
 		exceptionsListEM = new LinkedList<ExceptionsModel>();
 	}
 	
@@ -39,7 +38,6 @@ public class AdminController extends BaseController {
 				}
 			}
 		}
-		
 	}
 		
 	public String loadExceptionsStackTrace(int id) throws SQLException {

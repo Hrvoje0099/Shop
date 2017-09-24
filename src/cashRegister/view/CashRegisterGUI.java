@@ -58,15 +58,7 @@ import items.view.ItemsTemp;
 
 public class CashRegisterGUI extends JFrame {
 
-	private JPanel contentPane;
-	private CashRegisterTable tableCashRegister;
-	private CashRegisterController controller;
-	private ItemsTemp item;
-	private CashRegisterTemp cashRegister;
-	private BillsGUI billsGui;
-	private ReviewSalesGUI reviewSalesGui;
-
-	private JTextField txtAmountTotal;
+	public JTextField txtAmountTotal;
 	private JLabel lblWorker;
 	private JTextField txtWorker;
 	private JLabel lblBillNumber;
@@ -125,10 +117,19 @@ public class CashRegisterGUI extends JFrame {
 	private double amountTotalWithoutDiscount = 0;
 	private String amountWithDiscount;
 	
+	private JPanel contentPane;
+	private CashRegisterTable tableCashRegister;
+	private CashRegisterController controller;
+	private ItemsTemp item;
+	private CashRegisterTemp cashRegister;
+	private BillsGUI billsGui;
+	private ReviewSalesGUI reviewSalesGui;
+	
 	public CashRegisterGUI(String name, String surname) {
 		
-		controller = new CashRegisterController();
 		tableCashRegister = new CashRegisterTable();
+//		controller = new CashRegisterController(this, tableCashRegister);
+		controller = new CashRegisterController();
 		errors = new StringWriter();
 		
 		cal = new GregorianCalendar();
@@ -163,11 +164,9 @@ public class CashRegisterGUI extends JFrame {
 				cashRegisterR1.setVisible(true);
 				
 				// listener za postavit R1 kupca na R1 textfield
-				cashRegisterR1.setCashRegisterListeners(new CashRegisterListeners() {
-					public void setR1Customera(String customer) {
-						txtR1Customer.setText(customer);
-						btnR1.setEnabled(false);
-					}
+				cashRegisterR1.setCashRegisterListeners(customer -> {
+					txtR1Customer.setText(customer);
+					btnR1.setEnabled(false);
 				});
 			}
 		});

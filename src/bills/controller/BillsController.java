@@ -18,18 +18,13 @@ import workers.model.WorkersEnum;
 public class BillsController extends BaseController {
 	
 	private List<String> workerList;
-	
 	private List<CartModel> cartListCM;
-	
 	private List<BillsModel> billsListBM;
 	
 	
 	public BillsController() {
-		
 		workerList = new LinkedList<String>();
-		
 		cartListCM = new LinkedList<CartModel>();
-		
 		billsListBM = new LinkedList<BillsModel>();
 	}
 	
@@ -74,7 +69,6 @@ public class BillsController extends BaseController {
 				}
 			}
 		}
-		
 	}
 	
 	public BillsTemp loadBillToFields(int cartID) throws SQLException {
@@ -111,7 +105,6 @@ public class BillsController extends BaseController {
 				}
 			}
 		}
-		
 	}
 	
 	public void loadBillsByDateAndWorker(String date, String worker) throws SQLException {
@@ -129,7 +122,6 @@ public class BillsController extends BaseController {
 				}
 			}
 		}
-
 	}
 	
 	public List<String> loadWorkersReviewSales() throws SQLException {
@@ -149,5 +141,5 @@ public class BillsController extends BaseController {
 		
 		return workerList;
 	}
-
+	
 }

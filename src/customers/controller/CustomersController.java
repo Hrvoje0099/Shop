@@ -18,13 +18,10 @@ import customers.view.CustomersTemp;
 public class CustomersController extends BaseController {
 	
 	private List<CustomersModel> customersAddListCM;
-	
 	private List<CustomersModel> customersSearchListCM;
 	
 	public CustomersController() {
-		
 		customersAddListCM = new LinkedList<CustomersModel>();
-		
 		customersSearchListCM = new LinkedList<CustomersModel>();
 	}
 	
@@ -119,7 +116,6 @@ public class CustomersController extends BaseController {
 			
 			JOptionPane.showMessageDialog(null, "KLIJENT USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
 	}
 	
 	public void loadCustomers() throws SQLException {
@@ -144,7 +140,6 @@ public class CustomersController extends BaseController {
 				}
 			}
 		}
-
 	}
 	
  	public void searchCustomers(CustomersTemp customerTemp) throws SQLException {
@@ -182,7 +177,6 @@ public class CustomersController extends BaseController {
 				}
 			}
 		}
-
 	}
  	
 	public void deleteCustomer(int row_index, int idCustomer) throws SQLException {
@@ -196,7 +190,6 @@ public class CustomersController extends BaseController {
 			
 			JOptionPane.showMessageDialog(null, "KLIJENT USPIJEŠNO IZBRISAN! ID: " + idCustomer, "INFO", JOptionPane.INFORMATION_MESSAGE);
 		}
-
 	}
 	
 	public CustomersTemp loadCustomerDetails(int idCustomer) throws SQLException {

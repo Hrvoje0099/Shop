@@ -19,7 +19,6 @@ public class WorkersController extends BaseController {
 	private List<WorkersModel> workerAddListWM;
 	
 	public WorkersController() {
-		
 		workerAddListWM = new LinkedList<WorkersModel>();
 	}
 	
@@ -113,7 +112,6 @@ public class WorkersController extends BaseController {
 				}
 			}
 		}
-		
 	}
 	
 	public void deleteWorker(int row_index, int workerId) throws SQLException {
@@ -128,7 +126,6 @@ public class WorkersController extends BaseController {
 			
 			JOptionPane.showMessageDialog(null, "RADNIK USPIJEŠNO IZBRISAN! ID: " + workerId, "INFO", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
 	}
 	
 	public String showWorkerPassword(int workerId) throws SQLException {

@@ -19,21 +19,14 @@ import items.view.ItemsTemp;
 public class ItemsController extends BaseController {
 	
 	private List<ItemsModel> itemsAddListIM;
-	
 	private List<ItemsModel> itemsSearchListIM;
-	
 	private List<EntryOfGoodsModel> itemsEntryOfGoodsListEOGM;
-	
 	private List<String> supplierList;
 	
 	public ItemsController() {
-		
 		itemsAddListIM = new LinkedList<ItemsModel>();
-		
 		itemsSearchListIM = new LinkedList<ItemsModel>();
-		
 		itemsEntryOfGoodsListEOGM = new LinkedList<EntryOfGoodsModel>();
-		
 		supplierList = new LinkedList<String>();
 	}
 
@@ -124,7 +117,6 @@ public class ItemsController extends BaseController {
 			
 			JOptionPane.showMessageDialog(null, "ARTIKL USPJEŠNO IZMIJENJEN!", "INFO", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
 	}
 	
 	public void loadItems() throws SQLException {
@@ -151,7 +143,6 @@ public class ItemsController extends BaseController {
 				}
 			}
 		}
-
 	}
 	
 	public void searchItems(ItemsTemp itemTemp) throws SQLException {
@@ -183,7 +174,6 @@ public class ItemsController extends BaseController {
 				}
 			}
 		}
-
 	}
 	
 	public void deleteItem(int row_index, int itemCode) throws SQLException {
@@ -198,7 +188,6 @@ public class ItemsController extends BaseController {
 			
 			JOptionPane.showMessageDialog(null, "ARTIKL USPIJEŠNO IZBRISAN! ŠIFRA: " + itemCode, "INFO", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
 	}
 	
 	public ItemsTemp loadItemDetails(int itemCode) throws SQLException {
@@ -278,7 +267,6 @@ public class ItemsController extends BaseController {
 			
 			csUpdate.executeUpdate();
 		}
-		
 	}
 	
 	public List<String> loadSuppliers() throws SQLException {

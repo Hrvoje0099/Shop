@@ -25,17 +25,12 @@ import workers.view.WorkersTemp;
 public class CashRegisterController extends BaseController {
 	
 	private List<CartModel> cartListCM;
-	
 	private List<WorkersModel> workerAddListWM;
-	
 	private List<String> supplierList;
 	
 	public CashRegisterController() {
-		
 		cartListCM = new LinkedList<CartModel>();
-		
 		workerAddListWM = new LinkedList<WorkersModel>();
-		
 		supplierList = new LinkedList<String>();
 	}
 	
@@ -77,7 +72,6 @@ public class CashRegisterController extends BaseController {
 				
 			}
 		}
-
 	}
 	
 	public void saveCart(CartTemp cart) throws SQLException {
@@ -113,7 +107,6 @@ public class CashRegisterController extends BaseController {
 				}
 			}
 		}
-
 	}
 	
 	public ItemsTemp searchItemByBarcode(String barcode) throws SQLException {
@@ -164,6 +157,7 @@ public class CashRegisterController extends BaseController {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	
@@ -186,7 +180,6 @@ public class CashRegisterController extends BaseController {
 			
 			csUpdate.executeUpdate();
 		}
-
 	}
 	
 	public void loadWorkers() throws SQLException {
@@ -209,7 +202,6 @@ public class CashRegisterController extends BaseController {
 				}
 			}
 		}
-
 	}
 	
 	public List<String> loadSuppliers() throws SQLException {

@@ -14,12 +14,7 @@ public abstract class BaseController {
 	private final StringWriter errors;
 	
 	public BaseController() {
-		
 		errors = new StringWriter();
-		try {
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e, "GREŠKA", JOptionPane.ERROR_MESSAGE);
-		}
 	}
 	
 	public void connect() {
@@ -31,6 +26,7 @@ public abstract class BaseController {
 			JOptionPane.showMessageDialog(null, e1, "GREŠKA", JOptionPane.ERROR_MESSAGE);
 
 		}	
+		
 	}
 	
 	public void disconnect() {
@@ -50,6 +46,7 @@ public abstract class BaseController {
 				}
 			}
 		} else return;
+		
 	}
 	
 	public void saveException(String message, String stackTrace) throws SQLException {
